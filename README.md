@@ -5,3 +5,4 @@ O sistema que está a ser desenvolvido deverá permitir que a empresa possa gere
 
 #Desenvolvedores
 Gustavo Bergamo Mimim
+Lucas Oliveira da Cruz
