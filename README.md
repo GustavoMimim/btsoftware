@@ -9,3 +9,4 @@ Gustavo Bergamo Mimim  <br>
 João Marcos Tomaz dos Santos <br>
 Lucas Oliveira da Cruz <br>
 Renan Leonardo Ramos Ferreira da Silva <br>
+Vinicius Andrade Ribeiro <br>
