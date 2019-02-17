@@ -5,8 +5,8 @@ O sistema que está a ser desenvolvido deverá permitir que a empresa gerencie d
 
 ## Desenvolvedores
 
-Gustavo Bergamo Mimim  <br>
-João Marcos Tomaz dos Santos <br>
-Lucas Oliveira da Cruz <br>
-Renan Leonardo Ramos Ferreira da Silva <br>
-Vinicius Andrade Ribeiro <br>
+* Gustavo Bergamo Mimim  
+* João Marcos Tomaz dos Santos
+* Lucas Oliveira da Cruz
+* Renan Leonardo Ramos Ferreira da Silva
+* Vinicius Andrade Ribeiro
