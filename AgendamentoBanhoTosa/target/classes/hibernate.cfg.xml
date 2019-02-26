@@ -14,6 +14,8 @@
         <property name="hbm2ddl.auto">create</property>
         
         <!-- Mapeamento das Entidades -->
+        <!-- Usuarios -->
+        <mapping class="br.com.agendamento.domain.Usuarios"></mapping>
         
                  
     </session-factory>
