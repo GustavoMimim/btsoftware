@@ -16,7 +16,8 @@
         <!-- Mapeamento das Entidades -->
         <!-- Usuarios -->
         <mapping class="br.com.agendamento.domain.Usuarios"></mapping>
-        
+        <!-- Serviços -->
+       <mapping class="br.com.agendamento.domain.Servicos"></mapping>
                  
     </session-factory>
 </hibernate-configuration>
