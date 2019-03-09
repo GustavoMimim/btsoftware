@@ -8,8 +8,8 @@ import javax.persistence.MappedSuperclass;
 
 @SuppressWarnings("serial")
 @MappedSuperclass
-public class GenericDomain implements Serializable{
-	
+public class GenericDomain implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codigo;
@@ -21,5 +21,5 @@ public class GenericDomain implements Serializable{
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	
+
 }

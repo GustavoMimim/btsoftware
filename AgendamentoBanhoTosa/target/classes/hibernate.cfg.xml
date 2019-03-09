@@ -2,22 +2,41 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password"></property>
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/agendamento</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.format_sql">false</property>
-        <property name="hbm2ddl.auto">create</property>
         
-        <!-- Mapeamento das Entidades -->
-        <!-- Usuarios -->
-        <mapping class="br.com.agendamento.domain.Usuarios"></mapping>
-        <!-- Serviços -->
-       <mapping class="br.com.agendamento.domain.Servicos"></mapping>
-                 
-    </session-factory>
+<hibernate-configuration>
+
+	<session-factory>
+	
+		<!-- Configurações de Conexão com o Banco de Dados -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/agendamento</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+		
+		<!-- Pool de Conexões -->
+		<property name="connection.pool_size">1</property>
+		
+		<!-- SQL Dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		
+		<!-- Gerenciamento do Contexto das Sessões -->
+		<property name="current_session_context_class">thread</property>
+		
+		<!-- Cache de Segundo Nível -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+		
+		<!-- Mostra as SQLs Geradas -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">false</property>
+		
+		<!-- Cria as tabelas do banco de dados -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- Mapeamento das Entidades -->
+		<mapping class="br.com.agendamento.domain.Cliente"/>
+		<mapping class="br.com.agendamento.domain.Servico" />
+		<mapping class="br.com.agendamento.domain.Usuario" />
+		
+
+	</session-factory>
 </hibernate-configuration>
