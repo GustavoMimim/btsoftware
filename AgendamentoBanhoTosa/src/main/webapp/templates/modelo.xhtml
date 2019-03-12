@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Agendamento</title>
+
+	<!-- Tag usada para importar o arquivo CSS -->
+	<h:outputStylesheet library="css" name="style.css" />
+<style type="text/css">
+.ui-g div {
+	background-color: #ededed;
+	text-align: center;
+}
+
+.btn {
+	padding: 5px 0px;
+	margin: 2px 0px;
+	width: 100%;
+}
+</style>
+</h:head>
+<h:body style="margin:0px;">
+
+	<!-- Essa mensagem ira valer para todos os forms -->
+	<!--<p:growl id="mensagem" /> -->
+
+	<!-- Div usado geralmente para definir o tamanho e outros atributos basicos da aplicação -->
+	<div id="geral">
+
+		<!-- class é usado em TAGS HTML, diferente do styleclass usado no primefaces -->
+		<div id="cabecalho" class="menuPrincipal">
+			<div class="ui-g">
+
+				<div class="ui-g-12 ui-md-2"
+					style="background-color: orange; color: white;">
+					<p:outputLabel value="PETSHOP ESPAÇO ANIMAL"></p:outputLabel>
+
+				</div>
+
+				<div class="ui-g-12 ui-md-8"
+					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;"></div>
+				<div class="ui-g-12 ui-md-1"
+					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;">
+					<p:outputLabel value="Feliz70"></p:outputLabel>
+
+				</div>
+
+				<div class="ui-g-12 ui-md-1"
+					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;">
+					<p:outputLabel value="Sair"></p:outputLabel>
+				</div>
+
+				<div class="ui-g-12 ui-md-2" style="background-color: blue;">
+					<div style="height: 100px; background-color: blue"></div>
+					<p:button value="Usuários" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Clientes" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Animais" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Planos" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Agendamentos" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Serviços" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Pagamentos" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Relatórios" icon="pi pi-star" class="btn">
+					</p:button>
+					<p:button value="Configurações" icon="pi pi-star" class="btn">
+					</p:button>
+
+
+
+				</div>
+
+				<div id="conteudo" class="ui-g-12 ui-md-10 ui-g-nopad">
+
+					<!-- Tag que serve de referencia para saber que nela algum conteudo sera chamado futuramento com o ui:difine -->
+					<ui:insert name="conteudo" />
+
+				</div>
+
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</h:body>
+</html>

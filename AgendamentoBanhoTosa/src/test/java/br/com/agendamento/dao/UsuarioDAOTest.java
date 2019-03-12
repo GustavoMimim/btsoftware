@@ -1,5 +1,6 @@
 package br.com.agendamento.dao;
 
+
 import java.util.List;
 
 import org.junit.Ignore;
@@ -9,31 +10,32 @@ import br.com.agendamento.domain.Usuario;
 
 public class UsuarioDAOTest {
 	@Test
-	@Ignore // teste sendo ignorado
+	@Ignore
+	 // teste sendo ignorado
 	public void salvar() {
 		Usuario usuario = new Usuario();
 		usuario.setBairro("centro");
-		usuario.setCep("18860-000");
-		usuario.setCidade("Timburi");
+		usuario.setCep("19860-000");
+		usuario.setCidade("Ourinhos");
 		usuario.setCpf("000.000.000-00");
-		// usuario.setDataNascimento(19990920);
+		//usuario.setDataNascimento(new Date("9-03-18"));
 		usuario.setEstado("São Paulo");
-		usuario.setFuncao("Gerente");
+		usuario.setFuncao("Programador");
 		usuario.setNivelUsuario("Administrador");
-		usuario.setNome("Lucas Oliveira");
+		usuario.setNome("Pablito");
 		usuario.setNumero(45);
 		usuario.setRg("43223444");
 		usuario.setRua("Rua Sao Paulo");
-		usuario.setSenha("teste");
+		usuario.setSenha("qwerty");
 		usuario.setTelefone("(14)2343-5553");
-		usuario.setUsuario("locrz");
+		usuario.setUsuario("pablo");
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
 	}
 
 	@Test
-	
+	@Ignore
 	public void listar() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 
@@ -68,7 +70,7 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void excluir() {
-		Long codigo = 2L;
+		Long codigo = 1L;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario usuario = usuarioDAO.buscar(codigo);
 		

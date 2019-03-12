@@ -32,6 +32,21 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<!-- Repositorios -->
+	<!-- Usando em casos que o maven depende de repositorios de terceiros -->
+
+	<repositories>
+
+		<!-- Repo PrimeFaces -->
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+
+	</repositories>
 
 	<!-- Dependencias -->
 	<dependencies>
@@ -63,6 +78,21 @@
 			<artifactId>javax.faces</artifactId>
 			<version>2.2.12</version>
 		</dependency>
+
+		<!-- PrimeFaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
+		</dependency>
+		
+		<!-- Temas do Primefaces -->
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+
 
 	</dependencies>
 </project>
