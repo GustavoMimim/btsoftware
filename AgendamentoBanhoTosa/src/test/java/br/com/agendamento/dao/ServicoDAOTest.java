@@ -7,7 +7,7 @@ import br.com.agendamento.domain.Servico;
 
 public class ServicoDAOTest {
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void salvar() {
 		// Instanciando objeto
