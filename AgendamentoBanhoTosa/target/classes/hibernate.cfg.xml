@@ -30,12 +30,15 @@
 		<property name="hibernate.format_sql">false</property>
 		
 		<!-- Cria as tabelas do banco de dados -->
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Mapeamento das Entidades -->
+		<mapping class="br.com.agendamento.domain.Agendamento"/>
+		<mapping class="br.com.agendamento.domain.Animal" />
 		<mapping class="br.com.agendamento.domain.Cliente"/>
 		<mapping class="br.com.agendamento.domain.Servico" />
 		<mapping class="br.com.agendamento.domain.Usuario" />
+		<mapping class="br.com.agendamento.domain.PlanoAgendamento" />
 		
 
 	</session-factory>
