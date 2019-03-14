@@ -11,85 +11,140 @@
 
 	<!-- Tag usada para importar o arquivo CSS -->
 	<h:outputStylesheet library="css" name="style.css" />
-<style type="text/css">
-.ui-g div {
-	background-color: #ededed;
-	text-align: center;
-}
+	<h:outputStylesheet library="css" name="grid.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
 
-.btn {
-	padding: 5px 0px;
-	margin: 2px 0px;
-	width: 100%;
-}
-</style>
 </h:head>
-<h:body style="margin:0px;">
+<h:body>
 
 	<!-- Essa mensagem ira valer para todos os forms -->
 	<!--<p:growl id="mensagem" /> -->
 
-	<!-- Div usado geralmente para definir o tamanho e outros atributos basicos da aplicação -->
-	<div id="geral">
+	<div class="ui-g">
 
-		<!-- class é usado em TAGS HTML, diferente do styleclass usado no primefaces -->
-		<div id="cabecalho" class="menuPrincipal">
-			<div class="ui-g">
-
-				<div class="ui-g-12 ui-md-2"
-					style="background-color: orange; color: white;">
-					<p:outputLabel value="PETSHOP ESPAÇO ANIMAL"></p:outputLabel>
-
-				</div>
-
-				<div class="ui-g-12 ui-md-8"
-					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;"></div>
-				<div class="ui-g-12 ui-md-1"
-					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;">
-					<p:outputLabel value="Feliz70"></p:outputLabel>
-
-				</div>
-
-				<div class="ui-g-12 ui-md-1"
-					style="background-color: white; border-bottom: 2px; border-bottom-style: solid; border-bottom-color: gray;">
-					<p:outputLabel value="Sair"></p:outputLabel>
-				</div>
-
-				<div class="ui-g-12 ui-md-2" style="background-color: blue;">
-					<div style="height: 100px; background-color: blue"></div>
-					<p:button value="Usuários" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Clientes" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Animais" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Planos" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Agendamentos" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Serviços" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Pagamentos" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Relatórios" icon="pi pi-star" class="btn">
-					</p:button>
-					<p:button value="Configurações" icon="pi pi-star" class="btn">
-					</p:button>
-
-
-
-				</div>
-
-				<div id="conteudo" class="ui-g-12 ui-md-10 ui-g-nopad">
-
-					<!-- Tag que serve de referencia para saber que nela algum conteudo sera chamado futuramento com o ui:difine -->
-					<ui:insert name="conteudo" />
-
-				</div>
-
-
+		<div id="menuSuperior">
+			<div id="empresa" class="ui-g-6 ui-md-2">
+				<i class="fas fa-paw fa-lg iconePadding" id="mobile" />
+				<p:outputLabel value="PETSHOP ESPAÇO ANIMAL" id="empresa-a"></p:outputLabel>
 			</div>
 
+			<div id="usuario" class="ui-g-12 ui-md-10">
+				<p:commandLink styleClass="usuario-a">
+					<h:outputText value="Nome do Usuário" />
+				</p:commandLink>
+				<p:commandLink style="margin-right:0px;" styleClass="usuario-a">
+					<i class="fas fa-sign-out-alt iconeSair"></i>
+					<h:outputText value="Sair" />
+				</p:commandLink>
+			</div>
+			<div class="ui-g-6 ui-md-10" id="mobile" style="background-color: red;align-content: flex-end;">
+		
+				<p:commandButton id="dynaButton" value="..." type="button" style="background-color:red;"/>
+				<p:slideMenu overlay="true" trigger="dynaButton" my="left top"
+					at="left bottom" style="width:180px">
+					<p:submenu label="Ajax Menuitems">
+		
+					</p:submenu>
+					<p:submenu label="Non-Ajax Menuitem">
+						
+					</p:submenu>
+				
+				</p:slideMenu>
+			
+
+			</div>
+		</div>
+
+		<div id="menuLateral">
+			<div class="ui-g-12 ui-md-nopad">
+				<div class="ui-g fundo">
+					<div class="ui-g-12 ui-md-12 "></div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-user-tie fa-lg iconePadding"></i>
+							<h:outputText value="Usuários" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-user fa-lg iconePadding"></i>
+							<h:outputText value="Clientes" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-paw fa-lg iconePadding"></i>
+							<h:outputText value="Animais" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-calendar-plus fa-lg iconePadding"></i>
+							<h:outputText value="Planos" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-calendar fa-lg iconePadding"></i>
+							<h:outputText value="Agendamentos" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-briefcase fa-lg iconePadding"></i>
+							<h:outputText value="Serviços" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12">
+						<p:commandLink>
+							<i class="fas fa-wallet fa-lg iconePadding"></i>
+							<h:outputText value="Pagamentos" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-chart-pie fa-lg iconePadding"></i>
+							<h:outputText value="Relatórios" />
+						</p:commandLink>
+					</div>
+				</div>
+				<div class="ui-g btnMenu">
+					<div class="ui-g-12 ui-md-12 ">
+						<p:commandLink>
+							<i class="fas fa-cog fa-lg iconePadding"></i>
+							<h:outputText value="Configurações" />
+						</p:commandLink>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Div usado geralmente para definir o tamanho e outros atributos basicos da aplicação -->
+	<div id="conteudo">
+
+		<!-- Tag que serve de referencia para saber que nela algum conteudo sera chamado futuramento com o ui:difine -->
+		<div class="ui-g-12 ui-md-10">
+
+			<ui:insert name="conteudo" />
 
 		</div>
 

@@ -10,62 +10,96 @@
 
 	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
 	<ui:define name="conteudo">
-		<div style="margin: 10px;">
-			<div class="ui-g">
-				<div class="ui-g-1" style="background-color: orange; color: white;">
-					<p:outputLabel value="3" />
+		<div class="ui-g">
+			<div class="ui-g-12 ui-md-nopad">
+			
+				<div class="ui-g-12 ui-md-1">
+					<div class="ui-g-12 ui-md-6" id="titulo">
+						<p:outputLabel value="3" />
+					</div>
 				</div>
-				<div class="ui-g-2" style="background-color: white;">
-					<p:outputLabel value="Usuários" />
+				
+				<div class="ui-g-12 ui-md-4" style="background-color: orange; padding: 0;margin: 0;" >
+					<div class="ui-g-12 ui-md-12" style="background-color: red; color: white;">
+						<p:outputLabel value="Usuários" />
+					</div>
+
 				</div>
-				<div class="ui-g-1" style="background-color: blue; color: white;">
-					<p:outputLabel value="+ Novo" />
-				</div>
-				<div class="ui-g-8">
-					<p:outputLabel value="." />
-				</div>
-
-				<div class="ui-g-12"></div>
-
-				<div class="ui-g-8">
-					<h:form id="formListagem">
-
-						<p:dataTable emptyMessage="Nenhum usuario cadastrado.">
-
-							<p:column headerText="Usuário" filterBy="" style="background-color: orange; color: white;"
-								sortBy="">
-								<p:outputLabel value="Teste" />
-							</p:column>
-
-							<p:column headerText="Nome" style="background-color: orange; color: white;">
-								<p:outputLabel value="teste" />
-							</p:column>
-
-							<p:column headerText="Email" filterBy="" style="background-color: orange; color: white;"
-								sortBy="">
-								<p:outputLabel value="teste" />
-							</p:column>
-
-							<p:column headerText="Função" filterBy=""
-								sortBy="" >
-								<p:outputLabel value="teste" />
-							</p:column>
-
-	
-						</p:dataTable>
-
-						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-							<p:commandButton value="Sim" type="button"
-								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-
-							<p:commandButton value="Não" type="button"
-								styleClass="ui-confirmdialog-no" icon="ui-icon-check" />
-						</p:confirmDialog>
-
-					</h:form>
-				</div>
-				<div class="ui-g-4" style="background-color: white;"></div>
 			</div>
+
+			<div class="ui-g-12"></div>
+
+			<div class="ui-g-8">
+
+
+				<p:dataTable emptyMessage="Nenhum usuario cadastrado.">
+
+					<p:column headerText="Usuário" filterBy=""
+						style="background-color: orange; color: white;" sortBy="">
+						<p:outputLabel value="Teste" />
+					</p:column>
+
+					<p:column headerText="Nome"
+						style="background-color: orange; color: white;">
+						<p:outputLabel value="teste" />
+					</p:column>
+
+					<p:column headerText="Email" filterBy=""
+						style="background-color: orange; color: white;" sortBy="">
+						<p:outputLabel value="teste" />
+					</p:column>
+
+					<p:column headerText="Função" filterBy=""
+						style="background-color: orange; color: white;" sortBy="">
+						<p:outputLabel value="teste" />
+					</p:column>
+
+
+				</p:dataTable>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-check" />
+				</p:confirmDialog>
+
+
+			</div>
+			<div class="ui-g-4" style="background-color: white;"></div>
 		</div>
+
+
+		<p:dialog header="Novo Usuário" widgetVar="dialogo" draggable="false"
+			resizable="false" modal="true" closable="true">
+			<h:form id="formCadastro">
+				<h:panelGrid columns="2">
+
+					<!-- PESSOA -->
+					<p:outputLabel value="Pessoa:" />
+
+
+
+					<p:outputLabel value="Senha:" />
+					<p:password size="50" maxlength="16" />
+
+					<p:outputLabel value="Tipo de Usuario:" />
+
+					<p:selectOneRadio>
+						<f:selectItem itemValue="A" itemLabel="Administrador" />
+						<f:selectItem itemValue="B" itemLabel="Balconista" />
+						<f:selectItem itemValue="G" itemLabel="Gerente" />
+					</p:selectOneRadio>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Ativo:" />
+					<p:selectBooleanCheckbox />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>
