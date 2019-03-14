@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
+	<ui:define name="conteudo">
+
+		<div class="ui-g-12 ui-md-12" id="cab"
+			style="background-color: white; height: 50px;">
+			<p:outputLabel value="Usuários"
+				style="padding-right:15px;font-size:20px;"></p:outputLabel>
+
+			<p:commandButton value="+" type="button" title="Novo Usuário"
+				styleClass="btnCirculo" onclick="PF('dlg2').show();" />
+		</div>
+
+		<div class="ui-g-12 ui-md-9" id="tabelaUsuarios">
+			<h:form>
+				<p:dataTable emptyMessage="Nenhum usuário cadastrado.">
+
+					<p:column headerText="Usuário" styleClass="cabecalhoTabela">
+					</p:column>
+
+					<p:column headerText="Nome" styleClass="cabecalhoTabela">
+
+					</p:column>
+
+					<p:column headerText="Email" styleClass="cabecalhoTabela">
+
+					</p:column>
+
+					<p:column headerText="Função" styleClass="cabecalhoTabela">
+
+					</p:column>
+
+
+				</p:dataTable>
+			</h:form>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-3" id="paineis">
+
+			<p:panel id="painelInfo" styleClass="painel">
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Usuários" styleClass="tituloPainel" />
+				<h:panelGrid columns="1" cellpadding="10">
+
+					<h:outputText value="Codigo:1920" />
+					<h:outputText value="Cadastrado em: 14/03/2019" />
+					<h:outputText value="Nome de Usuário: feliz70" />
+					<h:outputText value="Nome: João Marcos" />
+					<h:outputText value="CPF: 000.000.000-9" />
+					<h:outputText value="Tipo de Acesso: Administrador" />
+					<h:outputText value="Função: Atendente" />
+				</h:panelGrid>
+				<p:commandButton value="Ver mais" type="button"
+					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
+					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
+			</p:panel>
+
+			<p:panel id="painelFiltro" styleClass="painel">
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Filtros" styleClass="tituloPainel" />
+				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
+
+				</h:panelGrid>
+
+			</p:panel>
+		</div>
+
+
+		<!-- modais para cadastro, detalhes, exclusão -->
+		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true"
+			resizable="false" height="auto">
+
+			<h:form>
+				<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
+					<h:panelGrid columns="6" cellpadding="5">
+						<h:outputLabel value="Nome:" />
+						<p:inputText required="true" />
+
+						<p:outputLabel value="CPF:" />
+						<p:inputText required="true" />
+
+						<h:outputLabel value="RG:" />
+						<p:inputText required="true" />
+					</h:panelGrid>
+					<div style="height: 10px;"></div>
+					<h:panelGrid columns="6" cellpadding="5">
+						<p:outputLabel value="Telefone:" />
+						<p:inputText required="true" />
+
+						<h:outputLabel value="Dt. Nasc." />
+						<p:inputText required="true" />
+
+						<p:outputLabel value="Função:" />
+						<p:inputText required="true" />
+
+					</h:panelGrid>
+				</p:fieldset>
+
+				<p:fieldset legend="Endereço" style="margin-bottom:20px">
+					<h:panelGrid columns="6" cellpadding="5">
+						<p:outputLabel value="Estado:" />
+						<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
+							style="width:150px">
+							<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+							<f:selectItem itemLabel="Acre" itemValue="Acre" />
+							<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
+							<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Cidade:" />
+						<p:inputText required="true" />
+
+						<h:outputLabel value="CEP:" />
+						<p:inputText required="true" />
+
+
+					</h:panelGrid>
+					<div style="height: 10px;"></div>
+					<h:panelGrid columns="6" cellpadding="5">
+						<p:outputLabel value="Bairro:" />
+						<p:inputText required="true" />
+
+						<p:outputLabel value="Rua:" />
+						<p:inputText required="true" />
+
+						<h:outputLabel value="Número:" />
+						<p:inputText required="true" />
+
+
+					</h:panelGrid>
+				</p:fieldset>
+
+				<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
+					<h:panelGrid columns="6" cellpadding="5">
+						<p:outputLabel value="Estado:" />
+						<p:selectOneMenu id="console1"
+							value="#{selectOneMenuView.console1}" style="width:150px">
+							<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+							<f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+							<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Nome de Usuário:" />
+						<p:inputText required="true" />
+
+						<h:outputLabel value="Senha:" />
+						<p:inputText required="true" />
+					</h:panelGrid>
+				</p:fieldset>
+
+
+
+
+				<p:commandButton value="Salvar" />
+				<p:commandButton value="Cancelar" onclick="PF('dlg2').();" />
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true"
+			resizable="false" height="auto">
+
+
+
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>

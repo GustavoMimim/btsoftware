@@ -66,6 +66,13 @@ body {
 	margin-right: 10px;
 }
 
+.btnCirculo {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	background-color: #005DAD;
+}
+
 .btnMenu {
 	padding: 10px 0px;
 	background-color: #005DAD;
@@ -105,6 +112,42 @@ body {
 	padding: 0;
 	margin: 0;
 }
+
+#tabelaUsuarios {
+	font-size: 14px;
+}
+
+#tabelaUsuarios .cabecalhoTabela {
+	color: white;
+	background-color: #F2994A;
+}
+
+.tituloPainel {
+	color: #005DAD;
+	font-weight: bold;
+}
+
+.iconePainel {
+	color: #F2994A;
+	padding-left: 16px;
+	padding-bottom: 16px;
+}
+
+.botaoVerMais {
+	background: transparent;
+	border: 1px;
+	border-style: solid;
+	color: #F2994A;
+	border-color: #F2994A;
+	margin-top: 10px;
+}
+
+.painel {
+	margin-bottom: 20px;
+	background-color: #eeeeee;
+}
+
+
 
 @media ( max-width : 780px) {
 	#empresa-a {
