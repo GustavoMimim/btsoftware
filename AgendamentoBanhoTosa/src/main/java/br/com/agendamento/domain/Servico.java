@@ -1,17 +1,38 @@
 package br.com.agendamento.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @SuppressWarnings("serial")
 @Entity
-
 public class Servico extends GenericDomain {
 
+	// Atributos
+	@Column(length = 30, nullable = false)
 	private String tipoServico;
+
+	@Column(length = 30, nullable = true)
 	private String descricao;
-	private float preco;
+
+	@Column(nullable = false)
+	private double preco;
+
+	// Chave Estrangeira
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Usuario codUsuarioInclusao;
 
 	// Getters e Setters :)
+	public Usuario getCodUsuarioInclusao() {
+		return codUsuarioInclusao;
+	}
+
+	public void setCodUsuarioInclusao(Usuario codUsuarioInclusao) {
+		this.codUsuarioInclusao = codUsuarioInclusao;
+	}
+
 	public String getTipoServico() {
 		return tipoServico;
 	}
@@ -28,11 +49,11 @@ public class Servico extends GenericDomain {
 		this.descricao = descricao;
 	}
 
-	public float getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(float preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
