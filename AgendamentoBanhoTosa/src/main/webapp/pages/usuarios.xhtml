@@ -56,7 +56,7 @@
 					<h:outputText value="Cadastrado em: 14/03/2019" />
 					<h:outputText value="Nome de Usuário: feliz70" />
 					<h:outputText value="Nome: João Marcos" />
-					<h:outputText value="CPF: 000.000.000-9" />
+					<h:outputText value="CPF: 123.456.789-10" />
 					<h:outputText value="Tipo de Acesso: Administrador" />
 					<h:outputText value="Função: Atendente" />
 				</h:panelGrid>
@@ -76,7 +76,8 @@
 		</div>
 
 
-		<!-- modais para cadastro, detalhes, exclusão -->
+		<!-- MODAIS para cadastro, detalhes, exclusão -->
+
 		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true"
 			resizable="false" height="auto">
 
@@ -142,7 +143,7 @@
 
 				<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
 					<h:panelGrid columns="6" cellpadding="5">
-						<p:outputLabel value="Estado:" />
+						<p:outputLabel value="Tipo de Usuário:" />
 						<p:selectOneMenu id="console1"
 							value="#{selectOneMenuView.console1}" style="width:150px">
 							<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
@@ -158,9 +159,6 @@
 					</h:panelGrid>
 				</p:fieldset>
 
-
-
-
 				<p:commandButton value="Salvar" />
 				<p:commandButton value="Cancelar" onclick="PF('dlg2').();" />
 
@@ -170,9 +168,23 @@
 
 		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true"
 			resizable="false" height="auto">
-
-
-
+			<h:panelGrid columns="2" cellpadding="5">
+			<h:outputLabel>Nome Completo</h:outputLabel>
+			<h:outputLabel>Cleber Soares Ribeiro</h:outputLabel>
+			
+			<h:outputLabel>CPF:</h:outputLabel>
+			<h:outputLabel>123456798</h:outputLabel>
+			
+			<h:outputLabel>Tipo de Acesso:</h:outputLabel>
+			<h:outputLabel>Administrador</h:outputLabel>
+			
+			<h:outputLabel>Cidade\Estado:</h:outputLabel>
+			<h:outputLabel>Ourinhos-São Paulo</h:outputLabel>
+			
+			<h:outputLabel>Nome de usuário:</h:outputLabel>
+			<h:outputLabel>Clebinho89</h:outputLabel>
+			
+			</h:panelGrid>
 		</p:dialog>
 
 
