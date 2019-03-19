@@ -78,31 +78,31 @@
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
-		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true"
+		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true" draggable="false"
 			resizable="false" height="auto">
 
 			<h:form>
 				<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
-					<h:panelGrid columns="6" cellpadding="5">
+					<h:panelGrid columns="6">
 						<h:outputLabel value="Nome:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="40" maxlength="50" />
 
 						<p:outputLabel value="CPF:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="14" />
 
 						<h:outputLabel value="RG:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="12" />
 					</h:panelGrid>
 					<div style="height: 10px;"></div>
 					<h:panelGrid columns="6" cellpadding="5">
 						<p:outputLabel value="Telefone:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="14" />
 
 						<h:outputLabel value="Dt. Nasc." />
 						<p:inputText required="true" />
 
 						<p:outputLabel value="Função:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="14" />
 
 					</h:panelGrid>
 				</p:fieldset>
@@ -110,8 +110,7 @@
 				<p:fieldset legend="Endereço" style="margin-bottom:20px">
 					<h:panelGrid columns="6" cellpadding="5">
 						<p:outputLabel value="Estado:" />
-						<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
-							style="width:150px">
+						<p:selectOneMenu style="width:150px">
 							<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
 							<f:selectItem itemLabel="Acre" itemValue="Acre" />
 							<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
@@ -119,23 +118,23 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Cidade:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="50"/>
 
 						<h:outputLabel value="CEP:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="10"/>
 
 
 					</h:panelGrid>
 					<div style="height: 10px;"></div>
 					<h:panelGrid columns="6" cellpadding="5">
 						<p:outputLabel value="Bairro:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="30"/>
 
 						<p:outputLabel value="Rua:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="50"/>
 
 						<h:outputLabel value="Número:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="5"/>
 
 
 					</h:panelGrid>
@@ -144,47 +143,49 @@
 				<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
 					<h:panelGrid columns="6" cellpadding="5">
 						<p:outputLabel value="Tipo de Usuário:" />
-						<p:selectOneMenu id="console1"
-							value="#{selectOneMenuView.console1}" style="width:150px">
+						<p:selectOneMenu style="width:150px">
 							<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
 							<f:selectItem itemLabel="Administrador" itemValue="Administrador" />
 							<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Nome de Usuário:" />
-						<p:inputText required="true" />
+						<p:inputText required="true" size="14" maxlength="20" />
 
 						<h:outputLabel value="Senha:" />
-						<p:inputText required="true" />
+						<p:password required="true" size="14" maxlength="10"/>
 					</h:panelGrid>
 				</p:fieldset>
 
-				<p:commandButton value="Salvar" />
-				<p:commandButton value="Cancelar" onclick="PF('dlg2').();" />
+				<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar}"/>
+				<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 
 			</h:form>
 
 		</p:dialog>
 
-		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true"
+		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true" draggable="false"
 			resizable="false" height="auto">
 			<h:panelGrid columns="2" cellpadding="5">
-			<h:outputLabel>Nome Completo</h:outputLabel>
-			<h:outputLabel>Cleber Soares Ribeiro</h:outputLabel>
-			
-			<h:outputLabel>CPF:</h:outputLabel>
-			<h:outputLabel>123456798</h:outputLabel>
-			
-			<h:outputLabel>Tipo de Acesso:</h:outputLabel>
-			<h:outputLabel>Administrador</h:outputLabel>
-			
-			<h:outputLabel>Cidade\Estado:</h:outputLabel>
-			<h:outputLabel>Ourinhos-São Paulo</h:outputLabel>
-			
-			<h:outputLabel>Nome de usuário:</h:outputLabel>
-			<h:outputLabel>Clebinho89</h:outputLabel>
-			
+				<h:outputLabel>Nome Completo</h:outputLabel>
+				<h:outputLabel>Cleber Soares Ribeiro</h:outputLabel>
+
+				<h:outputLabel>CPF:</h:outputLabel>
+				<h:outputLabel>123456798</h:outputLabel>
+
+				<h:outputLabel>Tipo de Acesso:</h:outputLabel>
+				<h:outputLabel>Administrador</h:outputLabel>
+
+				<h:outputLabel>Cidade\Estado:</h:outputLabel>
+				<h:outputLabel>Ourinhos-São Paulo</h:outputLabel>
+
+				<h:outputLabel>Nome de usuário:</h:outputLabel>
+				<h:outputLabel>Clebinho89</h:outputLabel>
+
 			</h:panelGrid>
+
+			<p:commandButton value="Alterar" />
+			<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 		</p:dialog>
 
 
