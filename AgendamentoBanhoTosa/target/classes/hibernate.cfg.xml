@@ -39,6 +39,11 @@
 		<mapping class="br.com.agendamento.domain.Servico" />
 		<mapping class="br.com.agendamento.domain.Usuario" />
 		<mapping class="br.com.agendamento.domain.PlanoAgendamento" />
+		<mapping class="br.com.agendamento.domain.Pagamento" />
+		
+		<mapping class="br.com.agendamento.domain.AgendamentoServico" />
+		<mapping class="br.com.agendamento.domain.PlanoServico" />
+		<mapping class="br.com.agendamento.domain.PagamentoServico" />
 		
 
 	</session-factory>
