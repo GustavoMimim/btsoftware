@@ -32,7 +32,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<!-- Repositorios -->
 	<!-- Usando em casos que o maven depende de repositorios de terceiros -->
 
@@ -85,12 +85,19 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.2</version>
 		</dependency>
-		
+
 		<!-- Temas do Primefaces -->
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
+		</dependency>
+
+		<!-- OmniFaces -->
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>1.11</version>
 		</dependency>
 
 

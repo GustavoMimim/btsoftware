@@ -10,37 +10,53 @@
 
 	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
 	<ui:define name="conteudo">
-
+		<!-- mensagem -->
+		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
 		<div class="ui-g-12 ui-md-12" id="cab"
 			style="background-color: white; height: 50px;">
 			<p:outputLabel value="Usuários"
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
-			<p:commandButton value="+" type="button" title="Novo Usuário"
-				styleClass="btnCirculo" onclick="PF('dlg2').show();" />
+			<p:commandButton value="+" title="Novo Usuário"
+				styleClass="btnCirculo" onclick="PF('dlg2').show();"
+				actionListener="#{usuarioBean.novo()}"
+				update=":formCadUsuario:painelForm" />
 		</div>
 
 		<div class="ui-g-12 ui-md-9" id="tabelaUsuarios">
-			<h:form>
-				<p:dataTable emptyMessage="Nenhum usuário cadastrado.">
+			<h:form id="tabelaUsuarios">
+				<p:dataTable emptyMessage="Nenhum usuário cadastrado."
+					value="#{usuarioBean.usuarios}" var="usuario" paginator="true"
+					rows="10" paginatorPosition="bottom">
 
-					<p:column headerText="Usuário" styleClass="cabecalhoTabela">
+					<p:column headerText="Usuário" sortBy="#{usuario.usuario}">
+						<h:outputText value="#{usuario.usuario}" />
 					</p:column>
 
-					<p:column headerText="Nome" styleClass="cabecalhoTabela">
-
+					<p:column headerText="Nome" sortBy="#{usuario.nome}">
+						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 
-					<p:column headerText="Email" styleClass="cabecalhoTabela">
-
+					<p:column headerText="Email">
+						<h:outputText value="#{usuario.email}" />
 					</p:column>
 
-					<p:column headerText="Função" styleClass="cabecalhoTabela">
-
+					<p:column headerText="Função">
+						<h:outputText value="#{usuario.funcao}" />
 					</p:column>
-
-
+					<p:column headerText="Ações">
+						<p:commandButton value="excluir">
+							<p:confirm header="Excluir" message="Deseja excluir o usuário?"></p:confirm>
+						</p:commandButton>
+					</p:column>
 				</p:dataTable>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" />
+				</p:confirmDialog>
 			</h:form>
 
 		</div>
@@ -52,13 +68,15 @@
 				<h:outputText value="Usuários" styleClass="tituloPainel" />
 				<h:panelGrid columns="1" cellpadding="10">
 
-					<h:outputText value="Codigo:1920" />
+					<h:outputText value="Código: #{usuarioBean.usuarios.get(4).codigo}" />
 					<h:outputText value="Cadastrado em: 14/03/2019" />
-					<h:outputText value="Nome de Usuário: feliz70" />
-					<h:outputText value="Nome: João Marcos" />
-					<h:outputText value="CPF: 123.456.789-10" />
-					<h:outputText value="Tipo de Acesso: Administrador" />
-					<h:outputText value="Função: Atendente" />
+					<h:outputText
+						value="Nome de Usuário: #{usuarioBean.usuarios.get(4).usuario}" />
+					<h:outputText value="Nome: #{usuarioBean.usuarios.get(4).nome}" />
+					<h:outputText value="CPF: #{usuarioBean.usuarios.get(4).cpf}" />
+					<h:outputText
+						value="Tipo de Acesso: #{usuarioBean.usuarios.get(4).nivelUsuario}" />
+					<h:outputText value="Função: #{usuarioBean.usuarios.get(4).funcao}" />
 				</h:panelGrid>
 				<p:commandButton value="Ver mais" type="button"
 					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
@@ -78,114 +96,157 @@
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
-		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true" draggable="false"
-			resizable="false" height="auto">
+		<p:dialog header="Novo Usuário" widgetVar="dlg2" modal="true"
+			draggable="false" resizable="false" height="auto">
 
-			<h:form>
-				<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
-					<h:panelGrid columns="6">
-						<h:outputLabel value="Nome:" />
-						<p:inputText required="true" size="40" maxlength="50" />
+			<h:form id="formCadUsuario">
+				<h:panelGrid columns="1" id="painelForm">
+					<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
+						<h:panelGrid columns="6">
+							<h:outputLabel value="Nome:" />
+							<p:inputText size="40" maxlength="50"
+								value="#{usuarioBean.usuario.nome}" />
 
-						<p:outputLabel value="CPF:" />
-						<p:inputText required="true" size="14" maxlength="14" />
+							<p:outputLabel value="CPF:" />
+							<p:inputText size="14" maxlength="14"
+								value="#{usuarioBean.usuario.cpf}" />
 
-						<h:outputLabel value="RG:" />
-						<p:inputText required="true" size="14" maxlength="12" />
-					</h:panelGrid>
-					<div style="height: 10px;"></div>
-					<h:panelGrid columns="6" cellpadding="5">
-						<p:outputLabel value="Telefone:" />
-						<p:inputText required="true" size="14" maxlength="14" />
+							<h:outputLabel value="RG:" />
+							<p:inputText size="14" maxlength="12"
+								value="#{usuarioBean.usuario.rg}" />
+						</h:panelGrid>
+						<div style="height: 10px;"></div>
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Telefone:" />
+							<p:inputText size="14" maxlength="14"
+								value="#{usuarioBean.usuario.telefone}" />
 
-						<h:outputLabel value="Dt. Nasc." />
-						<p:inputText required="true" />
+							<h:outputLabel value="Dt. Nasc." />
+							<p:calendar value="#{usuarioBean.usuario.dataNascimento}" />
 
-						<p:outputLabel value="Função:" />
-						<p:inputText required="true" size="14" maxlength="14" />
+							<p:outputLabel value="Função:" />
+							<p:inputText size="14" maxlength="14"
+								value="#{usuarioBean.usuario.funcao}" />
 
-					</h:panelGrid>
-				</p:fieldset>
+							<p:outputLabel value="Email:" />
+							<p:inputText size="14" maxlength="30"
+								value="#{usuarioBean.usuario.email}" />
 
-				<p:fieldset legend="Endereço" style="margin-bottom:20px">
-					<h:panelGrid columns="6" cellpadding="5">
-						<p:outputLabel value="Estado:" />
-						<p:selectOneMenu style="width:150px">
-							<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
-							<f:selectItem itemLabel="Acre" itemValue="Acre" />
-							<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
-							<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
-						</p:selectOneMenu>
+						</h:panelGrid>
+					</p:fieldset>
 
-						<p:outputLabel value="Cidade:" />
-						<p:inputText required="true" size="14" maxlength="50"/>
+					<p:fieldset legend="Endereço" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Estado:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{usuarioBean.usuario.estado}">
+								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+								<f:selectItem itemLabel="Acre" itemValue="Acre" />
+								<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
+								<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
+							</p:selectOneMenu>
 
-						<h:outputLabel value="CEP:" />
-						<p:inputText required="true" size="14" maxlength="10"/>
+							<p:outputLabel value="Cidade:" />
+							<p:inputText size="14" maxlength="50"
+								value="#{usuarioBean.usuario.cidade}" />
 
-
-					</h:panelGrid>
-					<div style="height: 10px;"></div>
-					<h:panelGrid columns="6" cellpadding="5">
-						<p:outputLabel value="Bairro:" />
-						<p:inputText required="true" size="14" maxlength="30"/>
-
-						<p:outputLabel value="Rua:" />
-						<p:inputText required="true" size="14" maxlength="50"/>
-
-						<h:outputLabel value="Número:" />
-						<p:inputText required="true" size="14" maxlength="5"/>
+							<h:outputLabel value="CEP:" />
+							<p:inputText size="14" maxlength="10"
+								value="#{usuarioBean.usuario.cep}" />
 
 
-					</h:panelGrid>
-				</p:fieldset>
+						</h:panelGrid>
+						<div style="height: 10px;"></div>
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Bairro:" />
+							<p:inputText size="14" maxlength="30"
+								value="#{usuarioBean.usuario.bairro}" />
 
-				<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
-					<h:panelGrid columns="6" cellpadding="5">
-						<p:outputLabel value="Tipo de Usuário:" />
-						<p:selectOneMenu style="width:150px">
-							<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
-							<f:selectItem itemLabel="Administrador" itemValue="Administrador" />
-							<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
-						</p:selectOneMenu>
+							<p:outputLabel value="Rua:" />
+							<p:inputText size="14" maxlength="50"
+								value="#{usuarioBean.usuario.rua}" />
 
-						<p:outputLabel value="Nome de Usuário:" />
-						<p:inputText required="true" size="14" maxlength="20" />
+							<h:outputLabel value="Número:" />
+							<p:inputText size="14" maxlength="5"
+								value="#{usuarioBean.usuario.rua}" />
 
-						<h:outputLabel value="Senha:" />
-						<p:password required="true" size="14" maxlength="10"/>
-					</h:panelGrid>
-				</p:fieldset>
 
-				<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar}"/>
-				<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
+						</h:panelGrid>
+					</p:fieldset>
+
+					<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Tipo de Usuário:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{usuarioBean.usuario.nivelUsuario}">
+								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+								<f:selectItem itemLabel="Administrador"
+									itemValue="Administrador" />
+								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Nome de Usuário:" />
+							<p:inputText size="14" maxlength="20"
+								value="#{usuarioBean.usuario.usuario}" />
+
+							<h:outputLabel value="Senha:" />
+							<p:password size="14" maxlength="10"
+								value="#{usuarioBean.usuario.senha}" />
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" type="submit"
+						actionListener="#{usuarioBean.salvar()}"
+						update=":growl :formCadUsuario:painelForm" />
+					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
+				</h:panelGrid>
 
 			</h:form>
 
 		</p:dialog>
 
-		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true" draggable="false"
-			resizable="false" height="auto">
-			<h:panelGrid columns="2" cellpadding="5">
+		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true"
+			draggable="false" resizable="false" height="auto">
+			<h:panelGrid columns="2" cellpadding="5" style="margin-bottom:20px">
+
+				<h:outputLabel>Código:</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).codigo}" />
+
 				<h:outputLabel>Nome Completo</h:outputLabel>
-				<h:outputLabel>Cleber Soares Ribeiro</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).nome}" />
 
-				<h:outputLabel>CPF:</h:outputLabel>
-				<h:outputLabel>123456798</h:outputLabel>
+				<h:outputLabel>Nome de Usuário</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).usuario}" />
 
-				<h:outputLabel>Tipo de Acesso:</h:outputLabel>
-				<h:outputLabel>Administrador</h:outputLabel>
+				<h:outputLabel>CPF</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).cpf}" />
+				
+				<h:outputLabel>RG</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).rg}" />
+				
+				<h:outputLabel>Telefone</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).telefone}" />
+				
+				<h:outputLabel>Email</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).email}" />
+				
+				<h:outputLabel>Cidade</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).cidade} - #{usuarioBean.usuarios.get(4).estado}" />
 
-				<h:outputLabel>Cidade\Estado:</h:outputLabel>
-				<h:outputLabel>Ourinhos-São Paulo</h:outputLabel>
+				<h:outputLabel>Tipo de Acesso</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).nivelUsuario}" />
+				
+				<h:outputLabel>Função:</h:outputLabel>
+				<h:outputText value="#{usuarioBean.usuarios.get(4).funcao}" />
 
-				<h:outputLabel>Nome de usuário:</h:outputLabel>
-				<h:outputLabel>Clebinho89</h:outputLabel>
 
 			</h:panelGrid>
+			<h:panelGrid columns="2">
 
-			<p:commandButton value="Alterar" />
-			<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
+				<p:commandButton value="Alterar" />
+				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
+			</h:panelGrid>
 		</p:dialog>
 
 

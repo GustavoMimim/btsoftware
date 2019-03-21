@@ -122,6 +122,11 @@ body {
 	background-color: #F2994A;
 }
 
+.ui-datatable th.ui-state-default, .ui-datatable tfoot td.ui-state-default {
+	background-color: #F2994A;
+	color:white;
+}
+
 .tituloPainel {
 	color: #005DAD;
 	font-weight: bold;

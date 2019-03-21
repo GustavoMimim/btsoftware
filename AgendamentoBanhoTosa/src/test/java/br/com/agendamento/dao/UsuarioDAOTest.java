@@ -101,4 +101,28 @@ public class UsuarioDAOTest {
 			System.out.println(usuario.getCodigo() + " - " + usuario.getUsuario() + " - " + usuario.getNome());
 		}
 	}
+	
+	@Test
+	public void mergeIncluir() {
+		Usuario usuario = new Usuario();
+		usuario.setBairro("centro");
+		usuario.setCep("19860-000");
+		usuario.setCidade("Timburi");
+		usuario.setCpf("000.000.000-00");
+		//usuario.setDataNascimento(new Date("9-03-18"));
+		usuario.setEstado("São Paulo");
+		usuario.setFuncao("Estudante");
+		usuario.setNivelUsuario("Padrão");
+		usuario.setNome("Leticia");
+		usuario.setNumero(45);
+		usuario.setRg("43223444");
+		usuario.setRua("Rua Sao Paulo");
+		usuario.setSenha("qwerty");
+		usuario.setTelefone("(14)2343-5553");
+		usuario.setUsuario("lele");
+		usuario.setEmail("lele@bt.com");
+
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.salvar(usuario);
+	}
 }

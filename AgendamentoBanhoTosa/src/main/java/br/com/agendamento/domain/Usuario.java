@@ -56,6 +56,9 @@ public class Usuario extends GenericDomain {
 
 	@Column(length = 20, nullable = false)
 	private String nivelUsuario;
+	
+	@Column(length = 50, nullable = false)
+	private String email;
 
 	public String getUsuario() {
 		return usuario;
@@ -175,6 +178,14 @@ public class Usuario extends GenericDomain {
 
 	public void setNivelUsuario(String nivelUsuario) {
 		this.nivelUsuario = nivelUsuario;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
 }
