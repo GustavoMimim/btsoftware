@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Agendamento</title>
+
+	<!-- Tag usada para importar o arquivo CSS -->
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="grid.css" />
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+
+</h:head>
+<h:body style="background-color:blue;">
+
+	<!-- Essa mensagem ira valer para todos os forms -->
+	<!--<p:growl id="mensagem" /> -->
+
+	<div class="ui-g">
+
+		<div id="menuSuperior">
+			<div id="empresa" class="ui-g-6 ui-md-4">
+				<i class="fas fa-paw fa-lg iconePadding" id="mobile" />
+				<p:outputLabel value="PETSHOP ESPAÇO ANIMAL" id="empresa-a"></p:outputLabel>
+			</div>
+
+			<div id="usuario" class="ui-g-12 ui-md-8"></div>
+		</div>
+
+		<div id="lateralLogin"
+			style="position: fixed; top: 40px; height: 100%; width: 33.33334%; background-color: white; box-shadow: 4px 4px 4px rgba(104, 104, 104, 0.25);">
+			<div class="ui-g-12 ui-md-nopad">
+				<div class="ui-g" style="padding: 80px 0px;">
+					<div class="ui-g-12 ui-md-12 "></div>
+				</div>
+
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-12 ">
+						<h:form>
+							<p:panelGrid columns="1">
+								<p:outputLabel value="Usuário:" />
+								<p:inputText size="40" maxlength="20" />
+							
+								<p:outputLabel value="Senha: " />
+								<p:inputText size="40" maxlength="20" />
+								
+								<h:outputLabel value="" />
+								<p:commandButton value="Entrar" />
+							</p:panelGrid>
+						</h:form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Div usado geralmente para definir o tamanho e outros atributos basicos da aplicação -->
+	<div id="conteudo">
+
+		<!-- Tag que serve de referencia para saber que nela algum conteudo sera chamado futuramento com o ui:difine -->
+
+	</div>
+
+
+</h:body>
+</html>

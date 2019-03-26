@@ -33,7 +33,7 @@
 				<p:commandLink styleClass="usuario-a">
 					<h:outputText value="Nome do Usuário" />
 				</p:commandLink>
-				<p:commandLink style="margin-right:0px;" styleClass="usuario-a">
+				<p:commandLink style="margin-right:0px;" styleClass="usuario-a" actionListener="#{loginBean.sair()}" update=":growl">
 					<i class="fas fa-sign-out-alt iconeSair"></i>
 					<h:outputText value="Sair" />
 				</p:commandLink>

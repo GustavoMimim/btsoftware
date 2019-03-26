@@ -74,9 +74,9 @@ public class UsuarioBean implements Serializable {
 			novo();
 			usuarios = usuarioDAO.listar();
 
-			Messages.addGlobalInfo("Novo usuário cadastrado!");
+			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Erro ao salvar usuário!");
+			Messages.addGlobalError("Erro ao Salvar Usuário!");
 			erro.printStackTrace();
 		}
 
@@ -101,7 +101,7 @@ public class UsuarioBean implements Serializable {
 			
 			usuarios = usuarioDAO.listar();
 		}catch (RuntimeException e) {
-			Messages.addGlobalError("Nenhum usuário selecionado");
+			Messages.addGlobalError("Não foi possivel excluir!");
 			e.printStackTrace();
 		}
 
@@ -111,7 +111,7 @@ public class UsuarioBean implements Serializable {
 		usuario = (Usuario) evento.getComponent().getAttributes().get("usuarioSelecionado");
 		
 		if(usuario == null) {
-			Messages.addGlobalError("Nenhum Usuário Selecionado");
+			Messages.addGlobalError("Não foi possivel alterar!");
 		}
 	}
 

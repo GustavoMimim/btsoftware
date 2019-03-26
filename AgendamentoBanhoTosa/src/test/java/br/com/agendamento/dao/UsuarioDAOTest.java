@@ -103,6 +103,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void mergeIncluir() {
 		Usuario usuario = new Usuario();
 		usuario.setBairro("centro");
@@ -124,5 +125,16 @@ public class UsuarioDAOTest {
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
+	}
+	
+	@Test
+	public void autenticar() {
+		String login = "locrz";
+		String senha = "1223";
+		
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		Usuario usuario = usuarioDAO.autenticar(login, senha);
+		
+		System.out.println("Usuario: "+ usuario);
 	}
 }
