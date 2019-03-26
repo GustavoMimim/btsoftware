@@ -21,3 +21,34 @@
 	background: linear-gradient(to right, #f44336, #2196f3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+.login-area{
+width: 250px;
+margin: 0 auto;
+    margin-top: 0px;
+margin-top: 15vw;
+}
+.botao button{
+	background-color: transparent !important;
+	border: 1px solid #1f70b7 !important;
+	border-radius: 4em !important;
+	width: 90% !important;
+	color:#1f70b7 !important;
+	margin-top:20px;
+	height: 40px;
+}
+.login-area-usuario,.login-area-senha{
+	font-size: 11px;
+	color:#1f70b7 !important;
+	background-color: #ebebeb;
+	margin:10px;
+	padding: 4px;
+	padding-left: 6px;
+	border-radius: 6px 6px 0 0 !important;
+	border-bottom:1px solid #1f70b7;
+}
+.login-area-usuario input[type="text"],.login-area-senha input[type="password"]{
+	height: 20px;
+	width: 200px;
+	background-color: transparent;
+	border: none;
+}
