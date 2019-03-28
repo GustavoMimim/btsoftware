@@ -1,0 +1,4 @@
+.btnCirculo span {
+    padding: 0em 0em 0em 1px !important;
+    font-size: 25px !important;
+}
