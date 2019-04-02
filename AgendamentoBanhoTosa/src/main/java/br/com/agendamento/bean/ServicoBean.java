@@ -13,7 +13,6 @@ import org.primefaces.event.SelectEvent;
 
 import br.com.agendamento.dao.ServicoDAO;
 import br.com.agendamento.domain.Servico;
-import br.com.agendamento.domain.Servico;
 
 @SuppressWarnings("serial")
 @ManagedBean

@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ActionEvent;
-
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
