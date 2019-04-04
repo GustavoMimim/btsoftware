@@ -14,10 +14,10 @@
 		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
 		<div class="ui-g-12 ui-md-12" id="cab"
 			style="background-color: white; height: 50px;">
-			<p:outputLabel value="Usuários"
+			<p:outputLabel value="Animal"
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
-			<p:commandButton value="+" title="Novo Usuário"
+			<p:commandButton value="+" title="Novo Animal"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
 				actionListener="#{usuarioBean.novo()}"
 				update=":formCadUsuario:painelForm" />
@@ -26,7 +26,7 @@
 		<div class="ui-g-12 ui-md-9" id="tabelaUsuarios">
 			<h:form id="tabelaUsuarios">
 				<p:dataTable id="tabUsuarios"
-					emptyMessage="Nenhum usuário cadastrado."
+					emptyMessage="Nenhum animal cadastrado."
 					value="#{usuarioBean.usuarios}" var="usuario" paginator="true"
 					rows="10" paginatorPosition="bottom" selectionMode="single"
 					selection="#{usuarioBean.usuario}" rowKey="#{usuario.codigo}"
@@ -35,19 +35,15 @@
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{usuarioBean.onRowSelect}" />
 
-					<p:column headerText="Usuário" sortBy="#{usuario.usuario}">
-						<h:outputText value="#{usuario.usuario}" />
-					</p:column>
-
-					<p:column headerText="Nome" sortBy="#{usuario.nome}">
+					<p:column headerText="Cliente" sortBy="#{usuario.nome}">
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 
-					<p:column headerText="Email">
+					<p:column headerText="Nome (animal)">
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 
-					<p:column headerText="Função">
+					<p:column headerText="Raça">
 						<h:outputText value="#{usuario.funcao}" />
 					</p:column>
 				</p:dataTable>
@@ -86,7 +82,7 @@
 				<p:commandButton value="Excluir"
 					actionListener="#{usuarioBean.excluir}"
 					update=":growl :tabelaUsuarios:tabUsuarios">
-					<p:confirm header="Excluir" message="Deseja excluir o usuário?"></p:confirm>
+					<p:confirm header="Excluir" message="Deseja excluir esse animal?"></p:confirm>
 					<f:attribute name="usuarioSelecionado"
 						value="#{usuarioBean.usuarioSelecionado}" />
 				</p:commandButton>
@@ -113,105 +109,59 @@
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
-		<p:dialog header="Cadastro de Usuário" widgetVar="dlg2" modal="true"
+		<p:dialog header="Cadastro de Animal" widgetVar="dlg2" modal="true"
 			draggable="false" resizable="false" height="auto">
 
 			<h:form id="formCadUsuario">
 				<h:panelGrid columns="1" id="painelForm">
 
-					<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
+					<p:fieldset legend="Dados do Animal" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6">
 							<h:outputLabel value="Nome:" />
 							<p:inputText size="45" maxlength="50"
 								value="#{usuarioBean.usuario.nome}" />
 
-							<p:outputLabel value="CPF:" />
-							<p:inputText size="14" maxlength="14"
-								value="#{usuarioBean.usuario.cpf}" />
-
-							<h:outputLabel value="RG:" />
-							<p:inputText size="14" maxlength="8"
-								value="#{usuarioBean.usuario.rg}" />
+							<h:outputLabel value="Raça:" />
+							<p:inputText size="45" maxlength="50"
+								value="#{usuarioBean.usuario.nome}" />
+								
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Telefone:" />
+							<p:outputLabel value="Pelagem:" />
 							<p:inputText size="20" maxlength="13"
 								value="#{usuarioBean.usuario.telefone}" />
 
-							<h:outputLabel value="Dt. Nasc."/>
-							<p:calendar size="14" value="#{usuarioBean.usuario.dataNascimento}" />
+							<p:outputLabel value="Porte:" />
+							<p:inputText size="20" maxlength="13"
+								value="#{usuarioBean.usuario.telefone}" />
 
-							<p:outputLabel value="Função:" />
+							<p:outputLabel value="Cor:" />
 							<p:inputText size="30" maxlength="45"
 								value="#{usuarioBean.usuario.funcao}" />
+								
+							<p:outputLabel value="Sexo:" />
+							<p:inputText size="20" maxlength="13"
+								value="#{usuarioBean.usuario.telefone}" />
+							
+							<p:outputLabel value="Oberservação:" />
+							<p:inputText size="20" maxlength="13"
+								value="#{usuarioBean.usuario.telefone}" />
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
+					</p:fieldset>
+
+					
+
+					<p:fieldset legend="Dados Cliente" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
 						
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Email:" />
-							<p:inputText size="87" maxlength="50"
-								value="#{usuarioBean.usuario.email}" />
-						</h:panelGrid>
-					</p:fieldset>
-
-					<p:fieldset legend="Endereço" style="margin-bottom:20px">
-
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Estado:" />
-							<p:selectOneMenu style="width:150px"
-								value="#{usuarioBean.usuario.estado}">
-								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
-								<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
-								<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
-							</p:selectOneMenu>
-
-							<p:outputLabel value="Cidade:" />
-							<p:inputText size="35" maxlength="30"
-								value="#{usuarioBean.usuario.cidade}" />
-
-							<h:outputLabel value="CEP:" />
-							<p:inputText size="14" maxlength="9"
-								value="#{usuarioBean.usuario.cep}" />
-
-						</h:panelGrid>
-
-						<div style="height: 10px;"></div>
-
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Bairro:" />
-							<p:inputText size="20" maxlength="30"
-								value="#{usuarioBean.usuario.bairro}" />
-
-							<p:outputLabel value="Rua:" />
-							<p:inputText size="37" maxlength="50"
-								value="#{usuarioBean.usuario.rua}" />
-
-							<h:outputLabel value="Número:" />
-							<p:inputText size="10" maxlength="5"
-								value="#{usuarioBean.usuario.numero}" />
-
-
-						</h:panelGrid>
-					</p:fieldset>
-
-					<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Tipo de Usuário:" />
-							<p:selectOneMenu style="width:150px"
-								value="#{usuarioBean.usuario.nivelUsuario}">
-								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
-								<f:selectItem itemLabel="Administrador"
-									itemValue="Administrador" />
-								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
-							</p:selectOneMenu>
-
-							<p:outputLabel value="Nome de Usuário:" />
+							<p:outputLabel value="Pesquisar:" />
 							<p:inputText size="14" maxlength="20"
 								value="#{usuarioBean.usuario.usuario}" />
 
