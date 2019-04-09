@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
+	<ui:define name="conteudo">
+		<!-- mensagem -->
+		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
+		<div class="ui-g-12 ui-md-12" id="cab"
+			style="background-color: white; height: 50px;">
+			<p:outputLabel value="Pagamentos"
+				style="padding-right:15px;font-size:20px;"></p:outputLabel>
+
+			<p:commandButton value="+" title="Novo Pagamento"
+				styleClass="btnCirculo" onclick="PF('dlg2').show();"
+				actionListener="#{pagamentoBean.novo()}"
+				update=":formCadPagamento:painelForm" />
+		</div>
+
+		<div class="ui-g-12 ui-md-9" id="tabelaPagamentos">
+			<h:form id="tabelaPagamentos">
+				<p:dataTable id="tabPagamentos"
+					emptyMessage="Nenhum pagamento cadastrado."
+					value="#{pagamentoBean.pagamentos}" var="pagamento" paginator="true"
+					rows="10" paginatorPosition="bottom" selectionMode="single"
+					selection="#{pagamentoBean.pagamento}" rowKey="#{pagamento.codigo}"
+					sortBy="#{pagamento.tipo}">
+
+					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
+						listener="#{pagamentoBean.onRowSelect}" />
+
+					<p:column headerText="Pagamento" sortBy="#{pagamento.pagamento}">
+						<h:outputText value="#{pagamento.pagamento}" />
+					</p:column>
+
+					<p:column headerText="Tipo de Pagamento" sortBy="#{pagamento.tipo}">
+						<h:outputText value="#{pagamento.tipo}" />
+					</p:column>
+
+					<p:column headerText="Valor">
+						<h:outputText value="#{pagamento.valor}" />
+					</p:column>
+
+					<p:column headerText="Data">
+						<h:outputText value="#{pagamento.data}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-3" id="paineis">
+
+			<p:panel id="painelInfo" styleClass="painel">
+
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Pagamentos" styleClass="tituloPainel" />
+				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
+					<h:outputLabel value="Tipo de Pagamento: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
+
+					<h:outputLabel value="Valor: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
+
+					<h:outputLabel value="Data: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
+				</h:panelGrid>
+
+				<p:commandButton value="Ver mais" type="button"
+					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
+					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{pagamentoBean.excluir}"
+					update=":growl :tabelaPagamentos:tabPagamentos">
+					<p:confirm header="Excluir" message="Deseja excluir o pagamento?"></p:confirm>
+					<f:attribute name="pagamentoSelecionado"
+						value="#{pagamentoBean.pagamentoSelecionado}" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="NÃ£o" type="button"
+						styleClass="ui-confirmdialog-no" />
+				</p:confirmDialog>
+
+			</p:panel>
+
+			<p:panel id="painelFiltro" styleClass="painel">
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Filtros" styleClass="tituloPainel" />
+				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
+
+				</h:panelGrid>
+
+			</p:panel>
+		</div>
+
+
+		<!-- MODAIS para cadastro, detalhes, exclusÃ£o -->
+
+		<p:dialog header="Cadastro de Pagamento" widgetVar="dlg2" modal="true"
+			draggable="false" resizable="false" height="auto">
+
+			<h:form id="formCadPagamento">
+					<p:fieldset legend="Dados Pagamento" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Tipo de Pagamento:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{pagamentoBean.pagamento.dataPagamento}">
+								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+								<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+								<f:selectItem itemLabel="Cartão" itemValue="Cartao" />
+                                                                <f:selectItem itemLabel="Cheque" itemValue="Cheque" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:fieldset>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" type="submit"
+						actionListener="#{pagamentoBean.salvar()}"
+						update=":growl :formCadPagamento:painelForm :tabelaPagamentos:tabPagamentos" />
+					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Detalhes de Pagamento" widgetVar="dlg3" modal="true"
+			draggable="false" resizable="false" height="auto" width="auto"
+			id="dialogDetalhes">
+			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
+				style="margin-bottom:20px;">
+
+				<h:outputLabel value="Tipo: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
+
+				<h:outputLabel value="Valor: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
+
+				<h:outputLabel value="Data: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Alterar"
+					actionListener="#{pagamentoBean.alterar}"
+					update=":growl :tabelaPagamentos:tabPagamentos :formCadPagamento:painelForm :painelInfo :dialogDetalhes"
+					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
+					<f:attribute name="pagamentoSelecionado"
+						value="#{pagamentoBean.pagamentoSelecionado}" />
+				</p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>
