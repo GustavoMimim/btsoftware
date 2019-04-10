@@ -18,7 +18,7 @@
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
 			<p:commandButton value="+" title="Novo Usuário"
-				styleClass="btnCirculo" onclick="PF('dlg2').show();"
+				styleClass="btnCirculo" onclick="PF('dlg2').initPosition();PF('dlg2').show();"
 				actionListener="#{usuarioBean.novo()}"
 				update=":formCadUsuario:painelForm" />
 		</div>
@@ -33,7 +33,7 @@
 					sortBy="#{usuario.nome}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
-						listener="#{usuarioBean.onRowSelect}" />
+						listener="#{usuarioBean.onRowSelect}"  />
 
 					<p:column headerText="Usuário" sortBy="#{usuario.usuario}">
 						<h:outputText value="#{usuario.usuario}" />
@@ -80,7 +80,7 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
-					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
+					onclick="PF('dlg3').initPosition();PF('dlg3').show();" styleClass="botaoVerMais"
 					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
 
 				<p:commandButton value="Excluir"
@@ -124,11 +124,11 @@
 						<h:panelGrid columns="6">
 							<h:outputLabel value="Nome:" />
 							<p:inputText size="45" maxlength="50"
-								value="#{usuarioBean.usuario.nome}" />
+								value="#{usuarioBean.usuario.nome}" required="true" requiredMessage="O campo Nome é obrigatório!"/>
 
 							<p:outputLabel value="CPF:" />
 							<p:inputText size="14" maxlength="14"
-								value="#{usuarioBean.usuario.cpf}" />
+								value="#{usuarioBean.usuario.cpf}"  required="true" requiredMessage="O campo CPF é obrigatório!"/>
 
 							<h:outputLabel value="RG:" />
 							<p:inputText size="14" maxlength="8"
@@ -147,7 +147,7 @@
 
 							<p:outputLabel value="Função:" />
 							<p:inputText size="30" maxlength="45"
-								value="#{usuarioBean.usuario.funcao}" />
+								value="#{usuarioBean.usuario.funcao}"  required="true" requiredMessage="O campo Função é obrigatório!"/>
 
 						</h:panelGrid>
 
@@ -204,7 +204,7 @@
 						<h:panelGrid columns="6" cellpadding="5">
 							<p:outputLabel value="Tipo de Usuário:" />
 							<p:selectOneMenu style="width:150px"
-								value="#{usuarioBean.usuario.nivelUsuario}">
+								value="#{usuarioBean.usuario.nivelUsuario}"  required="true" requiredMessage="O campo Tipo de Usuário é obrigatório!">
 								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
 								<f:selectItem itemLabel="Administrador"
 									itemValue="Administrador" />
@@ -213,11 +213,11 @@
 
 							<p:outputLabel value="Nome de Usuário:" />
 							<p:inputText size="14" maxlength="20"
-								value="#{usuarioBean.usuario.usuario}" />
+								value="#{usuarioBean.usuario.usuario}"  required="true" requiredMessage="O campo Usuário é obrigatório!"/>
 
 							<h:outputLabel value="Senha:" />
 							<p:password size="14" maxlength="10"
-								value="#{usuarioBean.usuario.senha}" />
+								value="#{usuarioBean.usuario.senha}"  required="true" requiredMessage="O campo Senha é obrigatório!" />
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>

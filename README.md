@@ -11,5 +11,6 @@ Equipe a qual será responsabilizada pelo desenvolvimento da documentação com 
 * Gustavo Bergamo Mimim  
 * João Marcos Tomaz dos Santos
 * Lucas Oliveira da Cruz
+* Pablo Tavares De Souza
 * Renan Leonardo Ramos Ferreira da Silva
 * Vinicius Andrade Ribeiro

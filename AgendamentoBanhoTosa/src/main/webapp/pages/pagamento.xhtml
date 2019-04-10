@@ -30,7 +30,7 @@
 					value="#{pagamentoBean.pagamentos}" var="pagamento" paginator="true"
 					rows="10" paginatorPosition="bottom" selectionMode="single"
 					selection="#{pagamentoBean.pagamento}" rowKey="#{pagamento.codigo}"
-					sortBy="#{pagamento.tipo}">
+					sortBy="#{pagamento.nome}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{pagamentoBean.onRowSelect}" />
@@ -39,16 +39,16 @@
 						<h:outputText value="#{pagamento.pagamento}" />
 					</p:column>
 
-					<p:column headerText="Tipo de Pagamento" sortBy="#{pagamento.tipo}">
-						<h:outputText value="#{pagamento.tipo}" />
+					<p:column headerText="Nome" sortBy="#{pagamento.nome}">
+						<h:outputText value="#{pagamento.nome}" />
 					</p:column>
 
-					<p:column headerText="Valor">
-						<h:outputText value="#{pagamento.valor}" />
+					<p:column headerText="Email">
+						<h:outputText value="#{pagamento.email}" />
 					</p:column>
 
-					<p:column headerText="Data">
-						<h:outputText value="#{pagamento.data}" />
+					<p:column headerText="Função">
+						<h:outputText value="#{pagamento.funcao}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
@@ -62,14 +62,21 @@
 				<i class="far fa-file-alt iconePadding iconePainel"></i>
 				<h:outputText value="Pagamentos" styleClass="tituloPainel" />
 				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
-					<h:outputLabel value="Tipo de Pagamento: " />
-					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
+					<h:outputLabel value="Pagamento: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.pagamento}" />
 
-					<h:outputLabel value="Valor: " />
-					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.nome}" />
 
-					<h:outputLabel value="Data: " />
-					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
+					<h:outputLabel value="CPF: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.cpf}" />
+
+					<h:outputLabel value="Tipo de Acesso: " />
+					<h:outputText
+						value="#{pagamentoBean.pagamentoSelecionado.nivelPagamento}" />
+
+					<h:outputLabel value="Função: " />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.funcao}" />
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
@@ -87,7 +94,7 @@
 				<p:confirmDialog global="true">
 					<p:commandButton value="Sim" type="button"
 						styleClass="ui-confirmdialog-yes" />
-					<p:commandButton value="NÃ£o" type="button"
+					<p:commandButton value="Não" type="button"
 						styleClass="ui-confirmdialog-no" />
 				</p:confirmDialog>
 
@@ -104,24 +111,116 @@
 		</div>
 
 
-		<!-- MODAIS para cadastro, detalhes, exclusÃ£o -->
+		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
 		<p:dialog header="Cadastro de Pagamento" widgetVar="dlg2" modal="true"
 			draggable="false" resizable="false" height="auto">
 
 			<h:form id="formCadPagamento">
+				<h:panelGrid columns="1" id="painelForm">
+
+					<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
+
+						<h:panelGrid columns="6">
+							<h:outputLabel value="Nome:" />
+							<p:inputText size="45" maxlength="50"
+								value="#{pagamentoBean.pagamento.nome}" />
+
+							<p:outputLabel value="CPF:" />
+							<p:inputText size="14" maxlength="14"
+								value="#{pagamentoBean.pagamento.cpf}" />
+
+							<h:outputLabel value="RG:" />
+							<p:inputText size="14" maxlength="8"
+								value="#{pagamentoBean.pagamento.rg}" />
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Telefone:" />
+							<p:inputText size="20" maxlength="13"
+								value="#{pagamentoBean.pagamento.telefone}" />
+
+							<h:outputLabel value="Dt. Nasc."/>
+							<p:calendar size="14" value="#{pagamentoBean.pagamento.dataNascimento}" />
+
+							<p:outputLabel value="Função:" />
+							<p:inputText size="30" maxlength="45"
+								value="#{pagamentoBean.pagamento.funcao}" />
+
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+						
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Email:" />
+							<p:inputText size="87" maxlength="50"
+								value="#{pagamentoBean.pagamento.email}" />
+						</h:panelGrid>
+					</p:fieldset>
+
+					<p:fieldset legend="Endereço" style="margin-bottom:20px">
+
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Estado:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{pagamentoBean.pagamento.estado}">
+								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+								<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
+								<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
+							</p:selectOneMenu>
+
+							<p:outputLabel value="Cidade:" />
+							<p:inputText size="35" maxlength="30"
+								value="#{pagamentoBean.pagamento.cidade}" />
+
+							<h:outputLabel value="CEP:" />
+							<p:inputText size="14" maxlength="9"
+								value="#{pagamentoBean.pagamento.cep}" />
+
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Bairro:" />
+							<p:inputText size="20" maxlength="30"
+								value="#{pagamentoBean.pagamento.bairro}" />
+
+							<p:outputLabel value="Rua:" />
+							<p:inputText size="37" maxlength="50"
+								value="#{pagamentoBean.pagamento.rua}" />
+
+							<h:outputLabel value="Número:" />
+							<p:inputText size="10" maxlength="5"
+								value="#{pagamentoBean.pagamento.numero}" />
+
+
+						</h:panelGrid>
+					</p:fieldset>
+
 					<p:fieldset legend="Dados Pagamento" style="margin-bottom:20px">
 						<h:panelGrid columns="6" cellpadding="5">
 							<p:outputLabel value="Tipo de Pagamento:" />
 							<p:selectOneMenu style="width:150px"
-								value="#{pagamentoBean.pagamento.dataPagamento}">
+								value="#{pagamentoBean.pagamento.nivelPagamento}">
 								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
-								<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
-								<f:selectItem itemLabel="Cartão" itemValue="Cartao" />
-                                                                <f:selectItem itemLabel="Cheque" itemValue="Cheque" />
+								<f:selectItem itemLabel="Administrador"
+									itemValue="Administrador" />
+								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
 							</p:selectOneMenu>
+
+							<p:outputLabel value="Nome de Pagamento:" />
+							<p:inputText size="14" maxlength="20"
+								value="#{pagamentoBean.pagamento.pagamento}" />
+
+							<h:outputLabel value="Senha:" />
+							<p:password size="14" maxlength="10"
+								value="#{pagamentoBean.pagamento.senha}" />
 						</h:panelGrid>
 					</p:fieldset>
+				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
 						actionListener="#{pagamentoBean.salvar()}"
@@ -139,14 +238,43 @@
 			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
 				style="margin-bottom:20px;">
 
-				<h:outputLabel value="Tipo: " style="font-weight:bold;" />
-				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
 
-				<h:outputLabel value="Valor: " style="font-weight:bold;" />
-				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
+				<h:outputLabel value="Pagamento: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.pagamento}" />
 
-				<h:outputLabel value="Data: " style="font-weight:bold;" />
-				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
+				<h:outputLabel value="Nome: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.nome}" />
+
+				<h:outputLabel value="CPF: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.cpf}" />
+
+				<h:outputLabel value="Tipo de Acesso: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.nivelPagamento}" />
+
+				<h:outputLabel value="Função: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.funcao}" />
+
+				<h:outputLabel value="Email: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.email}" />
+
+				<h:outputLabel value="RG: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.rg}" />
+
+				<h:outputLabel value="Telefone: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.telefone}" />
+
+				<h:outputLabel value="Estado: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.estado}" />
+
+				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.rua}," />
+				<h:outputText value="" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.numero}" />
+				<h:outputText value="" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.cidade}" />
+				<h:outputText value="" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.bairro}" />
+
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 

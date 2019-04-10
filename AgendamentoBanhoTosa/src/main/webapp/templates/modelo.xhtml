@@ -31,7 +31,7 @@
 
 			<div id="usuario" class="ui-g-12 ui-md-10">
 				<p:commandLink styleClass="usuario-a">
-					<h:outputText value="Nome do Usuário" />
+					<h:outputText value="#{loginBean.usuario.usuario}" />
 				</p:commandLink>
 				<p:commandLink style="margin-right:0px;" styleClass="usuario-a" actionListener="#{loginBean.sair()}" update=":growl">
 					<i class="fas fa-sign-out-alt iconeSair"></i>
@@ -151,6 +151,4 @@
 	</div>
 
 </h:body>
-<script src="jquery.js"></script>
-<script src="seleciona.js"></script>
 </html>

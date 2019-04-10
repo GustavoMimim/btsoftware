@@ -98,4 +98,12 @@ public class PlanoAgendamento extends GenericDomain {
 		this.precoPlano = precoPlano;
 	}
 
+    public Animal getCodAnimal() {
+        return codAnimal;
+    }
+
+    public void setCodAnimal(Animal codAnimal) {
+        this.codAnimal = codAnimal;
+    }
+
 }
