@@ -23,6 +23,15 @@ public class UsuarioBean implements Serializable {
 	private Usuario usuario;
 	private Usuario usuarioSelecionado;
 	private List<Usuario> usuarios;// atributo para listar usuarios
+	private char tipo;
+
+	public char getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(char tipo) {
+		this.tipo = tipo;
+	}
 
 	// Getters e Setters
 	public Usuario getUsuarioSelecionado() {
@@ -68,14 +77,39 @@ public class UsuarioBean implements Serializable {
 	public void salvar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.merge(usuario);
 
-			novo();
-			usuarios = usuarioDAO.listar();
+			if (usuario.getCodigo() == null) {
 
-			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+				if (!usuarioDAO.verificaUsuario(usuario.getUsuario()).isEmpty()) {
+					Messages.addGlobalError("Nome de Usuário já cadastrado!");
+				}
+
+				else if (!usuarioDAO.verificaCpf(usuario.getCpf()).isEmpty()) {
+					Messages.addGlobalError("CPF já cadastrado!");
+				}
+
+				// cadastrando novo
+				else {
+					usuarioDAO.merge(usuario);
+
+					novo();
+					usuarios = usuarioDAO.listar();
+
+					Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+				}
+			} else {
+
+				usuarioDAO.merge(usuario);
+
+				novo();
+				usuarios = usuarioDAO.listar();
+
+				Messages.addGlobalInfo("Alteração Realizada com Sucesso!");
+
+			}
+
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Erro ao Salvar Usuário!");
+			Messages.addGlobalError("Erro ao Salvar Usuario!");
 			erro.printStackTrace();
 		}
 

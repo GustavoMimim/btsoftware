@@ -18,9 +18,14 @@
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
 			<p:commandButton value="+" title="Novo Usuário"
-				styleClass="btnCirculo" onclick="PF('dlg2').initPosition();PF('dlg2').show();"
+				styleClass="btnCirculo"
+				onclick="PF('dlg2').initPosition();PF('dlg2').show();"
 				actionListener="#{usuarioBean.novo()}"
-				update=":formCadUsuario:painelForm" />
+				update=":formCadUsuario:painelForm">
+				<f:actionListener
+					type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+				<input type="hidden" name="teste" value="Ferramentas" />
+			</p:commandButton>
 		</div>
 
 		<div class="ui-g-12 ui-md-9" id="tabelaUsuarios">
@@ -33,7 +38,7 @@
 					sortBy="#{usuario.nome}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
-						listener="#{usuarioBean.onRowSelect}"  />
+						listener="#{usuarioBean.onRowSelect}" />
 
 					<p:column headerText="Usuário" sortBy="#{usuario.usuario}">
 						<h:outputText value="#{usuario.usuario}" />
@@ -80,7 +85,8 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
-					onclick="PF('dlg3').initPosition();PF('dlg3').show();" styleClass="botaoVerMais"
+					onclick="PF('dlg3').initPosition();PF('dlg3').show();"
+					styleClass="botaoVerMais"
 					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
 
 				<p:commandButton value="Excluir"
@@ -122,40 +128,44 @@
 					<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6">
-							<h:outputLabel value="Nome:" />
-							<p:inputText size="45" maxlength="50"
-								value="#{usuarioBean.usuario.nome}" required="true" requiredMessage="O campo Nome é obrigatório!"/>
+							<h:outputLabel for="nome" value="Nome:" />
+							<p:inputText id="nome" size="45" maxlength="50"
+								value="#{usuarioBean.usuario.nome}" required="true"
+								requiredMessage="O campo Nome é obrigatório!" />
 
-							<p:outputLabel value="CPF:" />
-							<p:inputText size="14" maxlength="14"
-								value="#{usuarioBean.usuario.cpf}"  required="true" requiredMessage="O campo CPF é obrigatório!"/>
+							<p:outputLabel for="cpf" value="CPF:" />
+							<p:inputText id="cpf" size="14" maxlength="11"
+								value="#{usuarioBean.usuario.cpf}" required="true"
+								requiredMessage="O campo CPF é obrigatório!" />
 
-							<h:outputLabel value="RG:" />
-							<p:inputText size="14" maxlength="8"
+							<h:outputLabel for="rg" value="RG:" />
+							<p:inputText id="rg" size="14" maxlength="9"
 								value="#{usuarioBean.usuario.rg}" />
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Telefone:" />
-							<p:inputText size="20" maxlength="13"
+							<p:outputLabel for="telefone" value="Telefone:" />
+							<p:inputText id="telefone" size="20" maxlength="13"
 								value="#{usuarioBean.usuario.telefone}" />
 
-							<h:outputLabel value="Dt. Nasc."/>
-							<p:calendar size="14" value="#{usuarioBean.usuario.dataNascimento}" />
+							<h:outputLabel for="nascimento" value="Dt. Nasc." />
+							<p:calendar id="nascimento" size="14"
+								value="#{usuarioBean.usuario.dataNascimento}" />
 
-							<p:outputLabel value="Função:" />
-							<p:inputText size="30" maxlength="45"
-								value="#{usuarioBean.usuario.funcao}"  required="true" requiredMessage="O campo Função é obrigatório!"/>
+							<p:outputLabel for="funcao" value="Função:" />
+							<p:inputText id="funcao" size="30" maxlength="45"
+								value="#{usuarioBean.usuario.funcao}" required="true"
+								requiredMessage="O campo Função é obrigatório!" />
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
-						
+
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Email:" />
-							<p:inputText size="87" maxlength="50"
+							<p:outputLabel for="email" value="Email:" />
+							<p:inputText id="email" size="87" maxlength="50"
 								value="#{usuarioBean.usuario.email}" />
 						</h:panelGrid>
 					</p:fieldset>
@@ -163,20 +173,20 @@
 					<p:fieldset legend="Endereço" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Estado:" />
-							<p:selectOneMenu style="width:150px"
+							<p:outputLabel for="estado" value="Estado:" />
+							<p:selectOneMenu id="estado" style="width:150px"
 								value="#{usuarioBean.usuario.estado}">
 								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
 								<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
 								<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
 							</p:selectOneMenu>
 
-							<p:outputLabel value="Cidade:" />
-							<p:inputText size="35" maxlength="30"
+							<p:outputLabel for="cidade" value="Cidade:" />
+							<p:inputText id="cidade" size="35" maxlength="30"
 								value="#{usuarioBean.usuario.cidade}" />
 
-							<h:outputLabel value="CEP:" />
-							<p:inputText size="14" maxlength="9"
+							<h:outputLabel for="cep" value="CEP:" />
+							<p:inputText id="cep" size="14" maxlength="9"
 								value="#{usuarioBean.usuario.cep}" />
 
 						</h:panelGrid>
@@ -184,17 +194,18 @@
 						<div style="height: 10px;"></div>
 
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Bairro:" />
-							<p:inputText size="20" maxlength="30"
+							<p:outputLabel for="bairro" value="Bairro:" />
+							<p:inputText id="bairro" size="20" maxlength="30"
 								value="#{usuarioBean.usuario.bairro}" />
 
-							<p:outputLabel value="Rua:" />
-							<p:inputText size="37" maxlength="50"
+							<p:outputLabel for="rua" value="Rua:" />
+							<p:inputText id="rua" size="37" maxlength="50"
 								value="#{usuarioBean.usuario.rua}" />
 
-							<h:outputLabel value="Número:" />
-							<p:inputText size="10" maxlength="5"
-								value="#{usuarioBean.usuario.numero}" />
+							<h:outputLabel for="numero" value="Número:" />
+							<p:inputText id="numero" size="10" maxlength="5"
+								value="#{usuarioBean.usuario.numero}"
+								converterMessage="O campo Número recebe apenas valores inteiros" />
 
 
 						</h:panelGrid>
@@ -202,28 +213,31 @@
 
 					<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Tipo de Usuário:" />
-							<p:selectOneMenu style="width:150px"
-								value="#{usuarioBean.usuario.nivelUsuario}"  required="true" requiredMessage="O campo Tipo de Usuário é obrigatório!">
+							<p:outputLabel for="tipo" value="Tipo de Usuário:" />
+							<p:selectOneMenu id="tipo" style="width:150px"
+								value="#{usuarioBean.usuario.nivelUsuario}" required="true"
+								requiredMessage="O campo Tipo de Usuário é obrigatório!">
 								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
 								<f:selectItem itemLabel="Administrador"
 									itemValue="Administrador" />
 								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
 							</p:selectOneMenu>
 
-							<p:outputLabel value="Nome de Usuário:" />
-							<p:inputText size="14" maxlength="20"
-								value="#{usuarioBean.usuario.usuario}"  required="true" requiredMessage="O campo Usuário é obrigatório!"/>
+							<p:outputLabel for="usuarioNome" value="Nome de Usuário:" />
+							<p:inputText id="usuarioNome" size="14" maxlength="20"
+								value="#{usuarioBean.usuario.usuario}" required="true"
+								requiredMessage="O campo Usuário é obrigatório!" />
 
-							<h:outputLabel value="Senha:" />
-							<p:password size="14" maxlength="10"
-								value="#{usuarioBean.usuario.senha}"  required="true" requiredMessage="O campo Senha é obrigatório!" />
+							<h:outputLabel for="senha" value="Senha:" />
+							<p:password id="senha" size="14" maxlength="10"
+								value="#{usuarioBean.usuario.senha}" required="true"
+								requiredMessage="O campo Senha é obrigatório!" />
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
-						actionListener="#{usuarioBean.salvar()}"
+						actionListener="#{usuarioBean.salvar}"
 						update=":growl :formCadUsuario:painelForm :tabelaUsuarios:tabUsuarios" />
 					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 				</h:panelGrid>
@@ -284,6 +298,8 @@
 					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
 					<f:attribute name="usuarioSelecionado"
 						value="#{usuarioBean.usuarioSelecionado}" />
+					<f:actionListener
+						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 				</p:commandButton>
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>
