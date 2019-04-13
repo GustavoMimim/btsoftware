@@ -56,23 +56,18 @@
 			<p:panel id="painelInfo" styleClass="painel">
 
 				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Usuários" styleClass="tituloPainel" />
+				<h:outputText value="Cliente" styleClass="tituloPainel" />
 				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
-					<h:outputLabel value="Usuário: " />
+					<h:outputLabel value="Cliente(Dono): " />
 					<h:outputText value="#{usuarioBean.usuarioSelecionado.usuario}" />
 
-					<h:outputLabel value="Nome: " />
+					<h:outputLabel value="Cachorro(Nome):" />
 					<h:outputText value="#{usuarioBean.usuarioSelecionado.nome}" />
 
-					<h:outputLabel value="CPF: " />
+					<h:outputLabel value="Telefone:" />
 					<h:outputText value="#{usuarioBean.usuarioSelecionado.cpf}" />
 
-					<h:outputLabel value="Tipo de Acesso: " />
-					<h:outputText
-						value="#{usuarioBean.usuarioSelecionado.nivelUsuario}" />
 
-					<h:outputLabel value="Função: " />
-					<h:outputText value="#{usuarioBean.usuarioSelecionado.funcao}" />
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
@@ -125,51 +120,90 @@
 							<h:outputLabel value="Raça:" />
 							<p:inputText size="45" maxlength="50"
 								value="#{usuarioBean.usuario.nome}" />
-								
+
 						</h:panelGrid>
 
-						<div style="height: 10px;"></div>
-
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Pelagem:" />
-							<p:inputText size="20" maxlength="13"
-								value="#{usuarioBean.usuario.telefone}" />
-
-							<p:outputLabel value="Porte:" />
-							<p:inputText size="20" maxlength="13"
-								value="#{usuarioBean.usuario.telefone}" />
+						<h:panelGrid columns="6">
 
 							<p:outputLabel value="Cor:" />
-							<p:inputText size="30" maxlength="45"
+							<p:inputText size="100" maxlength="45"
 								value="#{usuarioBean.usuario.funcao}" />
-								
+
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+
+						<h:panelGrid columns="1">
+							<p:outputLabel value="Pelagem:" />
+							<p:selectOneRadio id="pelagem" value="#{radioView.console}"
+								unselectable="true">
+								<f:selectItem itemLabel="Baixa" itemValue="baixa" />
+								<f:selectItem itemLabel="Media" itemValue="media" />
+								<f:selectItem itemLabel="Alta" itemValue="alta" />
+								<f:selectItem itemLabel="Gigante" itemValue="gigante" />
+							</p:selectOneRadio>
+
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+
 							<p:outputLabel value="Sexo:" />
-							<p:inputText size="20" maxlength="13"
-								value="#{usuarioBean.usuario.telefone}" />
-							
-							<p:outputLabel value="Oberservação:" />
-							<p:inputText size="20" maxlength="13"
-								value="#{usuarioBean.usuario.telefone}" />
+							<p:selectOneRadio id="sexo" value="#{radioView.console}"
+								unselectable="true">
+								<f:selectItem itemLabel="Macho" itemValue="M" />
+								<f:selectItem itemLabel="Femea" itemValue="F" />
+							</p:selectOneRadio>
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="1" cellpadding="5">
+
+							<p:outputLabel value="Observação:" />
+							<p:inputTextarea rows="3" cols="100"
+								completeMethod="#{inputTextareaView.completeArea}"
+								queryDelay="750" minQueryLength="4" />
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 					</p:fieldset>
 
-					
+
 
 					<p:fieldset legend="Dados Cliente" style="margin-bottom:20px">
-						<h:panelGrid columns="6" cellpadding="5">
-						
-							<p:outputLabel value="Pesquisar:" />
-							<p:inputText size="14" maxlength="20"
-								value="#{usuarioBean.usuario.usuario}" />
+						<h:panelGrid columns="1" cellpadding="5">
 
-							<h:outputLabel value="Senha:" />
-							<p:password size="14" maxlength="10"
-								value="#{usuarioBean.usuario.senha}" />
+							<p:outputLabel value="Pesquisar:" />
+							<p:inputText size="100" maxlength="20"
+								value="#{usuarioBean.usuario.usuario}" />
+								
+								<!-- Esse codigo esta comentado pois necesita de configuração, para visualizar o funcionamnto do campo acesse: https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml -->
+							<!-- <h:outputLabel value="Resultado:" />
+							<p:password size="100" maxlength="10"
+								value="#{usuarioBean.usuario.senha}" /> -->
+
+							<!--  <h:outputLabel value="Resultado:" />
+							    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+							        <p:outputLabel for="city" value="Editable: " />
+							        <p:selectOneMenu id="city" value="#{usuarioBean.usuarioSelecionado.nome}" effect="fold" editable="true">
+							            <f:selectItem itemLabel="Select One" itemValue="" />
+							            <f:selectItems value="#{usuarioBean.usuarioSelecionado.nome}" />
+							        </p:selectOneMenu>
+							 
+							        <p:outputLabel for="advanced" value="Advanced:" />
+							        <p:selectOneMenu id="advanced" value="#{usuarioBean.usuarioSelecionado.nome}" panelStyle="width:180px"
+							                         effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
+							            <f:selectItems value="#{usuarioBean.usuarioSelecionado.nome}" var="theme" itemLabel="#{usuarioBean.usuarioSelecionado.nome}" itemValue="#{theme}" />
+							 
+				
+							            <p:column>
+							                <h:outputText value="teste" />
+							            </p:column>
+							        </p:selectOneMenu>
+							        
 						</h:panelGrid>
-					</p:fieldset>
+						-->
+				</h:panelGrid>
+				</p:fieldset>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
@@ -189,41 +223,26 @@
 				style="margin-bottom:20px;">
 
 
-				<h:outputLabel value="Usuário: " style="font-weight:bold;" />
+				<h:outputLabel value="Dono: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.usuario}" />
 
-				<h:outputLabel value="Nome: " style="font-weight:bold;" />
+				<h:outputLabel value="Nome(cachorro): " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.nome}" />
 
-				<h:outputLabel value="CPF: " style="font-weight:bold;" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.cpf}" />
-
-				<h:outputLabel value="Tipo de Acesso: " style="font-weight:bold;" />
+				<h:outputLabel value="Raça: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.nivelUsuario}" />
 
-				<h:outputLabel value="Função: " style="font-weight:bold;" />
+				<h:outputLabel value="Cor: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.funcao}" />
 
-				<h:outputLabel value="Email: " style="font-weight:bold;" />
+				<h:outputLabel value="Pelagem: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.email}" />
 
-				<h:outputLabel value="RG: " style="font-weight:bold;" />
+				<h:outputLabel value="Sexo: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.rg}" />
 
-				<h:outputLabel value="Telefone: " style="font-weight:bold;" />
+				<h:outputLabel value="Observação: " style="font-weight:bold;" />
 				<h:outputText value="#{usuarioBean.usuarioSelecionado.telefone}" />
-
-				<h:outputLabel value="Estado: " style="font-weight:bold;" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.estado}" />
-
-				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.rua}," />
-				<h:outputText value="" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.numero}" />
-				<h:outputText value="" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.cidade}" />
-				<h:outputText value="" />
-				<h:outputText value="#{usuarioBean.usuarioSelecionado.bairro}" />
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
