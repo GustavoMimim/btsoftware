@@ -12,18 +12,22 @@ import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
 import br.com.agendamento.dao.AnimalDAO;
+import br.com.agendamento.dao.ClienteDAO;
+import br.com.agendamento.dao.UsuarioDAO;
 import br.com.agendamento.domain.Animal;
+import br.com.agendamento.domain.Cliente;
+import br.com.agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class AnimalBean implements Serializable{
+public class AnimalBean implements Serializable {
 
 	private Animal animal;
 	private Animal animalSelecionado;
 	private List<Animal> animais;// atributo para listar animais
-	
-	//Getters e Setters
+
+	// Getters e Setters
 	public Animal getAnimal() {
 		return animal;
 	}
@@ -48,9 +52,11 @@ public class AnimalBean implements Serializable{
 		this.animalSelecionado = animalSelecionado;
 	}
 
-	//zera todos os campos de Animal
+	// zera todos os campos de Animal
 	public void novo() {
 		animal = new Animal();
+		
+		Messages.addGlobalInfo("Novo animal instanciado!");
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
@@ -66,6 +72,12 @@ public class AnimalBean implements Serializable{
 
 	public void salvar() {
 		try {
+			ClienteDAO clienteDAO = new ClienteDAO();
+			Cliente cliente = clienteDAO.buscar(1L);
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Usuario usuario = usuarioDAO.buscar(1L);
+			animal.setCodUsuarioInclusao(usuario);
+			animal.setCodCliente(cliente);
 			AnimalDAO animalDAO = new AnimalDAO();
 			animalDAO.merge(animal);
 
@@ -88,22 +100,22 @@ public class AnimalBean implements Serializable{
 	public void excluir(ActionEvent evento) {
 		animal = (Animal) evento.getComponent().getAttributes().get("animalSelecionado");
 
-		try{
+		try {
 			AnimalDAO animalDAO = new AnimalDAO();
 			animalDAO.excluir(animal);
 			Messages.addGlobalInfo("Animal " + animal.getNome() + " Excluído");
-			
+
 			animais = animalDAO.listar();
-		}catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			Messages.addGlobalError("Não foi possivel excluir!");
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void alterar(ActionEvent evento) {
 		animal = (Animal) evento.getComponent().getAttributes().get("animalSelecionado");
-		if(animal == null) {
+		if (animal == null) {
 			Messages.addGlobalError("Não foi possivel alterar!");
 		}
 	}
