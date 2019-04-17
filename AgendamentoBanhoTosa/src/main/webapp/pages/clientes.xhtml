@@ -35,20 +35,16 @@
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{clienteBean.onRowSelect}" />
 
-					<p:column headerText="Cliente" sortBy="#{cliente.cliente}">
-						<h:outputText value="#{cliente.cliente}" />
-					</p:column>
-
 					<p:column headerText="Nome" sortBy="#{cliente.nome}">
 						<h:outputText value="#{cliente.nome}" />
 					</p:column>
 
-					<p:column headerText="Email">
-						<h:outputText value="#{cliente.email}" />
+					<p:column headerText="Telefone">
+						<h:outputText value="#{cliente.telefone}" />
 					</p:column>
 
-					<p:column headerText="Função">
-						<h:outputText value="#{cliente.funcao}" />
+					<p:column headerText="Status">
+						<h:outputText value="#{cliente.status}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
@@ -62,21 +58,16 @@
 				<i class="far fa-file-alt iconePadding iconePainel"></i>
 				<h:outputText value="Clientes" styleClass="tituloPainel" />
 				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
-					<h:outputLabel value="Cliente: " />
-					<h:outputText value="#{clienteBean.clienteSelecionado.cliente}" />
 
 					<h:outputLabel value="Nome: " />
 					<h:outputText value="#{clienteBean.clienteSelecionado.nome}" />
 
-					<h:outputLabel value="CPF: " />
-					<h:outputText value="#{clienteBean.clienteSelecionado.cpf}" />
+					<h:outputLabel value="Telefone: " />
+					<h:outputText value="#{clienteBean.clienteSelecionado.telefone}" />
+					
+					<h:outputLabel value="Status: " />
+					<h:outputText value="#{clienteBean.clienteSelecionado.status}" />
 
-					<h:outputLabel value="Tipo de Acesso: " />
-					<h:outputText
-						value="#{clienteBean.clienteSelecionado.nivelCliente}" />
-
-					<h:outputLabel value="Função: " />
-					<h:outputText value="#{clienteBean.clienteSelecionado.funcao}" />
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
@@ -144,20 +135,22 @@
 
 							<h:outputLabel value="Dt. Nasc."/>
 							<p:calendar size="14" value="#{clienteBean.cliente.dataNascimento}" />
-
-							<p:outputLabel value="Função:" />
-							<p:inputText size="30" maxlength="45"
-								value="#{clienteBean.cliente.funcao}" />
-
+							
+							<p:outputLabel value="Sexo:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{clienteBean.cliente.sexoCliente}">
+								<f:selectItem itemLabel="Selecione um Sexo" itemValue="" />
+								<f:selectItem itemLabel="Masculino"
+									itemValue="Masculino" />
+								<f:selectItem itemLabel="Feminino" 
+									itemValue="Feminino" />
+							</p:selectOneMenu>
+							
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 						
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Email:" />
-							<p:inputText size="87" maxlength="50"
-								value="#{clienteBean.cliente.email}" />
-						</h:panelGrid>
+						
 					</p:fieldset>
 
 					<p:fieldset legend="Endereço" style="margin-bottom:20px">
@@ -200,24 +193,18 @@
 						</h:panelGrid>
 					</p:fieldset>
 
-					<p:fieldset legend="Dados do Cliente" style="margin-bottom:20px">
+					<p:fieldset legend="Status do Cliente" style="margin-bottom:20px">
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel value="Tipo de Cliente:" />
+							<p:outputLabel value="Status do Cliente:" />
 							<p:selectOneMenu style="width:150px"
-								value="#{clienteBean.cliente.nivelCliente}">
-								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
-								<f:selectItem itemLabel="Administrador"
-									itemValue="Administrador" />
-								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
+								value="#{clienteBean.cliente.statusCliente}">
+								<f:selectItem itemLabel="Selecione um Status" itemValue="" />
+								<f:selectItem itemLabel="Ativo"
+									itemValue="Ativo" />
+								<f:selectItem itemLabel="Inativo" 
+									itemValue="Inativo" />
 							</p:selectOneMenu>
-
-							<p:outputLabel value="Nome de Cliente:" />
-							<p:inputText size="14" maxlength="20"
-								value="#{clienteBean.cliente.nome}" />
-
-							<h:outputLabel value="Senha:" />
-							<p:password size="14" maxlength="10"
-								value="#{clienteBean.cliente.senha}" />
+							
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
@@ -232,30 +219,18 @@
 
 		</p:dialog>
 
-		<p:dialog header="Detalhes de Usuário" widgetVar="dlg3" modal="true"
+		<p:dialog header="Detalhes de Cliente" widgetVar="dlg3" modal="true"
 			draggable="false" resizable="false" height="auto" width="auto"
 			id="dialogDetalhes">
 			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
 				style="margin-bottom:20px;">
 
 
-				<h:outputLabel value="Usuário: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.cliente}" />
-
 				<h:outputLabel value="Nome: " style="font-weight:bold;" />
 				<h:outputText value="#{clienteBean.clienteSelecionado.nome}" />
 
 				<h:outputLabel value="CPF: " style="font-weight:bold;" />
 				<h:outputText value="#{clienteBean.clienteSelecionado.cpf}" />
-
-				<h:outputLabel value="Tipo de Acesso: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.nivelCliente}" />
-
-				<h:outputLabel value="Função: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.funcao}" />
-
-				<h:outputLabel value="Email: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.email}" />
 
 				<h:outputLabel value="RG: " style="font-weight:bold;" />
 				<h:outputText value="#{clienteBean.clienteSelecionado.rg}" />
@@ -267,7 +242,7 @@
 				<h:outputText value="#{clienteBean.clienteSelecionado.estado}" />
 
 				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.rua}," />
+				<h:outputText value="#{clienteBean.clienteSelecionado.rua}" />
 				<h:outputText value="" />
 				<h:outputText value="#{clienteBean.clienteSelecionado.numero}" />
 				<h:outputText value="" />
