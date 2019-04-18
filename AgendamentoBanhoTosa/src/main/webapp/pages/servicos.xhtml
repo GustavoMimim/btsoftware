@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
+	<ui:define name="conteudo">
+		<!-- mensagem -->
+		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
+		<div class="ui-g-12 ui-md-12" id="cab"
+			style="background-color: white; height: 50px;">
+			<p:outputLabel value="Serviço"
+				style="padding-right:15px;font-size:20px;"></p:outputLabel>
+
+			<p:commandButton value="+" title="Novo Serviço"
+				styleClass="btnCirculo" onclick="PF('dlg2').show();"
+				actionListener="#{animalBean.novo}"
+				update=":formCadAnimal:painelForm :growl" />
+		</div>
+
+		<div class="ui-g-12 ui-md-9" id="tabelaAnimal">
+			<h:form id="tabelaAnimais">
+				<p:dataTable id="tabAnimais"
+					emptyMessage="Nenhum animal cadastrado."
+					value="#{animalBean.animais}" var="animal" paginator="true"
+					rows="10" paginatorPosition="bottom" selectionMode="single"
+					selection="#{animalBean.animal}" rowKey="#{animal.codigo}"
+					sortBy="#{animal.nome}">
+
+					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
+						listener="#{animalBean.onRowSelect}" />
+
+					<p:column headerText="Serviço" sortBy="#{animal.codCliente.nome}">
+						<h:outputText value="#{animal.codCliente.nome}" />
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-3" id="paineis">
+
+			<p:panel id="painelInfo" styleClass="painel">
+
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Animal selecionado" styleClass="tituloPainel" />
+				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
+				
+					<h:outputLabel value="Serviço: " />
+					<h:outputText
+						value="#{animalBean.animalSelecionado.codCliente.telefone}" />
+
+
+				</h:panelGrid>
+
+				<p:commandButton value="Ver mais" type="button"
+					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
+					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{animalBean.excluir}"
+					update=":growl :tabelaAnimais:tabAnimais">
+					
+					<p:confirm header="Excluir" message="Deseja excluir esse serviço?"></p:confirm>
+					<f:attribute name="animalSelecionado"
+						value="#{animalBean.animalSelecionado}" />
+						
+				</p:commandButton>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" />
+				</p:confirmDialog>
+
+			</p:panel>
+
+			<p:panel id="painelFiltro" styleClass="painel">
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Filtros" styleClass="tituloPainel" />
+				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
+
+				</h:panelGrid>
+
+			</p:panel>
+		</div>
+
+
+		<!-- MODAIS para cadastro, detalhes, exclusão -->
+
+		<p:dialog header="Cadastro de Serviço" widgetVar="dlg2" modal="true"
+			draggable="false" resizable="false" height="auto">
+
+			<h:form id="formCadAnimal">
+				<h:panelGrid columns="1" id="painelForm">
+
+					<p:fieldset legend="Serviço" style="margin-bottom:20px">
+
+						<h:panelGrid columns="6">
+							<h:outputLabel value="Seviço:" />
+							<p:inputText size="90" maxlength="20"
+								value="#{animalBean.animal.nome}" />
+
+							<h:outputLabel value="Preço:" />
+							<p:inputText size="10" maxlength="30"
+								value="#{animalBean.animal.raca}"/>
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="6">
+
+							<p:outputLabel value="Descrição:" id="cor" />
+							<p:inputText size="106" maxlength="30"
+								value="#{animalBean.animal.cor}" />
+
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+						
+					</p:fieldset>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" type="submit"
+						actionListener="#{animalBean.salvar}"
+						update=":growl :formCadAnimal:painelForm :tabelaAnimais:tabAnimais" />
+					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Detalhes do Serviço" widgetVar="dlg3" modal="true"
+			draggable="false" resizable="false" height="auto" width="auto"
+			id="dialogDetalhes">
+			<h:panelGrid columns="2" cellpadding="50" cellspacing="5"
+				style="margin-bottom:20px;">
+
+
+				<h:outputLabel value="Dono: " style="font-weight:bold;" />
+				<h:outputText
+					value="#{animalBean.animalSelecionado.codCliente.nome}" />
+
+				<h:outputLabel value="Serviço: " style="font-weight:bold;" />
+				<h:outputText value="#{animalBean.animalSelecionado.nome}" />
+
+				<h:outputLabel value="Preço: " style="font-weight:bold;" />
+				<h:outputText value="#{animalBean.animalSelecionado.raca}" />
+
+				<h:outputLabel value="Detalhes: " style="font-weight:bold;" />
+				<h:outputText value="#{animalBean.animalSelecionado.cor}" />
+
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Alterar"
+					actionListener="#{animalBean.alterar}"
+					update=":growl :tabelaAnimais:tabAnimais :formCadAnimal:painelForm :painelInfo :dialogDetalhes"
+					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
+					<f:attribute name="animalSelecionado"
+						value="#{animalBean.animalSelecionado}" />
+				</p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>
