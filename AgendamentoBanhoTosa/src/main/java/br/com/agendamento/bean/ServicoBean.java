@@ -27,7 +27,6 @@ public class ServicoBean implements Serializable {
 	// atributo para listar servicos
 	private List<Servico> servicos;
 
-	
 	public Servico getServico() {
 		return servico;
 	}
@@ -52,7 +51,7 @@ public class ServicoBean implements Serializable {
 		this.servicos = servicos;
 	}
 
-	//funções
+	// funções
 	public void novo() {
 		servico = new Servico();
 	}
@@ -70,13 +69,20 @@ public class ServicoBean implements Serializable {
 
 	public void salvar() {
 		try {
+
 			ServicoDAO servicoDAO = new ServicoDAO();
-			servicoDAO.merge(servico);
 
-			novo();
-			servicos = servicoDAO.listar();
+			if (!servicoDAO.verificaNome(servico.getTipoServico()).isEmpty()) {
+				Messages.addGlobalError("Serviço desse tipo já cadastrado!");
+			} else {// Cadastra um novo serviço
 
-			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+				servicoDAO.merge(servico);
+
+				novo();
+				servicos = servicoDAO.listar();
+
+				Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+			}
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao Salvar Serviço!");
 			erro.printStackTrace();
@@ -96,23 +102,23 @@ public class ServicoBean implements Serializable {
 	public void excluir(ActionEvent evento) {
 		servico = (Servico) evento.getComponent().getAttributes().get("servicoSelecionado");
 
-		try{
+		try {
 			ServicoDAO servicoDAO = new ServicoDAO();
 			servicoDAO.excluir(servico);
 			Messages.addGlobalInfo("Serviço " + servico.getTipoServico() + " Excluído");
-			
+
 			servicos = servicoDAO.listar();
-		}catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			Messages.addGlobalError("Não foi possivel excluir!");
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void alterar(ActionEvent evento) {
 		servico = (Servico) evento.getComponent().getAttributes().get("servicoSelecionado");
-		
-		if(servico == null) {
+
+		if (servico == null) {
 			Messages.addGlobalError("Não foi possivel alterar!");
 		}
 	}
