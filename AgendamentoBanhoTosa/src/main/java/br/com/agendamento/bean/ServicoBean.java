@@ -1,5 +1,6 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,11 +9,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
 import br.com.agendamento.dao.ServicoDAO;
+import br.com.agendamento.dao.UsuarioDAO;
 import br.com.agendamento.domain.Servico;
+import br.com.agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -56,6 +60,15 @@ public class ServicoBean implements Serializable {
 		servico = new Servico();
 	}
 
+	public void index() {
+		try {
+			Faces.redirect("./pages/servicos.xhtml");
+		} catch (IOException erro) {
+			erro.printStackTrace();
+		}
+
+	}
+
 	@PostConstruct // é chamado logo apos o construtor da classe
 	public void listar() {
 		try {
@@ -69,20 +82,19 @@ public class ServicoBean implements Serializable {
 
 	public void salvar() {
 		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Usuario usuario = usuarioDAO.buscar(1L);
+			servico.setCodUsuarioInclusao(usuario);
 
 			ServicoDAO servicoDAO = new ServicoDAO();
 
-			if (!servicoDAO.verificaNome(servico.getTipoServico()).isEmpty()) {
-				Messages.addGlobalError("Serviço desse tipo já cadastrado!");
-			} else {// Cadastra um novo serviço
+			servicoDAO.merge(servico);
 
-				servicoDAO.merge(servico);
+			novo();
+			servicos = servicoDAO.listar();
 
-				novo();
-				servicos = servicoDAO.listar();
+			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
 
-				Messages.addGlobalInfo("Operação Realizada com Sucesso!");
-			}
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao Salvar Serviço!");
 			erro.printStackTrace();

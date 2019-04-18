@@ -1,5 +1,6 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
@@ -62,6 +64,16 @@ public class UsuarioBean implements Serializable {
 	public void novo() {
 		usuario = new Usuario();
 	}
+	
+	public void index() {
+		try {
+			Faces.redirect("./pages/usuarios.xhtml");
+		}
+		catch (IOException erro) {
+			erro.printStackTrace();
+		}
+		
+	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
 	public void listar() {
@@ -78,6 +90,7 @@ public class UsuarioBean implements Serializable {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+			//se o cod do usuario for null, novo usuario, ou seja, inserir
 			if (usuario.getCodigo() == null) {
 
 				if (!usuarioDAO.verificaUsuario(usuario.getUsuario()).isEmpty()) {
@@ -97,6 +110,8 @@ public class UsuarioBean implements Serializable {
 
 					Messages.addGlobalInfo("Operação Realizada com Sucesso!");
 				}
+			
+			//senao alterar usuario
 			} else {
 
 				usuarioDAO.merge(usuario);

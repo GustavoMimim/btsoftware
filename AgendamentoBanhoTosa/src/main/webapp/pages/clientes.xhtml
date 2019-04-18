@@ -135,17 +135,7 @@
 
 							<h:outputLabel value="Dt. Nasc."/>
 							<p:calendar size="14" value="#{clienteBean.cliente.dataNascimento}" />
-							
-							<p:outputLabel value="Sexo:" />
-							<p:selectOneMenu style="width:150px"
-								value="#{clienteBean.cliente.sexoCliente}">
-								<f:selectItem itemLabel="Selecione um Sexo" itemValue="" />
-								<f:selectItem itemLabel="Masculino"
-									itemValue="Masculino" />
-								<f:selectItem itemLabel="Feminino" 
-									itemValue="Feminino" />
-							</p:selectOneMenu>
-							
+														
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
@@ -183,7 +173,7 @@
 
 							<p:outputLabel value="Rua:" />
 							<p:inputText size="37" maxlength="50"
-								value="#{clienteBean.cliente.rua}" />
+								value="#{clienteBean.cliente.logradouro}" />
 
 							<h:outputLabel value="Número:" />
 							<p:inputText size="10" maxlength="5"
@@ -197,7 +187,7 @@
 						<h:panelGrid columns="6" cellpadding="5">
 							<p:outputLabel value="Status do Cliente:" />
 							<p:selectOneMenu style="width:150px"
-								value="#{clienteBean.cliente.statusCliente}">
+								value="#{clienteBean.cliente.status}">
 								<f:selectItem itemLabel="Selecione um Status" itemValue="" />
 								<f:selectItem itemLabel="Ativo"
 									itemValue="Ativo" />
@@ -242,7 +232,7 @@
 				<h:outputText value="#{clienteBean.clienteSelecionado.estado}" />
 
 				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
-				<h:outputText value="#{clienteBean.clienteSelecionado.rua}" />
+				<h:outputText value="#{clienteBean.clienteSelecionado.logradouro}" />
 				<h:outputText value="" />
 				<h:outputText value="#{clienteBean.clienteSelecionado.numero}" />
 				<h:outputText value="" />

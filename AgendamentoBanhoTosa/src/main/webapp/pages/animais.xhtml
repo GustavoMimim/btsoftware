@@ -14,16 +14,16 @@
 		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
 		<div class="ui-g-12 ui-md-12" id="cab"
 			style="background-color: white; height: 50px;">
-			<p:outputLabel value="Animal"
+			<p:outputLabel value="Animais"
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
 			<p:commandButton value="+" title="Novo Animal"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
-				actionListener="#{animalBean.novo}"
+				actionListener="#{animalBean.novo()}"
 				update=":formCadAnimal:painelForm :growl" />
 		</div>
 
-		<div class="ui-g-12 ui-md-9" id="tabelaAnimal">
+		<div class="ui-g-12 ui-md-9" id="tabelaAnimais">
 			<h:form id="tabelaAnimais">
 				<p:dataTable id="tabAnimais"
 					emptyMessage="Nenhum animal cadastrado."
@@ -35,12 +35,12 @@
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{animalBean.onRowSelect}" />
 
-					<p:column headerText="Cliente" sortBy="#{animal.codCliente.nome}">
-						<h:outputText value="#{animal.codCliente.nome}" />
-					</p:column>
-
 					<p:column headerText="Nome do animal">
 						<h:outputText value="#{animal.nome}" />
+					</p:column>
+					
+					<p:column headerText="Cliente(Dono)" sortBy="#{animal.codCliente.nome}">
+						<h:outputText value="#{animal.codCliente.nome}" />
 					</p:column>
 
 					<p:column headerText="Raça">
@@ -138,7 +138,7 @@
 
 						<div style="height: 10px;"></div>
 
-						<h:panelGrid columns="1">
+						<h:panelGrid columns="4">
 							<p:outputLabel value="Pelagem:" />
 							<p:selectOneMenu id="pelagem" style="width:150px"
 								value="#{animalBean.animal.pelagem}">
@@ -146,6 +146,16 @@
 								<f:selectItem itemLabel="Baixa" itemValue="baixa" />
 								<f:selectItem itemLabel="Media" itemValue="media" />
 								<f:selectItem itemLabel="Alta" itemValue="alta" />
+								<f:selectItem itemLabel="Gigante" itemValue="gigante" />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Porte:" />
+							<p:selectOneMenu id="porte" style="width:150px"
+								value="#{animalBean.animal.porte}">
+								<f:selectItem itemLabel="Selecione um porte" itemValue="" />
+								<f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
+								<f:selectItem itemLabel="Médio" itemValue="Médio" />
+								<f:selectItem itemLabel="Grande" itemValue="Grande" />
 								<f:selectItem itemLabel="Gigante" itemValue="gigante" />
 							</p:selectOneMenu>
 
@@ -159,7 +169,7 @@
 								<f:selectItem itemLabel="Femea" itemValue="F" />
 							</p:selectOneRadio>
 						</h:panelGrid>
-<!-- 
+						<!-- 
 						<h:panelGrid columns="1" cellpadding="5">
 
 							<p:outputLabel value="Observação:" />
@@ -176,35 +186,15 @@
 					<p:fieldset legend="Dados Cliente" style="margin-bottom:20px">
 						<h:panelGrid columns="1" cellpadding="5">
 
-							<p:outputLabel value="Pesquisar:" />
-							<p:inputText size="100" maxlength="20"/>
+							<p:outputLabel value="Cliente:" />
+							<p:selectOneMenu id="cliente" style="width:150px"
+								value="#{animalBean.animal.codCliente}" converter="omnifaces.SelectItemsConverter">
+								<f:selectItem itemLabel="Selecione um cliente" noSelectionOption="true" />
+								<f:selectItems value="#{animalBean.clientes}" var="cliente"
+									itemValue="#{cliente}" itemLabel="#{cliente.nome} - #{cliente.cpf}" />
+							</p:selectOneMenu>
 
-							<!-- Esse codigo esta comentado pois necesita de configuração, para visualizar o funcionamnto do campo acesse: https://www.primefaces.org/showcase/ui/input/oneMenu.xhtml -->
-							<!-- <h:outputLabel value="Resultado:" />
-							<p:password size="100" maxlength="10"
-								value="#{usuarioBean.usuario.senha}" /> -->
 
-							<!--  <h:outputLabel value="Resultado:" />
-							    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-							        <p:outputLabel for="city" value="Editable: " />
-							        <p:selectOneMenu id="city" value="#{usuarioBean.usuarioSelecionado.nome}" effect="fold" editable="true">
-							            <f:selectItem itemLabel="Select One" itemValue="" />
-							            <f:selectItems value="#{usuarioBean.usuarioSelecionado.nome}" />
-							        </p:selectOneMenu>
-							 
-							        <p:outputLabel for="advanced" value="Advanced:" />
-							        <p:selectOneMenu id="advanced" value="#{usuarioBean.usuarioSelecionado.nome}" panelStyle="width:180px"
-							                         effect="fade" var="t" style="width:160px" filter="true" filterMatchMode="startsWith">
-							            <f:selectItems value="#{usuarioBean.usuarioSelecionado.nome}" var="theme" itemLabel="#{usuarioBean.usuarioSelecionado.nome}" itemValue="#{theme}" />
-							 
-				
-							            <p:column>
-							                <h:outputText value="teste" />
-							            </p:column>
-							        </p:selectOneMenu>
-							        
-						</h:panelGrid>
-						-->
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>

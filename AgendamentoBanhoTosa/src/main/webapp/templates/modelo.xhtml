@@ -64,7 +64,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{usuarioBean.index()}">
 							<i class="fas fa-user-tie fa-lg iconePadding"></i>
 							<h:outputText value="Usuários"/>
 						</p:commandLink>
@@ -72,7 +72,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{clienteBean.index()}">
 							<i class="fas fa-user fa-lg iconePadding"></i>
 							<h:outputText value="Clientes" />
 						</p:commandLink>
@@ -80,7 +80,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{animalBean.index()}">
 							<i class="fas fa-paw fa-lg iconePadding"></i>
 							<h:outputText value="Animais" />
 						</p:commandLink>
@@ -88,7 +88,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{planoAgendamentoBean.index()}">
 							<i class="fas fa-calendar-plus fa-lg iconePadding"></i>
 							<h:outputText value="Planos" />
 						</p:commandLink>
@@ -96,7 +96,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{agendamentoBean.index()}">
 							<i class="fas fa-calendar fa-lg iconePadding"></i>
 							<h:outputText value="Agendamentos" />
 						</p:commandLink>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12 ">
-						<p:commandLink>
+						<p:commandLink actionListener="#{servicoBean.index()}">
 							<i class="fas fa-briefcase fa-lg iconePadding"></i>
 							<h:outputText value="Serviços" />
 						</p:commandLink>
@@ -112,7 +112,7 @@
 				</div>
 				<div class="ui-g btnMenu">
 					<div class="ui-g-12 ui-md-12">
-						<p:commandLink>
+						<p:commandLink actionListener="#{pagamentoBean.index()}">
 							<i class="fas fa-wallet fa-lg iconePadding"></i>
 							<h:outputText value="Pagamentos" />
 						</p:commandLink>

@@ -1,5 +1,6 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
@@ -51,6 +53,16 @@ public class AgendamentoBean implements Serializable{
 	//zera todos os campos de Animal
 	public void novo() {
 		agendamento = new Agendamento();
+	}
+	
+	public void index() {
+		try {
+			Faces.redirect("./pages/agendamento.xhtml");
+		}
+		catch (IOException erro) {
+			erro.printStackTrace();
+		}
+		
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe

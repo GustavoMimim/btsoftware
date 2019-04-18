@@ -1,6 +1,8 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
@@ -54,6 +57,16 @@ public class ClienteBean implements Serializable {
 	public void novo() {
 		cliente = new Cliente();
 	}
+	
+	public void index() {
+		try {
+			Faces.redirect("./pages/clientes.xhtml");
+		}
+		catch (IOException erro) {
+			erro.printStackTrace();
+		}
+		
+	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
 	public void listar() {
@@ -68,6 +81,7 @@ public class ClienteBean implements Serializable {
 
 	public void salvar() {
 		try {
+			cliente.setDataInclusao(new Date());
 
 			ClienteDAO clienteDAO = new ClienteDAO();
 

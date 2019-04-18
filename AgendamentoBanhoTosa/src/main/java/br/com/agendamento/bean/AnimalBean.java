@@ -1,5 +1,6 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
@@ -26,6 +28,7 @@ public class AnimalBean implements Serializable {
 	private Animal animal;
 	private Animal animalSelecionado;
 	private List<Animal> animais;// atributo para listar animais
+	private List<Cliente> clientes;
 
 	// Getters e Setters
 	public Animal getAnimal() {
@@ -44,6 +47,14 @@ public class AnimalBean implements Serializable {
 		this.animais = animais;
 	}
 
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
 	public Animal getAnimalSelecionado() {
 		return animalSelecionado;
 	}
@@ -54,9 +65,26 @@ public class AnimalBean implements Serializable {
 
 	// zera todos os campos de Animal
 	public void novo() {
-		animal = new Animal();
-		
-		Messages.addGlobalInfo("Novo animal instanciado!");
+		try {
+			animal = new Animal();
+
+			// populando lista de clientes
+			ClienteDAO clienteDAO = new ClienteDAO();
+			clientes = clienteDAO.listar();
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um animal!");
+			erro.printStackTrace();
+		}
+	}
+
+	public void index() {
+		try {
+			Faces.redirect("./pages/animais.xhtml");
+		} catch (IOException erro) {
+			erro.printStackTrace();
+		}
+
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
@@ -72,12 +100,10 @@ public class AnimalBean implements Serializable {
 
 	public void salvar() {
 		try {
-			ClienteDAO clienteDAO = new ClienteDAO();
-			Cliente cliente = clienteDAO.buscar(1L);
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			Usuario usuario = usuarioDAO.buscar(1L);
 			animal.setCodUsuarioInclusao(usuario);
-			animal.setCodCliente(cliente);
+
 			AnimalDAO animalDAO = new AnimalDAO();
 			animalDAO.merge(animal);
 
@@ -114,9 +140,23 @@ public class AnimalBean implements Serializable {
 	}
 
 	public void alterar(ActionEvent evento) {
-		animal = (Animal) evento.getComponent().getAttributes().get("animalSelecionado");
-		if (animal == null) {
-			Messages.addGlobalError("Não foi possivel alterar!");
+		try {
+			animal = (Animal) evento.getComponent().getAttributes().get("animalSelecionado");
+			if (animal == null) {
+				Messages.addGlobalError("Não foi possivel alterar!");
+			}
+			else {
+				// populando lista de clientes
+				ClienteDAO clienteDAO = new ClienteDAO();
+				clientes = clienteDAO.listar();
+			}
+
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um animal!");
+			erro.printStackTrace();
 		}
+
+		
 	}
 }

@@ -14,31 +14,35 @@
 		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
 		<div class="ui-g-12 ui-md-12" id="cab"
 			style="background-color: white; height: 50px;">
-			<p:outputLabel value="Serviço"
+			<p:outputLabel value="Serviços"
 				style="padding-right:15px;font-size:20px;"></p:outputLabel>
 
 			<p:commandButton value="+" title="Novo Serviço"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
-				actionListener="#{animalBean.novo}"
-				update=":formCadAnimal:painelForm :growl" />
+				actionListener="#{servicoBean.novo}"
+				update=":formCadServico:painelForm :growl" />
 		</div>
 
-		<div class="ui-g-12 ui-md-9" id="tabelaAnimal">
-			<h:form id="tabelaAnimais">
-				<p:dataTable id="tabAnimais"
-					emptyMessage="Nenhum animal cadastrado."
-					value="#{animalBean.animais}" var="animal" paginator="true"
+		<div class="ui-g-12 ui-md-9" id="tabelaServico">
+			<h:form id="tabelaServicos">
+				<p:dataTable id="tabServicos"
+					emptyMessage="Nenhum serviço cadastrado."
+					value="#{servicoBean.servicos}" var="servico" paginator="true"
 					rows="10" paginatorPosition="bottom" selectionMode="single"
-					selection="#{animalBean.animal}" rowKey="#{animal.codigo}"
-					sortBy="#{animal.nome}">
+					selection="#{servicoBean.servico}" rowKey="#{servico.codigo}"
+					sortBy="#{servico.tipoServico}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
-						listener="#{animalBean.onRowSelect}" />
+						listener="#{servicoBean.onRowSelect}" />
 
-					<p:column headerText="Serviço" sortBy="#{animal.codCliente.nome}">
-						<h:outputText value="#{animal.codCliente.nome}" />
+					<p:column headerText="Serviço" sortBy="#{servico.tipoServico}">
+						<h:outputText value="#{servico.tipoServico}" />
 					</p:column>
-					
+
+					<p:column headerText="Preço" sortBy="#{servico.preco}">
+						<h:outputText value="#{servico.preco}" />
+					</p:column>
+
 				</p:dataTable>
 			</h:form>
 
@@ -49,12 +53,11 @@
 			<p:panel id="painelInfo" styleClass="painel">
 
 				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Animal selecionado" styleClass="tituloPainel" />
+				<h:outputText value="Serviço selecionado" styleClass="tituloPainel" />
 				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
-				
+
 					<h:outputLabel value="Serviço: " />
-					<h:outputText
-						value="#{animalBean.animalSelecionado.codCliente.telefone}" />
+					<h:outputText value="#{servicoBean.servicoSelecionado.tipoServico}" />
 
 
 				</h:panelGrid>
@@ -64,13 +67,13 @@
 					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
 
 				<p:commandButton value="Excluir"
-					actionListener="#{animalBean.excluir}"
-					update=":growl :tabelaAnimais:tabAnimais">
-					
+					actionListener="#{servicoBean.excluir}"
+					update=":growl :tabelaServicos:tabServicos">
+
 					<p:confirm header="Excluir" message="Deseja excluir esse serviço?"></p:confirm>
-					<f:attribute name="animalSelecionado"
-						value="#{animalBean.animalSelecionado}" />
-						
+					<f:attribute name="servicoSelecionado"
+						value="#{servicoBean.servicoSelecionado}" />
+
 				</p:commandButton>
 
 				<p:confirmDialog global="true">
@@ -98,38 +101,38 @@
 		<p:dialog header="Cadastro de Serviço" widgetVar="dlg2" modal="true"
 			draggable="false" resizable="false" height="auto">
 
-			<h:form id="formCadAnimal">
+			<h:form id="formCadServico">
 				<h:panelGrid columns="1" id="painelForm">
 
 					<p:fieldset legend="Serviço" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6">
 							<h:outputLabel value="Seviço:" />
-							<p:inputText size="90" maxlength="20"
-								value="#{animalBean.animal.nome}" />
+							<p:inputText size="50" maxlength="20"
+								value="#{servicoBean.servico.tipoServico}" />
 
 							<h:outputLabel value="Preço:" />
 							<p:inputText size="10" maxlength="30"
-								value="#{animalBean.animal.raca}"/>
+								value="#{servicoBean.servico.preco}" />
 
 						</h:panelGrid>
 
 						<h:panelGrid columns="6">
 
-							<p:outputLabel value="Descrição:" id="cor" />
-							<p:inputText size="106" maxlength="30"
-								value="#{animalBean.animal.cor}" />
+							<p:outputLabel value="Descrição:" id="descricao" />
+							<p:inputText size="50" maxlength="30"
+								value="#{servicoBean.servico.descricao}" />
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
-						
+
 					</p:fieldset>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
-						actionListener="#{animalBean.salvar}"
-						update=":growl :formCadAnimal:painelForm :tabelaAnimais:tabAnimais" />
+						actionListener="#{servicoBean.salvar}"
+						update=":growl :formCadServico:painelForm :tabelaServicos:tabServicos" />
 					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 				</h:panelGrid>
 
@@ -143,30 +146,25 @@
 			<h:panelGrid columns="2" cellpadding="50" cellspacing="5"
 				style="margin-bottom:20px;">
 
-
-				<h:outputLabel value="Dono: " style="font-weight:bold;" />
-				<h:outputText
-					value="#{animalBean.animalSelecionado.codCliente.nome}" />
-
 				<h:outputLabel value="Serviço: " style="font-weight:bold;" />
-				<h:outputText value="#{animalBean.animalSelecionado.nome}" />
+				<h:outputText value="#{servicoBean.servicoSelecionado.tipoServico}" />
 
 				<h:outputLabel value="Preço: " style="font-weight:bold;" />
-				<h:outputText value="#{animalBean.animalSelecionado.raca}" />
+				<h:outputText value="#{servicoBean.servicoSelecionado.preco}" />
 
 				<h:outputLabel value="Detalhes: " style="font-weight:bold;" />
-				<h:outputText value="#{animalBean.animalSelecionado.cor}" />
+				<h:outputText value="#{servicoBean.servicoSelecionado.descricao}" />
 
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 
 				<p:commandButton value="Alterar"
-					actionListener="#{animalBean.alterar}"
-					update=":growl :tabelaAnimais:tabAnimais :formCadAnimal:painelForm :painelInfo :dialogDetalhes"
+					actionListener="#{servicoBean.alterar}"
+					update=":growl :tabelaServicos:tabServicos :formCadServico:painelForm :painelInfo :dialogDetalhes"
 					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
-					<f:attribute name="animalSelecionado"
-						value="#{animalBean.animalSelecionado}" />
+					<f:attribute name="servicoSelecionado"
+						value="#{servicoBean.servicoSelecionado}" />
 				</p:commandButton>
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>
