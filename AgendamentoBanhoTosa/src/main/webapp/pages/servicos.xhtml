@@ -106,27 +106,30 @@
 
 					<p:fieldset legend="Serviço" style="margin-bottom:20px">
 
-						<h:panelGrid columns="6">
-							<h:outputLabel value="Seviço:" />
+
+
+						<h:panelGrid columns="1">
+							<h:outputLabel value="Serviço:" />
 							<p:inputText size="50" maxlength="20"
 								value="#{servicoBean.servico.tipoServico}" />
-
+						</h:panelGrid>
+						<h:panelGrid columns="1">
 							<h:outputLabel value="Preço:" />
 							<p:inputText size="10" maxlength="30"
 								value="#{servicoBean.servico.preco}" />
-
 						</h:panelGrid>
 
-						<h:panelGrid columns="6">
 
+
+						<h:panelGrid columns="1">
 							<p:outputLabel value="Descrição:" id="descricao" />
-							<p:inputText size="50" maxlength="30"
+							<p:inputText size="50" maxlength="30" style="height:70px"
 								value="#{servicoBean.servico.descricao}" />
-
 						</h:panelGrid>
+
+
 
 						<div style="height: 10px;"></div>
-
 					</p:fieldset>
 				</h:panelGrid>
 				<h:panelGrid columns="2">

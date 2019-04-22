@@ -1,5 +1,6 @@
 package br.com.agendamento.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,10 +9,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
+import br.com.agendamento.dao.AnimalDAO;
+import br.com.agendamento.dao.ClienteDAO;
 import br.com.agendamento.dao.PlanoAgendamentoDAO;
+import br.com.agendamento.domain.Animal;
+import br.com.agendamento.domain.Cliente;
 import br.com.agendamento.domain.PlanoAgendamento;
 
 @SuppressWarnings("serial")
@@ -22,13 +28,32 @@ public class PlanoAgendamentoBean implements Serializable{
 	private PlanoAgendamento planoagendamento;
 	private PlanoAgendamento planoagendamentoSelecionado;
 	private List<PlanoAgendamento> planosagendamento;// atributo para listar os agendamentos
+	private List<Animal> animais;// atributo para listar animais
+	private List<Cliente> clientes;
+
+	// Getters e Setters
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
 	
 	//Getters e Setters
 	public PlanoAgendamento getPlanoAgendamento() {
 		return planoagendamento;
 	}
 
-	public void setPlanoAgendamento(PlanoAgendamento agendamento) {
+	public void setPlanoAgendamento(PlanoAgendamento planoagendamento) {
 		this.planoagendamento = planoagendamento;
 	}
 
@@ -36,7 +61,7 @@ public class PlanoAgendamentoBean implements Serializable{
 		return planoagendamentoSelecionado;
 	}
 
-	public void setPlanoAgendamentoSelecionado(PlanoAgendamento agendamentoSelecionado) {
+	public void setPlanoAgendamentoSelecionado(PlanoAgendamento planoagendamentoSelecionado) {
 		this.planoagendamentoSelecionado = planoagendamentoSelecionado;
 	}
 
@@ -44,13 +69,35 @@ public class PlanoAgendamentoBean implements Serializable{
 		return planosagendamento;
 	}
 
-	public void setPlanoAgendamentos(List<PlanoAgendamento> agendamentos) {
+	public void setPlanoAgendamentos(List<PlanoAgendamento> planosagendamento) {
 		this.planosagendamento = planosagendamento;
 	}
 
 	//zera todos os campos de Animal
 	public void novo() {
-		planoagendamento = new PlanoAgendamento();
+		try {
+			planoagendamento = new PlanoAgendamento();
+
+			// populando lista de clientes
+			ClienteDAO clienteDAO = new ClienteDAO();
+			clientes = clienteDAO.listar();
+			
+			AnimalDAO animalDAO = new AnimalDAO();
+			animais = animalDAO.listar();
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um plano!");
+			erro.printStackTrace();
+		}
+	}
+	
+	public void index() {
+		try {
+			Faces.redirect("./pages/planos.xhtml");
+		} catch (IOException erro) {
+			erro.printStackTrace();
+		}
+
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
@@ -63,6 +110,20 @@ public class PlanoAgendamentoBean implements Serializable{
 			erro.printStackTrace();
 		}
 	}
+	
+////	public void animalCliente() {
+//		Long codigo = planoagendamento.getCodAnimal().getCodCliente().getCodigo();
+//		
+//		try {
+//			AnimalDAO animalDAO = new AnimalDAO();
+//			//animais = animalDAO.listarAnimaisCliente(codigo);
+//			
+//		} catch (RuntimeException erro) {
+//			Messages.addGlobalError("Ocorreu um erro ao listar os animais!");
+//			erro.printStackTrace();
+//		}
+//		
+//	}
 
 	public void salvar() {
 		try {
@@ -102,9 +163,23 @@ public class PlanoAgendamentoBean implements Serializable{
 	}
 	
 	public void alterar(ActionEvent evento) {
-		planoagendamento = (PlanoAgendamento) evento.getComponent().getAttributes().get("planoagendamentoSelecionado");
-		if(planoagendamento == null) {
-			Messages.addGlobalError("Não foi possivel alterar!(Valor(es) Nulo(s))");
+		
+		
+		try {
+			planoagendamento = (PlanoAgendamento) evento.getComponent().getAttributes().get("planoagendamentoSelecionado");
+			if(planoagendamento == null) {
+				Messages.addGlobalError("Não foi possivel alterar!(Valor(es) Nulo(s))");
+			}
+			else {
+				// populando lista de clientes
+				ClienteDAO clienteDAO = new ClienteDAO();
+				clientes = clienteDAO.listar();
+			}
+
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um plano!");
+			erro.printStackTrace();
 		}
 	}
 	

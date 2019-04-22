@@ -38,8 +38,9 @@
 					<p:column headerText="Nome do animal">
 						<h:outputText value="#{animal.nome}" />
 					</p:column>
-					
-					<p:column headerText="Cliente(Dono)" sortBy="#{animal.codCliente.nome}">
+
+					<p:column headerText="Cliente(Dono)"
+						sortBy="#{animal.codCliente.nome}">
 						<h:outputText value="#{animal.codCliente.nome}" />
 					</p:column>
 
@@ -118,67 +119,73 @@
 					<p:fieldset legend="Dados do Animal" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6">
-							<h:outputLabel value="Nome:" />
-							<p:inputText size="45" maxlength="20"
-								value="#{animalBean.animal.nome}" />
-
-							<h:outputLabel value="Raça:" />
-							<p:inputText size="45" maxlength="30"
-								value="#{animalBean.animal.raca}" />
+							<h:panelGrid columns="1">
+								<h:outputLabel value="Nome:" />
+								<p:inputText size="45" maxlength="20"
+									value="#{animalBean.animal.nome}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel value="Raça:" />
+								<p:inputText size="38" maxlength="30"
+									value="#{animalBean.animal.raca}" />
+							</h:panelGrid>
 
 						</h:panelGrid>
 
 						<h:panelGrid columns="6">
-
-							<p:outputLabel value="Cor:" id="cor" />
-							<p:inputText size="100" maxlength="30"
-								value="#{animalBean.animal.cor}" />
+							<h:panelGrid columns="1">
+								<p:outputLabel value="Cor:" id="cor" />
+								<p:inputText size="86" maxlength="30"
+									value="#{animalBean.animal.cor}" />
+							</h:panelGrid>
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
-						<h:panelGrid columns="4">
-							<p:outputLabel value="Pelagem:" />
-							<p:selectOneMenu id="pelagem" style="width:150px"
-								value="#{animalBean.animal.pelagem}">
-								<f:selectItem itemLabel="Selecione uma pelagem" itemValue="" />
-								<f:selectItem itemLabel="Baixa" itemValue="baixa" />
-								<f:selectItem itemLabel="Media" itemValue="media" />
-								<f:selectItem itemLabel="Alta" itemValue="alta" />
-								<f:selectItem itemLabel="Gigante" itemValue="gigante" />
-							</p:selectOneMenu>
-							
-							<p:outputLabel value="Porte:" />
-							<p:selectOneMenu id="porte" style="width:150px"
-								value="#{animalBean.animal.porte}">
-								<f:selectItem itemLabel="Selecione um porte" itemValue="" />
-								<f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
-								<f:selectItem itemLabel="Médio" itemValue="Médio" />
-								<f:selectItem itemLabel="Grande" itemValue="Grande" />
-								<f:selectItem itemLabel="Gigante" itemValue="gigante" />
-							</p:selectOneMenu>
+						<h:panelGrid columns="6">
+
+							<h:panelGrid columns="1">
+								<p:outputLabel value="Pelagem:" />
+								<p:selectOneMenu id="pelagem" style="width:150px"
+									value="#{animalBean.animal.pelagem}">
+									<f:selectItem itemLabel="Selecione uma pelagem" itemValue="" />
+									<f:selectItem itemLabel="Baixa" itemValue="baixa" />
+									<f:selectItem itemLabel="Media" itemValue="media" />
+									<f:selectItem itemLabel="Alta" itemValue="alta" />
+									<f:selectItem itemLabel="Gigante" itemValue="gigante" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<p:outputLabel value="Porte:" />
+								<p:selectOneMenu id="porte" style="width:150px"
+									value="#{animalBean.animal.porte}">
+									<f:selectItem itemLabel="Selecione um porte" itemValue="" />
+									<f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
+									<f:selectItem itemLabel="Médio" itemValue="Médio" />
+									<f:selectItem itemLabel="Grande" itemValue="Grande" />
+									<f:selectItem itemLabel="Gigante" itemValue="gigante" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<p:outputLabel value="Sexo:" />
+								<p:selectOneRadio id="sexo" value="#{animalBean.animal.sexo}"
+									unselectable="true">
+									<f:selectItem itemLabel="Macho" itemValue="M" />
+									<f:selectItem itemLabel="Femea" itemValue="F" />
+								</p:selectOneRadio>
+							</h:panelGrid>
+
+
 
 						</h:panelGrid>
+
 						<h:panelGrid columns="1">
-
-							<p:outputLabel value="Sexo:" />
-							<p:selectOneRadio id="sexo" value="#{animalBean.animal.sexo}"
-								unselectable="true">
-								<f:selectItem itemLabel="Macho" itemValue="M" />
-								<f:selectItem itemLabel="Femea" itemValue="F" />
-							</p:selectOneRadio>
-						</h:panelGrid>
-						<!-- 
-						<h:panelGrid columns="1" cellpadding="5">
-
-							<p:outputLabel value="Observação:" />
-							<p:inputTextarea rows="3" cols="100"
-								value="animalBean.animal.observacoes" />
+							<p:outputLabel value="Observações" id="observações" />
+							<p:inputText size="56" maxlength="30" style="height:70px"
+								value="#{animalBean.animal.observacoes}" />
 						</h:panelGrid>
 
-						<div style="height: 10px;"></div>
-						 -->
 					</p:fieldset>
 
 
@@ -187,11 +194,14 @@
 						<h:panelGrid columns="1" cellpadding="5">
 
 							<p:outputLabel value="Cliente:" />
-							<p:selectOneMenu id="cliente" style="width:150px"
-								value="#{animalBean.animal.codCliente}" converter="omnifaces.SelectItemsConverter">
-								<f:selectItem itemLabel="Selecione um cliente" noSelectionOption="true" />
+							<p:selectOneMenu id="cliente" style="width:350px"
+								value="#{animalBean.animal.codCliente}"
+								converter="omnifaces.SelectItemsConverter">
+								<f:selectItem itemLabel="Selecione um cliente"
+									noSelectionOption="true" />
 								<f:selectItems value="#{animalBean.clientes}" var="cliente"
-									itemValue="#{cliente}" itemLabel="#{cliente.nome} - #{cliente.cpf}" />
+									itemValue="#{cliente}"
+									itemLabel="#{cliente.nome} - #{cliente.cpf}" />
 							</p:selectOneMenu>
 
 
