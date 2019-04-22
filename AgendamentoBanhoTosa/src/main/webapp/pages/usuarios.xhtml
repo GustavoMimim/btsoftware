@@ -119,7 +119,7 @@
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
 		<p:dialog header="Cadastro de Usuário" widgetVar="dlg2" modal="true"
-			draggable="false" resizable="false" height="auto">
+			draggable="false" resizable="false" height="500">
 
 			<h:form id="formCadUsuario">
 				<h:panelGrid columns="1" id="painelForm">
@@ -127,110 +127,133 @@
 					<p:fieldset legend="Dados Pessoais" style="margin-bottom:20px">
 
 						<h:panelGrid columns="6">
-							<h:outputLabel for="nome" value="Nome:" />
-							<p:inputText id="nome" size="45" maxlength="50"
-								value="#{usuarioBean.usuario.nome}" required="true"
-								requiredMessage="O campo Nome é obrigatório!" />
+							<h:panelGrid columns="1">
+								<h:outputLabel for="nome" value="Nome:" />
+								<p:inputText id="nome" size="45" maxlength="50"
+									value="#{usuarioBean.usuario.nome}" required="true"
+									requiredMessage="O campo Nome é obrigatório!" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<p:outputLabel for="cpf" value="CPF:" />
+								<p:inputText id="cpf" size="15" maxlength="11"
+									value="#{usuarioBean.usuario.cpf}" required="true"
+									requiredMessage="O campo CPF é obrigatório!" />
 
-							<p:outputLabel for="cpf" value="CPF:" />
-							<p:inputText id="cpf" size="14" maxlength="11"
-								value="#{usuarioBean.usuario.cpf}" required="true"
-								requiredMessage="O campo CPF é obrigatório!" />
-
-							<h:outputLabel for="rg" value="RG:" />
-							<p:inputText id="rg" size="14" maxlength="9"
-								value="#{usuarioBean.usuario.rg}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel for="rg" value="RG:" />
+								<p:inputText id="rg" size="15" maxlength="9"
+									value="#{usuarioBean.usuario.rg}" />
+							</h:panelGrid>
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel for="telefone" value="Telefone:" />
-							<p:inputText id="telefone" size="20" maxlength="13"
-								value="#{usuarioBean.usuario.telefone}" />
-
-							<h:outputLabel for="nascimento" value="Dt. Nasc." />
-							<p:calendar id="nascimento" size="14"
-								value="#{usuarioBean.usuario.dataNascimento}" />
-
-							<p:outputLabel for="funcao" value="Função:" />
-							<p:inputText id="funcao" size="30" maxlength="45"
-								value="#{usuarioBean.usuario.funcao}" required="true"
-								requiredMessage="O campo Função é obrigatório!" />
-
+						<h:panelGrid columns="6">
+							<h:panelGrid columns="1">
+								<p:outputLabel for="telefone" value="Telefone:" />
+								<p:inputText id="telefone" size="20" maxlength="13"
+									value="#{usuarioBean.usuario.telefone}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel for="nascimento" value="Dt. Nasc." />
+								<p:calendar id="nascimento" size="25"
+									value="#{usuarioBean.usuario.dataNascimento}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<p:outputLabel for="funcao" value="Função:" />
+								<p:inputText id="funcao" size="30" maxlength="45"
+									value="#{usuarioBean.usuario.funcao}" required="true"
+									requiredMessage="O campo Função é obrigatório!" />
+							</h:panelGrid>
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel for="email" value="Email:" />
-							<p:inputText id="email" size="87" maxlength="50"
-								value="#{usuarioBean.usuario.email}" />
+						<h:panelGrid columns="6">
+							<h:panelGrid columns="1">
+								<p:outputLabel for="email" value="Email:" />
+								<p:inputText id="email" size="82" maxlength="50"
+									value="#{usuarioBean.usuario.email}" />
+							</h:panelGrid>
 						</h:panelGrid>
 					</p:fieldset>
 
 					<p:fieldset legend="Endereço" style="margin-bottom:20px">
 
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel for="estado" value="Estado:" />
-							<p:selectOneMenu id="estado" style="width:150px"
-								value="#{usuarioBean.usuario.estado}">
-								<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
-								<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
-								<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
-							</p:selectOneMenu>
+						<h:panelGrid columns="6">
+							<h:panelGrid columns="1">
+								<p:outputLabel for="estado" value="Estado:" />
+								<p:selectOneMenu id="estado" size="20"
+									value="#{usuarioBean.usuario.estado}">
+									<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+									<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
+									<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
 
-							<p:outputLabel for="cidade" value="Cidade:" />
-							<p:inputText id="cidade" size="35" maxlength="30"
-								value="#{usuarioBean.usuario.cidade}" />
-
-							<h:outputLabel for="cep" value="CEP:" />
-							<p:inputText id="cep" size="14" maxlength="9"
-								value="#{usuarioBean.usuario.cep}" />
+								<p:outputLabel for="cidade" value="Cidade:" />
+								<p:inputText id="cidade" size="40" maxlength="30"
+									value="#{usuarioBean.usuario.cidade}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel for="cep" value="CEP:" />
+								<p:inputText id="cep" size="15" maxlength="9"
+									value="#{usuarioBean.usuario.cep}" />
+							</h:panelGrid>
 
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
 						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel for="bairro" value="Bairro:" />
-							<p:inputText id="bairro" size="20" maxlength="30"
-								value="#{usuarioBean.usuario.bairro}" />
-
-							<p:outputLabel for="rua" value="Rua:" />
-							<p:inputText id="rua" size="37" maxlength="50"
-								value="#{usuarioBean.usuario.rua}" />
-
-							<h:outputLabel for="numero" value="Número:" />
-							<p:inputText id="numero" size="10" maxlength="5"
-								value="#{usuarioBean.usuario.numero}"
-								converterMessage="O campo Número recebe apenas valores inteiros" />
-
+							<h:panelGrid columns="1">
+								<p:outputLabel for="bairro" value="Bairro:" />
+								<p:inputText id="bairro" size="20" maxlength="30"
+									value="#{usuarioBean.usuario.bairro}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<p:outputLabel for="rua" value="Rua:" />
+								<p:inputText id="rua" size="45" maxlength="50"
+									value="#{usuarioBean.usuario.rua}" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel for="numero" value="Número:" />
+								<p:inputText id="numero" size="10" maxlength="5"
+									value="#{usuarioBean.usuario.numero}"
+									converterMessage="O campo Número recebe apenas valores inteiros" />
+							</h:panelGrid>
 
 						</h:panelGrid>
 					</p:fieldset>
 
 					<p:fieldset legend="Dados Usuário" style="margin-bottom:20px">
-						<h:panelGrid columns="6" cellpadding="5">
-							<p:outputLabel for="tipo" value="Tipo de Usuário:" />
-							<p:selectOneMenu id="tipo" style="width:150px"
-								value="#{usuarioBean.usuario.nivelUsuario}" required="true"
-								requiredMessage="O campo Tipo de Usuário é obrigatório!">
-								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
-								<f:selectItem itemLabel="Administrador"
-									itemValue="Administrador" />
-								<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
-							</p:selectOneMenu>
+						<h:panelGrid columns="6">
+							<h:panelGrid columns="1">
+								<p:outputLabel for="tipo" value="Tipo de Usuário:" />
+								<p:selectOneMenu id="tipo" size="16"
+									value="#{usuarioBean.usuario.nivelUsuario}" required="true"
+									requiredMessage="O campo Tipo de Usuário é obrigatório!">
+									<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+									<f:selectItem itemLabel="Administrador"
+										itemValue="Administrador" />
+									<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+							<h:panelGrid columns="1">
 
-							<p:outputLabel for="usuarioNome" value="Nome de Usuário:" />
-							<p:inputText id="usuarioNome" size="14" maxlength="20"
-								value="#{usuarioBean.usuario.usuario}" required="true"
-								requiredMessage="O campo Usuário é obrigatório!" />
-
-							<h:outputLabel for="senha" value="Senha:" />
-							<p:password id="senha" size="14" maxlength="10"
-								value="#{usuarioBean.usuario.senha}" required="true"
-								requiredMessage="O campo Senha é obrigatório!" />
+								<p:outputLabel for="usuarioNome" value="Nome de Usuário:" />
+								<p:inputText id="usuarioNome" size="30" maxlength="20"
+									value="#{usuarioBean.usuario.usuario}" required="true"
+									requiredMessage="O campo Usuário é obrigatório!" />
+							</h:panelGrid>
+							<h:panelGrid columns="1">
+								<h:outputLabel for="senha" value="Senha:" />
+								<p:password id="senha" size="26" maxlength="10"
+									value="#{usuarioBean.usuario.senha}" required="true"
+									requiredMessage="O campo Senha é obrigatório!" />
+							</h:panelGrid>
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
