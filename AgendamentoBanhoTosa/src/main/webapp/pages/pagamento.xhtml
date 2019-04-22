@@ -35,18 +35,18 @@
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{pagamentoBean.onRowSelect}" />
 
-					<p:column headerText="Pagamento" sortBy="#{pagamento.pagamento}">
+					<p:column headerText="Pagamento">
 					</p:column>
 
-					<p:column headerText="Tipo de Pagamento" sortBy="#{pagamento.tipo}">
+					<p:column headerText="Tipo de Pagamento">
 						<h:outputText value="#{pagamento.tipo}" />
 					</p:column>
 
-					<p:column headerText="Valor">
+					<p:column headerText="Valor" sortBy="#{pagamento.valor}">
 						<h:outputText value="#{pagamento.valor}" />
 					</p:column>
 
-					<p:column headerText="Data">
+					<p:column headerText="Data" sortBy="#{pagamento.data}">
 						<h:outputText value="#{pagamento.data}" />
 					</p:column>
 				</p:dataTable>
