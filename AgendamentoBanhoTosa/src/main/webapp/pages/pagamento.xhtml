@@ -19,7 +19,7 @@
 
 			<p:commandButton value="+" title="Novo Pagamento"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
-				actionListener="#{pagamentoBean.novo()}"
+				actionListener="#{pagamentoBean.novo}"
 				update=":formCadPagamento:painelForm" />
 		</div>
 
@@ -65,7 +65,7 @@
 					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
 
 					<h:outputLabel value="Valor: " />
-					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valorPagamento}" />
+					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
 
 					<h:outputLabel value="Data: " />
 					<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
@@ -115,7 +115,7 @@
 						
 							<p:outputLabel value="Tipo de Pagamento:" />
 							<p:selectOneMenu style="width:150px"
-								value="#{pagamentoBean.pagamento.tipo}">
+								value="#{pagamentoBean.pagamento.tipoPagamento}">
 								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
 								<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
 								<f:selectItem itemLabel="Cartão" itemValue="Cartao" />
@@ -128,13 +128,13 @@
 
 							<h:outputLabel value="Data:" />
 							<p:calendar size="14" maxlength="10"
-								value="#{pagamentoBean.pagamento.data}" />
+								value="#{pagamentoBean.pagamento.dataPagamento}" />
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
-						actionListener="#{pagamentoBean.salvar()}"
+						actionListener="#{pagamentoBean.salvar}"
 						update=":growl :formCadPagamento:painelForm :tabelaPagamentos:tabPagamentos" />
 					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 				</h:panelGrid>
@@ -146,14 +146,14 @@
 		<p:dialog header="Detalhes de Pagamento" widgetVar="dlg3" modal="true"
 			draggable="false" resizable="false" height="auto" width="auto"
 			id="dialogDetalhes">
-			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
+			<h:panelGrid columns="2" cellpadding="50" cellspacing="5"
 				style="margin-bottom:20px;">
 
 				<h:outputLabel value="Tipo de Pagamento: " style="font-weight:bold;" />
 				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.tipoPagamento}" />
 
 				<h:outputLabel value="Valor: " style="font-weight:bold;" />
-				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valorPagamento}" />
+				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.valor}" />
 
 				<h:outputLabel value="Data: " style="font-weight:bold;" />
 				<h:outputText value="#{pagamentoBean.pagamentoSelecionado.dataPagamento}" />
@@ -170,8 +170,5 @@
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>
 		</p:dialog>
-
-
-
 	</ui:define>
 </ui:composition>

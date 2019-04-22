@@ -82,7 +82,13 @@ public class PagamentoBean implements Serializable {
 
 	public void salvar() {
 		try {
+			//Teste
+			/*UsuarioDAO usuarioDao = new UsuarioDAO();
+			Usuario usuario = new Usuario();
+			usuario = usuarioDao.buscar(1L);
+			*/
 			PagamentoDAO pagamentoDAO = new PagamentoDAO();
+			//pagamento.setCodUsuarioInclusao(usuario);
 			pagamentoDAO.merge(pagamento);
 
 			novo();
@@ -111,7 +117,7 @@ public class PagamentoBean implements Serializable {
 		try{
 			PagamentoDAO pagamentoDAO = new PagamentoDAO();
 			pagamentoDAO.excluir(pagamento);
-			Messages.addGlobalInfo("Serviço " + pagamento.getTipoPagamento() + " Excluído");
+			Messages.addGlobalInfo("Pagamento " + pagamento.getCodigo() + "do tipo " + pagamento.getTipoPagamento() + " excluído");
 			
 			pagamentos = pagamentoDAO.listar();
 		}catch (RuntimeException e) {
