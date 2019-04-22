@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<!-- Area que compoe o que vai ser levado no modelo.xhtml -->
+	<ui:define name="conteudo">
+		<!-- mensagem -->
+		<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
+		<div class="ui-g-12 ui-md-12" id="cab"
+			style="background-color: white; height: 50px;">
+			<p:outputLabel value="Planos"
+				style="padding-right:15px;font-size:20px;"></p:outputLabel>
+
+			<p:commandButton value="+" title="Novo Plano"
+				styleClass="btnCirculo" onclick="PF('dlg2').show();"
+				actionListener="#{planoBean.novo()}"
+				update=":formCadPlano:painelForm" />
+		</div>
+
+		<div class="ui-g-12 ui-md-9" id="tabelaPlanos">
+			<h:form id="tabelaPlanos">
+				<p:dataTable id="tabPlanos"
+					emptyMessage="Nenhum plano cadastrado."
+					value="#{planoBean.planos}" var="plano" paginator="true"
+					rows="10" paginatorPosition="bottom" selectionMode="single"
+					selection="#{planoBean.plano}" rowKey="#{plano.codigo}"
+					sortBy="#{plano.nome}">
+
+					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
+						listener="#{planoBean.onRowSelect}" />
+
+					<p:column headerText="Nome do Cliente" sortBy="#{plano.nome}">
+						<h:outputText value="#{plano.nome}" />
+					</p:column>
+
+					<p:column headerText="Nome do Animal">
+						<h:outputText value="#{plano.animal}" />
+					</p:column>
+
+					<p:column headerText="Tipo de serviço">
+						<h:outputText value="#{plano.tipo}" />
+					</p:column>
+					
+					<p:column headerText="Dia do serviço">
+						<h:outputText value="#{plano.diaServico}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+		</div>
+
+		<div class="ui-g-12 ui-md-3" id="paineis">
+
+			<p:panel id="painelInfo" styleClass="painel">
+
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Planos" styleClass="tituloPainel" />
+				<h:panelGrid columns="2" cellpadding="10" style="font-size:15px;">
+
+					<h:outputLabel value="Nome do Cliente: " />
+					<h:outputText value="#{planoBean.planoSelecionado.nome}" />
+
+					<h:outputLabel value="Nome do Animal: " />
+					<h:outputText value="#{planoBean.planoSelecionado.animal}" />
+					
+					<h:outputLabel value="Telefone: " />
+					<h:outputText value="#{planoBean.planoSelecionado.telefone}" />
+
+				</h:panelGrid>
+
+				<p:commandButton value="Ver mais" type="button"
+					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
+					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
+
+				<p:commandButton value="Excluir"
+					actionListener="#{planoBean.excluir}"
+					update=":growl :tabelaPlanos:tabPlanos">
+					<p:confirm header="Excluir" message="Deseja excluir o plano?"></p:confirm>
+					<f:attribute name="planoSelecionado"
+						value="#{planoBean.planoSelecionado}" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" />
+				</p:confirmDialog>
+
+			</p:panel>
+
+			<p:panel id="painelFiltro" styleClass="painel">
+				<i class="far fa-file-alt iconePadding iconePainel"></i>
+				<h:outputText value="Filtros" styleClass="tituloPainel" />
+				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
+
+				</h:panelGrid>
+
+			</p:panel>
+		</div>
+
+
+		<!-- MODAIS para cadastro, detalhes, exclusão -->
+
+		<p:dialog header="Cadastro de Plano" widgetVar="dlg2" modal="true"
+			draggable="false" resizable="false" height="auto">
+
+			<h:form id="formCadPlano">
+				<h:panelGrid columns="1" id="painelForm">
+
+					<p:fieldset legend="Dados do Plano" style="margin-bottom:20px">
+
+						<h:panelGrid columns="7">
+							<h:outputLabel value="Nome do Cliente:" />
+							<p:inputText size="30" maxlength="50"
+								value="#{planoBean.plano.nome}" />
+							
+							<!-- Acho que cadastraria apenas pelo CPF, e não por nome (Vinicius) -->
+							<p:outputLabel value="CPF:" />
+							<p:inputText size="14" maxlength="14"
+								value="#{planoBean.plano.cpf}" />
+
+							<h:outputLabel value="Nome do Animal:" />
+							<p:inputText size="20" maxlength="30"
+								value="#{planoBean.plano.animal}" />
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+
+						<h:panelGrid columns="8" cellpadding="5">
+							<p:outputLabel value="Tipo de Serviço" />
+							<p:selectOneMenu style="width:150px"
+								value="#{planoBean.plano.tipoServico}">
+								<f:selectItem itemLabel="Selecione o Tipo" itemValue="" />
+								<f:selectItem itemLabel="Tipo 1"
+									itemValue="Tipo 1" />
+								<f:selectItem itemLabel="Tipo 2" 
+									itemValue="Tipo 2" />
+								<f:selectItem itemLabel="Tipo 3" 
+									itemValue="Tipo 3" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="Horário de Serviço:" />
+							<p:inputText size="5" maxlength="5"
+								value="#{planoBean.plano.horario}" />
+								
+							<h:outputLabel value="Freq. de Pagamento:" />
+							<p:inputText size="5" maxlength="2"
+								value="#{planoBean.plano.freqPagamento}" />
+								
+							<h:outputLabel value="Freq. de Serviço:" />
+							<p:inputText size="5" maxlength="2"
+								value="#{planoBean.plano.freqServiço}" />
+							
+						</h:panelGrid>
+
+						<div style="height: 10px;"></div>
+						
+						
+					</p:fieldset>
+
+					
+					<!-- NO DOCUMENTO DE REQUISITOS NÃO EXISTE ESPECIFICAÇÃO DE STATUS DO PLANO,
+					MAS ACHO QUE SERIA UMA BOA IDEIA (VINICIUS PAUZUDO) -->
+					<p:fieldset legend="Status do Plano" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Status do Plano:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{planoBean.plano.statusPlano}">
+								<f:selectItem itemLabel="Selecione um Status" itemValue="" />
+								<f:selectItem itemLabel="Ativo"
+									itemValue="Ativo" />
+								<f:selectItem itemLabel="Inativo" 
+									itemValue="Inativo" />
+							</p:selectOneMenu>
+							
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" type="submit"
+						actionListener="#{planoBean.salvar()}"
+						update=":growl :formCadPlano:painelForm :tabelaPlanos:tabPlanos" />
+					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Detalhes de Plano" widgetVar="dlg3" modal="true"
+			draggable="false" resizable="false" height="auto" width="auto"
+			id="dialogDetalhes">
+			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
+				style="margin-bottom:20px;">
+
+
+				<h:outputLabel value="Nome do Cliente: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.nome}" />
+
+				<h:outputLabel value="CPF: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.cpf}" />
+				
+				<h:outputLabel value="Nome do Animal: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.animal}" />
+
+				<h:outputLabel value="Telefone: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.telefone}" />
+
+				<h:outputLabel value="Estado: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.estado}" />
+
+				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.rua}" />
+				<h:outputText value="" />
+				<h:outputText value="#{planoBean.planoSelecionado.numero}" />
+				<h:outputText value="" />
+				<h:outputText value="#{planoBean.planoSelecionado.cidade}" />
+				<h:outputText value="" />
+				<h:outputText value="#{planoBean.planoSelecionado.bairro}" />
+				
+				<h:outputLabel value="Tipo de Serviço: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.tipoServico}" />
+				
+				<h:outputLabel value="Freq. de Pagamento: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.freqPagamento}" />
+				
+				<h:outputLabel value="Freq. de Serviço: " style="font-weight:bold;" />
+				<h:outputText value="#{planoBean.planoSelecionado.freqServico}" />
+
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+
+				<p:commandButton value="Alterar"
+					actionListener="#{planoBean.alterar}"
+					update=":growl :tabelaPlanos:tabPlanos :formCadPlano:painelForm :painelInfo :dialogDetalhes"
+					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
+					<f:attribute name="planoSelecionado"
+						value="#{planoBean.planoSelecionado}" />
+				</p:commandButton>
+				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>
