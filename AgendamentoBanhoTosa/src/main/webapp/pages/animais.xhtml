@@ -19,7 +19,7 @@
 
 			<p:commandButton value="+" title="Novo Animal"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
-				actionListener="#{animalBean.novo()}"
+				actionListener="#{animalBean.novo}"
 				update=":formCadAnimal:painelForm :growl" />
 		</div>
 
@@ -73,7 +73,6 @@
 					<h:outputText
 						value="#{animalBean.animalSelecionado.codCliente.telefone}" />
 
-
 				</h:panelGrid>
 
 				<p:commandButton value="Ver mais" type="button"
@@ -94,19 +93,15 @@
 					<p:commandButton value="Não" type="button"
 						styleClass="ui-confirmdialog-no" />
 				</p:confirmDialog>
-
 			</p:panel>
 
 			<p:panel id="painelFiltro" styleClass="painel">
 				<i class="far fa-file-alt iconePadding iconePainel"></i>
 				<h:outputText value="Filtros" styleClass="tituloPainel" />
 				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
-
 				</h:panelGrid>
-
 			</p:panel>
 		</div>
-
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
@@ -122,12 +117,12 @@
 							<h:panelGrid columns="1">
 								<h:outputLabel value="Nome:" />
 								<p:inputText size="45" maxlength="20"
-									value="#{animalBean.animal.nome}" />
+									value="#{animalBean.animal.nome}" required="true" requiredMessage="O campo nome é obrigatório!" />
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:outputLabel value="Raça:" />
 								<p:inputText size="38" maxlength="30"
-									value="#{animalBean.animal.raca}" />
+									value="#{animalBean.animal.raca}" required="true" requiredMessage="O campo raça é obrigatório!"/>
 							</h:panelGrid>
 
 						</h:panelGrid>
@@ -136,7 +131,7 @@
 							<h:panelGrid columns="1">
 								<p:outputLabel value="Cor:" id="cor" />
 								<p:inputText size="86" maxlength="30"
-									value="#{animalBean.animal.cor}" />
+									value="#{animalBean.animal.cor}"/>
 							</h:panelGrid>
 
 						</h:panelGrid>
@@ -148,7 +143,7 @@
 							<h:panelGrid columns="1">
 								<p:outputLabel value="Pelagem:" />
 								<p:selectOneMenu id="pelagem" style="width:150px"
-									value="#{animalBean.animal.pelagem}">
+									value="#{animalBean.animal.pelagem}" required="true" requiredMessage="O campo pelagem é obrigatório!">
 									<f:selectItem itemLabel="Selecione uma pelagem" itemValue="" />
 									<f:selectItem itemLabel="Baixa" itemValue="baixa" />
 									<f:selectItem itemLabel="Media" itemValue="media" />
@@ -159,7 +154,7 @@
 							<h:panelGrid columns="1">
 								<p:outputLabel value="Porte:" />
 								<p:selectOneMenu id="porte" style="width:150px"
-									value="#{animalBean.animal.porte}">
+									value="#{animalBean.animal.porte}" required="true" requiredMessage="O campo porte é obrigatório!">
 									<f:selectItem itemLabel="Selecione um porte" itemValue="" />
 									<f:selectItem itemLabel="Pequeno" itemValue="Pequeno" />
 									<f:selectItem itemLabel="Médio" itemValue="Médio" />
@@ -196,7 +191,7 @@
 							<p:outputLabel value="Cliente:" />
 							<p:selectOneMenu id="cliente" style="width:350px"
 								value="#{animalBean.animal.codCliente}"
-								converter="omnifaces.SelectItemsConverter">
+								converter="omnifaces.SelectItemsConverter" required="true" requiredMessage="O campo pelagem é obrigatório!">
 								<f:selectItem itemLabel="Selecione um cliente"
 									noSelectionOption="true" />
 								<f:selectItems value="#{animalBean.clientes}" var="cliente"
