@@ -19,7 +19,7 @@
 
 			<p:commandButton value="+" title="Novo Plano" styleClass="btnCirculo"
 				onclick="PF('dlg2').show();"
-				actionListener="#{planoAgendamentoBean.novo()}"
+				actionListener="#{planoAgendamentoBean.novo}"
 				update=":formCadPlano:painelForm" />
 		</div>
 
@@ -34,7 +34,7 @@
 					sortBy="#{plano.codAnimal.codCliente.nome}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
-						listener="#{planoAgendamentoBean.onRowSelect()}" />
+						listener="#{planoAgendamentoBean.onRowSelect}" />
 
 					<p:column headerText="Nome do Cliente"
 						sortBy="#{plano.codAnimal.codCliente.nome}">
@@ -85,7 +85,7 @@
 					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
 
 				<p:commandButton value="Excluir"
-					actionListener="#{planoAgendamentoBean.excluir()}"
+					actionListener="#{planoAgendamentoBean.excluir}"
 					update=":growl :tabelaPlanos:tabPlanos">
 					<p:confirm header="Excluir" message="Deseja excluir o plano?"></p:confirm>
 					<f:attribute name="planoAgendamentoSelecionado"
@@ -179,7 +179,7 @@
 
 
 					<!-- NO DOCUMENTO DE REQUISITOS NÃO EXISTE ESPECIFICAÇÃO DE STATUS DO PLANO,
-					MAS ACHO QUE SERIA UMA BOA IDEIA (VINICIUS PAUZUDO) -->
+					MAS ACHO QUE SERIA UMA BOA IDEIA (VINICIUS) -->
 					<p:fieldset legend="Status do Plano" style="margin-bottom:20px">
 						<h:panelGrid columns="6" cellpadding="5">
 							<p:outputLabel value="Status do Plano:" />
@@ -194,7 +194,7 @@
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
-						actionListener="#{planoAgendamentoBean.salvar()}"
+						actionListener="#{planoAgendamentoBean.salvar}"
 						update=":growl :formCadPlano:painelForm :tabelaPlanos:tabPlanos" />
 					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 				</h:panelGrid>
@@ -206,7 +206,7 @@
 		<p:dialog header="Detalhes de Plano" widgetVar="dlg3" modal="true"
 			draggable="false" resizable="false" height="auto" width="auto"
 			id="dialogDetalhes">
-			<h:panelGrid columns="2" cellpadding="50" cellspacing="5px"
+			<h:panelGrid columns="2" cellpadding="50" cellspacing="5"
 				style="margin-bottom:20px;">
 
 
@@ -261,7 +261,7 @@
 			<h:panelGrid columns="2">
 
 				<p:commandButton value="Alterar"
-					actionListener="#{planoAgendamentoBean.alterar()}"
+					actionListener="#{planoAgendamentoBean.alterar}"
 					update=":growl :tabelaPlanos:tabPlanos :formCadPlano:painelForm :painelInfo :dialogDetalhes"
 					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
 					<f:attribute name="planoAgendamentoSelecionado"
@@ -270,8 +270,5 @@
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>
 		</p:dialog>
-
-
-
 	</ui:define>
 </ui:composition>
