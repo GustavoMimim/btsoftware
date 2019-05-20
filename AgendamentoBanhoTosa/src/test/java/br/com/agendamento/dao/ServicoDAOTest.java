@@ -1,6 +1,5 @@
 package br.com.agendamento.dao;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.agendamento.domain.Servico;

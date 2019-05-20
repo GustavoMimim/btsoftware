@@ -29,7 +29,7 @@ public class AgendamentoBean implements Serializable{
 	public Agendamento getAgendamento() {
 		return agendamento;
 	}
-
+	
 	public void setAgendamento(Agendamento agendamento) {
 		this.agendamento = agendamento;
 	}

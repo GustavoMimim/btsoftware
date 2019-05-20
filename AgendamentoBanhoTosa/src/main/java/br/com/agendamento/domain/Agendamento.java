@@ -20,6 +20,26 @@ public class Agendamento extends GenericDomain {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Usuario codUsuarioInclusao;
+	
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Servico codServico;
+
+	public Animal getCodAnimal() {
+		return codAnimal;
+	}
+
+	public void setCodAnimal(Animal codAnimal) {
+		this.codAnimal = codAnimal;
+	}
+
+	public Servico getCodServico() {
+		return codServico;
+	}
+
+	public void setCodServico(Servico codServico) {
+		this.codServico = codServico;
+	}
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIME)
