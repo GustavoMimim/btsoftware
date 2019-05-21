@@ -23,7 +23,7 @@ public class Usuario extends GenericDomain {
 	@Column(length = 45, nullable = false)
 	private String funcao;
 
-	@Column(length = 8)
+	@Column(length = 9)
 	private String rg;
 
 	@Column(length = 14, nullable = false)

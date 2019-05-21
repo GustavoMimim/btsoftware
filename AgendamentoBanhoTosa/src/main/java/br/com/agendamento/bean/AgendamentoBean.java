@@ -57,7 +57,7 @@ public class AgendamentoBean implements Serializable{
 	
 	public void index() {
 		try {
-			Faces.redirect("./pages/agendamento.xhtml");
+			Faces.redirect("./pages/agendamentos.xhtml");
 		}
 		catch (IOException erro) {
 			erro.printStackTrace();

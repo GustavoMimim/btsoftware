@@ -31,9 +31,9 @@
 						<h:panelGrid columns="1">
 							<h:outputLabel for="usuario" value="Usuario"
 								styleClass="login-area-txtusuario" />
-							<p:inputText id="usuario" required="false"
+							<p:inputText id="usuario" required="true"
 								styleClass="login-area-usuario-campo"
-								value="#{loginBean.usuario.usuario}" />
+								value="#{loginBean.usuario.usuario}" requiredMessage="Digite o usuário!" />
 						</h:panelGrid>
 					</div>
 					<div class="login-area-senha">
@@ -41,7 +41,7 @@
 							<h:outputLabel for="senha" value="Senha"
 								styleClass="login-area-txtsenha" />
 							<p:password id="senha" styleClass="login-area-senha-campo"
-								required="false" value="#{loginBean.usuario.senha}" />
+								required="true" value="#{loginBean.usuario.senha}" requiredMessage="Digite a senha!" />
 						</h:panelGrid>
 					</div>
 					<center>
