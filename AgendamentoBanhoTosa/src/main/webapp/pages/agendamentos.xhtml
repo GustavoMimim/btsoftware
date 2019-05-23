@@ -20,22 +20,26 @@
 			<p:commandButton value="+" title="Novo Agendamento"
 				styleClass="btnCirculo" onclick="PF('dlg2').show();"
 				actionListener="#{agendamentoBean.novo}"
-				update=":formCadAgendamento:painelForm" />
+				update=" :formCadAgendamento:painelForm :growl" />
 		</div>
 
 		<!-- Aqui começa a tabela que mostra os agendamentos -->
+
 		<div class="ui-g-12 ui-md-9" id="tabelaAgendamentos">
 			<h:form id="tabelaAgendamentos">
 				<p:dataTable id="tabAgendamentos"
 					emptyMessage="Nenhum agendamento cadastrado."
-					value="#{agendamentoBean.agendamentos}" var="agendamentos"
+					value="#{agendamentoBean.agendamentos}" var="agendamento"
 					paginator="true" rows="10" paginatorPosition="bottom"
-					selectionMode="single" selection="#{agendamentoBean.agendamentos}"
-					rowKey="#{agendamento.codigo}"
-					sortBy="#{agendamento.codAnimal.codCliente.nome}">
+					selectionMode="single" selection="#{agendamentoBean.agendamento}"
+					rowKey="#{agendamento.codigo}" sortBy="#{agendamento.horario}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{agendamentoBean.onRowSelect}" />
+
+					<p:column headerText="Horário" sortBy="#{agendamento.horario}">
+						<h:outputText value="#{agendamento.horario}" />
+					</p:column>
 
 					<p:column headerText="Nome do Cliente"
 						sortBy="#{agendamento.codAnimal.codCliente.nome}">
@@ -51,9 +55,15 @@
 						<h:outputText value="#{agendamento.codServico.tipoServico}" />
 					</p:column>
 
-					<!--<p:column headerText="Frequencia Atendimento">
-						<h:outputText value="#{plano.frequenciaAtendimento}" />
-					</p:column> -->
+					<!-- Agendamento não tem valor, então... -->
+					<!-- 
+					<p:column headerText="Valor">
+						<h:outputText value="#{agendamento.valor}" />
+					</p:column>
+					 -->
+					<p:column headerText="Telefone">
+						<h:outputText value="#{agendamento.codAnimal.codCliente.telefone}" />
+					</p:column>
 				</p:dataTable>
 			</h:form>
 
@@ -114,6 +124,9 @@
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
 
+		<!-- ERRO NO CADASTRO
+			NÃO ESTÃO APARECENDO AS CHAVES PARA SELECIONAR
+		 -->
 		<p:dialog header="Cadastro de Agendamento" widgetVar="dlg2"
 			modal="true" draggable="false" resizable="false" height="auto">
 
@@ -123,9 +136,9 @@
 					<p:fieldset legend="Dados do Agendamento"
 						style="margin-bottom:20px">
 
-						<h:panelGrid columns="7">
+						<h:panelGrid columns="2">
 							<h:outputLabel value="Nome do Animal-Cliente:" />
-							<p:selectOneMenu id="animalCombo" style="width:150px"
+							<p:selectOneMenu id="animalCombo" style="width:350px"
 								value="#{agendamentoBean.agendamento.codAnimal}"
 								converter="omnifaces.SelectItemsConverter">
 								<f:selectItem itemLabel="Selecione um Animal-Cliente"
@@ -138,9 +151,9 @@
 
 						<div style="height: 10px;"></div>
 
-						<h:panelGrid columns="8" cellpadding="5">
+						<h:panelGrid columns="2" cellpadding="5">
 							<p:outputLabel value="Tipo de Serviço" />
-							<p:selectOneMenu id="servicoCombo" style="width:150px"
+							<p:selectOneMenu id="servicoCombo" style="width:350px"
 								value="#{agendamentoBean.agendamento.codServico}"
 								converter="omnifaces.SelectItemsConverter">
 								<f:selectItem itemLabel="Selecione um serviço"
@@ -151,44 +164,50 @@
 							</p:selectOneMenu>
 
 							<h:outputLabel value="Horário do agendamento" />
-							<p:inputText size="5" maxlength="5"
+							<p:inputNumber size="5" maxlength="5"
 								value="#{agendamentoBean.agendamento.horario}" />
 
 							<h:outputLabel value="Data do agendamento:" />
-							<p:inputText size="5" maxlength="2"
+							<p:calendar size="25"
 								value="#{agendamentoBean.agendamento.dataAtendimento}" />
-							<!-- 
+							<!-- Parte de chaves do usuario
 							<h:outputLabel value="Usuário: " />
 							<p:inputText size="5" maxlength="2"
 								value="#{agendamentoBean.agendamento.codUsuarioInclusao}"
 								disabled="true" placeholder="#{loginBean.usuario.nome}" />
  -->
+
+							<!-- Pula linha -->
+							<p:outputLabel value="" />
 							<p:outputLabel value="Buscar animal?" />
 							<p:selectOneRadio id="buscarAnimal"
 								value="#{agendamentoBean.agendamento.buscarAnimal}"
 								unselectable="false">
-								<f:selectItem itemLabel="Sim" itemValue="1" />
-								<!-- 1 busca, e 0 não busca -->
-								<f:selectItem itemLabel="Não" itemValue="0" />
+								<f:selectItem itemLabel="Sim" itemValue="Sim" />
+								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
 
 							<p:outputLabel value="Entregar animal?" />
 							<p:selectOneRadio id="entregarAnimal"
 								value="#{agendamentoBean.agendamento.entregarAnimal}"
 								unselectable="false">
-								<f:selectItem itemLabel="Sim" itemValue="1" />
-								<!-- 1 entrega, e 0 não entrega -->
-								<f:selectItem itemLabel="Não" itemValue="0" />
+								<f:selectItem itemLabel="Sim" itemValue="Sim" />
+								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
 
 							<p:outputLabel value="Pacote?" />
 							<p:selectOneRadio id="pacote"
 								value="#{agendamentoBean.agendamento.pacote}"
 								unselectable="false">
-								<f:selectItem itemLabel="Sim" itemValue="1" />
-								<!-- 1 é pacote, e 0 pacote-->
-								<f:selectItem itemLabel="Não" itemValue="0" />
+								<f:selectItem itemLabel="Sim" itemValue="Sim" />
+								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
+							
+							<!-- Como ainda não valida usuario, então... -->
+							<!-- 
+							<p:outputLabel value="Usuário: "/>
+							<p:inputText value="#{agendamentoBean.agendamento.codUsuarioInclusao}"/>
+							 -->
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
@@ -198,7 +217,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
 						actionListener="#{agendamentoBean.salvar}"
-						update=":growl :formCadAgendemanto:painelForm :tabelaAgendamentos:tabAgendamentos" />
+						update=":growl :formCadAgendamento:painelForm :tabelaAgendamentos:tabAgendamentos" />
 					<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();" />
 				</h:panelGrid>
 
@@ -206,11 +225,7 @@
 
 		</p:dialog>
 
-
-
-
-		<!-- PAREI DE ALTERAR AQUI -->
-		<!-- FALTA TESTAR TBM E ARRUMAR A VIEW -->
+		<!-- DETALHES AQUI -->
 		<p:dialog header="Detalhes de Agendamento" widgetVar="dlg3"
 			modal="true" draggable="false" resizable="false" height="auto"
 			width="auto" id="dialogDetalhes">
@@ -220,60 +235,54 @@
 
 				<h:outputLabel value="Nome do Cliente: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.nome}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codAnimal.codCliente.nome}" />
 
 				<h:outputLabel value="CPF: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.cpf}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codAnimal.codCliente.cpf}" />
 
 				<h:outputLabel value="Nome do Animal: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.nome}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codAnimal.nome}" />
 
 				<h:outputLabel value="Telefone: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.telefone}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codAnimal.codCliente.telefone}" />
 
-				<h:outputLabel value="Estado: " style="font-weight:bold;" />
+				<h:outputLabel value="Horario: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.estado}" />
+					value="#{agendamentoBean.agendamentoSelecionado.horario}" />
 
-				<h:outputLabel value="Endereço: " style="font-weight:bold;" />
+				<h:outputLabel value="Pacote? " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.logradouro}" />
-				<h:outputText value="" />
-				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.numero}" />
-				<h:outputText value="" />
-				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.cidade}" />
-				<h:outputText value="" />
-				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.codAnimal.codCliente.bairro}" />
+					value="#{agendamentoBean.agendamentoSelecionado.pacote}" />
 
-				<h:outputLabel value="Frequencia Atendimento: "
+				<h:outputText value="Buscar? " style="font-weight:bold;" />
+				<h:outputText
+					value="#{agendamentoBean.agendamentoSelecionado.buscarAnimal}" />
+
+				<h:outputText value="Entregar? " style="font-weight:bold;" />
+				<h:outputText
+					value="#{agendamentoBean.agendamentoSelecionado.entregarAnimal}" />
+
+				<h:outputText value="Usuário que incluiu: "
 					style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.frequenciaAtendimento}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codUsuarioInclusao.nome}" />
 
-				<h:outputLabel value="Freq. de Pagamento: "
-					style="font-weight:bold;" />
+				<h:outputLabel value="Serviço: " style="font-weight:bold;" />
 				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.frequenciaPagamento}" />
-
-				<h:outputLabel value="Freq. de Serviço: " style="font-weight:bold;" />
-				<h:outputText
-					value="#{planoAgendamentoBean.planoAgendamentoSelecionado.horario}" />
+					value="#{agendamentoBean.agendamentoSelecionado.codServico.tipoServico}" />
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 
 				<p:commandButton value="Alterar"
-					actionListener="#{planoAgendamentoBean.alterar}"
-					update=":growl :tabelaPlanos:tabPlanos :formCadPlano:painelForm :painelInfo :dialogDetalhes"
+					actionListener="#{agendamentoBean.alterar}"
+					update=":growl :tabelaAgendamentos:tabAgendamentos :formCadAgendamento:painelForm :painelInfo :dialogDetalhes"
 					oncomplete="PF('dlg2').show();" onclick="PF('dlg3').hide();">
-					<f:attribute name="planoAgendamentoSelecionado"
-						value="#{planoAgendamentoBean.planoAgendamentoSelecionado}" />
+					<f:attribute name="agendamentoSelecionado"
+						value="#{agendamentoBean.agendamentoSelecionado}" />
 				</p:commandButton>
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>

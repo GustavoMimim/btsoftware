@@ -45,18 +45,18 @@ public class Agendamento extends GenericDomain {
 	@Temporal(TemporalType.TIME)
 	private Date horario;
 
-	@Column(length = 1, nullable = false)
-	private int entregarAnimal;
+	@Column(length = 3, nullable = false)
+	private String entregarAnimal;
 
-	@Column(length = 1, nullable = false)
-	private int buscarAnimal;
+	@Column(length = 3, nullable = false)
+	private String buscarAnimal;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataAtendimento;
 
-	@Column(length = 1, nullable = false)
-	private int pacote;
+	@Column(length = 3, nullable = false)
+	private String pacote;
 
 	public Usuario getCodUsuarioInclusao() {
 		return codUsuarioInclusao;
@@ -74,19 +74,19 @@ public class Agendamento extends GenericDomain {
 		this.horario = horario;
 	}
 
-	public int getEntregarAnimal() {
+	public String getEntregarAnimal() {
 		return entregarAnimal;
 	}
 
-	public void setEntregarAnimal(int entregarAnimal) {
+	public void setEntregarAnimal(String entregarAnimal) {
 		this.entregarAnimal = entregarAnimal;
 	}
 
-	public int getBuscarAnimal() {
+	public String getBuscarAnimal() {
 		return buscarAnimal;
 	}
 
-	public void setBuscarAnimal(int buscarAnimal) {
+	public void setBuscarAnimal(String buscarAnimal) {
 		this.buscarAnimal = buscarAnimal;
 	}
 
@@ -98,11 +98,11 @@ public class Agendamento extends GenericDomain {
 		this.dataAtendimento = dataAtendimento;
 	}
 
-	public int getPacote() {
+	public String getPacote() {
 		return pacote;
 	}
 
-	public void setPacote(int pacote) {
+	public void setPacote(String pacote) {
 		this.pacote = pacote;
 	}
 

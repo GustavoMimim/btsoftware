@@ -70,6 +70,7 @@ public class AgendamentoBean implements Serializable{
 		try {
 			AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
 			agendamentos = agendamentoDAO.listar();
+			
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao listar os agendamentos!");
 			erro.printStackTrace();
@@ -86,7 +87,7 @@ public class AgendamentoBean implements Serializable{
 
 			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
 		} catch (RuntimeException erro) {
-			Messages.addGlobalError("Erro ao salvar o animal!");
+			Messages.addGlobalError("Erro ao salvar o agendamento!");
 			erro.printStackTrace();
 		}
 
@@ -94,6 +95,7 @@ public class AgendamentoBean implements Serializable{
 
 	public void onRowSelect(SelectEvent event) {
 		agendamentoSelecionado = (Agendamento) event.getObject();
+		
 		// Messages.addGlobalInfo("Isso foi selecionado: " + test.getNome());
 	}
 
