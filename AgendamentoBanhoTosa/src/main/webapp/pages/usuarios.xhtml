@@ -128,7 +128,7 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<h:outputLabel for="nome" value="Nome:" />
+								<h:outputLabel for="nome" value="Nome: *" />
 								<p:inputText id="nome" size="45" maxlength="50"
 									value="#{usuarioBean.usuario.nome}" required="true"
 									requiredMessage="O campo Nome é obrigatório!" />
@@ -235,7 +235,7 @@
 								<p:selectOneMenu id="tipo" size="16"
 									value="#{usuarioBean.usuario.nivelUsuario}" required="true"
 									requiredMessage="O campo Tipo de Usuário é obrigatório!">
-									<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+									<f:selectItem itemLabel="Selecione um Tipo" itemValue="" noSelectionOption="true" />
 									<f:selectItem itemLabel="Administrador"
 										itemValue="Administrador" />
 									<f:selectItem itemLabel="Padrão" itemValue="Padrão" />
@@ -249,7 +249,7 @@
 									requiredMessage="O campo Usuário é obrigatório!" />
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<h:outputLabel for="senha" value="Senha:" />
+								<h:outputLabel for="senha" value="Senha: *" />
 								<p:password id="senha" size="26" maxlength="10"
 									value="#{usuarioBean.usuario.senha}" required="true"
 									requiredMessage="O campo Senha é obrigatório!" />

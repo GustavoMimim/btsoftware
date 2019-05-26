@@ -22,8 +22,7 @@ public class PlanoAgendamento extends GenericDomain {
 	private Usuario codUsuarioInclusao;
 
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIME)
-	private Date horario;
+	private String horario;
 
 	@Column(length = 3, nullable = false)
 	private int frequenciaAtendimento;
@@ -31,11 +30,11 @@ public class PlanoAgendamento extends GenericDomain {
 	@Column(length = 3, nullable = false)
 	private int frequenciaPagamento;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	@Temporal(TemporalType.TIME)
 	private Date dataCadastro;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	@Temporal(TemporalType.TIME)
 	private Date dataCancelamento;
 
@@ -50,11 +49,11 @@ public class PlanoAgendamento extends GenericDomain {
 		this.codUsuarioInclusao = codUsuarioInclusao;
 	}
 
-	public Date getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(Date horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 

@@ -111,12 +111,14 @@
 						<h:panelGrid columns="1">
 							<h:outputLabel value="Serviço:" />
 							<p:inputText size="50" maxlength="20"
-								value="#{servicoBean.servico.tipoServico}" />
+								value="#{servicoBean.servico.tipoServico}" required="true"
+									requiredMessage="O campo Serviço é obrigatório!" />
 						</h:panelGrid>
 						<h:panelGrid columns="1">
 							<h:outputLabel value="Preço:" />
 							<p:inputText size="10" maxlength="30"
-								value="#{servicoBean.servico.preco}" />
+								value="#{servicoBean.servico.preco}" required="true"
+									requiredMessage="O campo Preço é obrigatório!" />
 						</h:panelGrid>
 
 

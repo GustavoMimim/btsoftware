@@ -114,18 +114,20 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Nome:" />
+								<h:outputLabel value="Nome: *" />
 								<p:inputText size="45" maxlength="50"
-									value="#{clienteBean.cliente.nome}" />
+									value="#{clienteBean.cliente.nome}" required="true"
+									requiredMessage="O campo Nome é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<p:outputLabel value="CPF:" />
-								<p:inputNumber size="15" maxlength="14"
-									value="#{clienteBean.cliente.cpf}" />
+								<p:outputLabel value="CPF: *" />
+								<p:inputText size="15" maxlength="14"
+									value="#{clienteBean.cliente.cpf}" required="true"
+									requiredMessage="O campo CPF é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:outputLabel value="RG:" />
-								<p:inputNumber size="15" maxlength="8"
+								<p:inputText size="15" maxlength="8"
 									value="#{clienteBean.cliente.rg}" />
 							</h:panelGrid>
 						</h:panelGrid>
@@ -135,9 +137,10 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Telefone:" />
+								<p:outputLabel value="Telefone: *" />
 								<p:inputText size="40" maxlength="13"
-									value="#{clienteBean.cliente.telefone}" />
+									value="#{clienteBean.cliente.telefone}" required="true"
+									requiredMessage="O campo Telefone é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:outputLabel value="Dt. Nasc." />
@@ -156,23 +159,26 @@
 						<h:panelGrid columns="6">
 
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Estado:" />
+								<p:outputLabel value="Estado: *" />
 								<p:selectOneMenu size="20"
-									value="#{clienteBean.cliente.estado}">
+									value="#{clienteBean.cliente.estado}" required="true"
+									requiredMessage="O campo Estado é obrigatório!">
 									<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
 									<f:selectItem itemLabel="Paraná" itemValue="Paraná" />
 									<f:selectItem itemLabel="São Paulo" itemValue="São Paulo" />
 								</p:selectOneMenu>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Cidade:" />
+								<p:outputLabel value="Cidade: *" />
 								<p:inputText size="40" maxlength="30"
-									value="#{clienteBean.cliente.cidade}" />
+									value="#{clienteBean.cliente.cidade}" required="true"
+									requiredMessage="O campo Cidade é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<h:outputLabel value="CEP:" />
-								<p:inputNumber size="15" maxlength="9"
-									value="#{clienteBean.cliente.cep}" />
+								<h:outputLabel value="CEP: *" />
+								<p:inputText size="15" maxlength="9"
+									value="#{clienteBean.cliente.cep}" required="true"
+									requiredMessage="O campo CEP é obrigatório!"/>
 							</h:panelGrid>
 
 						</h:panelGrid>
@@ -181,20 +187,22 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Bairro:" />
-
+								<p:outputLabel value="Bairro: *" />
 								<p:inputText size="20" maxlength="30"
-									value="#{clienteBean.cliente.bairro}" />
+									value="#{clienteBean.cliente.bairro}" required="true"
+									requiredMessage="O campo Bairro é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Rua:" />
+								<p:outputLabel value="Logradouro: *" />
 								<p:inputText size="40" maxlength="50"
-									value="#{clienteBean.cliente.logradouro}" />
+									value="#{clienteBean.cliente.logradouro}" required="true"
+									requiredMessage="O campo Logradouro é obrigatório!"/>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Número:" />
+								<h:outputLabel value="Número: *" />
 								<p:inputText size="15" maxlength="5"
-									value="#{clienteBean.cliente.numero}" />
+									value="#{clienteBean.cliente.numero}" required="true"
+									requiredMessage="O campo Número é obrigatório!"/>
 
 							</h:panelGrid>
 
@@ -204,11 +212,12 @@
 					<p:fieldset legend="Status do Cliente" style="margin-bottom:20px">
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Status do Cliente:" />
+								<p:outputLabel value="Status do Cliente: *" />
 								<p:selectOneMenu style="width:150px"
-									value="#{clienteBean.cliente.status}">
-									<f:selectItem itemLabel="Selecione um Status" itemValue="" />
-									<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+									value="#{clienteBean.cliente.status}" required="true"
+									requiredMessage="O campo Status do Cliente é obrigatório!">
+									<f:selectItem itemLabel="Selecione um Status" itemValue="" noSelectionOption="true" />
+									<f:selectItem itemLabel="Ativo" itemValue="Ativo"  />
 									<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 								</p:selectOneMenu>
 							</h:panelGrid>
@@ -270,8 +279,6 @@
 				<p:commandButton value="Cancelar" onclick="PF('dlg3').hide();" />
 			</h:panelGrid>
 		</p:dialog>
-
-
 
 	</ui:define>
 </ui:composition>
