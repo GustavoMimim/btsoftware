@@ -42,8 +42,7 @@ public class Agendamento extends GenericDomain {
 	}
 
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIME)
-	private Date horario;
+	private String horario;
 
 	@Column(length = 3, nullable = false)
 	private String entregarAnimal;
@@ -66,11 +65,11 @@ public class Agendamento extends GenericDomain {
 		this.codUsuarioInclusao = codUsuarioInclusao;
 	}
 
-	public Date getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(Date horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 

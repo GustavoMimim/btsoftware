@@ -14,22 +14,47 @@ import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
 import br.com.agendamento.dao.AgendamentoDAO;
+import br.com.agendamento.dao.AnimalDAO;
+import br.com.agendamento.dao.ServicoDAO;
+import br.com.agendamento.dao.UsuarioDAO;
 import br.com.agendamento.domain.Agendamento;
+import br.com.agendamento.domain.Animal;
+import br.com.agendamento.domain.Servico;
+import br.com.agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class AgendamentoBean implements Serializable{
+public class AgendamentoBean implements Serializable {
 
 	private Agendamento agendamento;
 	private Agendamento agendamentoSelecionado;
 	private List<Agendamento> agendamentos;// atributo para listar os agendamentos
+	private List<Animal> animais;
+	private List<Servico> servicos;
+
+	// Getters e Setters
 	
-	//Getters e Setters
 	public Agendamento getAgendamento() {
 		return agendamento;
 	}
-	
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+
+	public List<Animal> getAnimais() {
+		return animais;
+	}
+
+	public void setAnimais(List<Animal> animais) {
+		this.animais = animais;
+	}
+
 	public void setAgendamento(Agendamento agendamento) {
 		this.agendamento = agendamento;
 	}
@@ -50,19 +75,30 @@ public class AgendamentoBean implements Serializable{
 		this.agendamentos = agendamentos;
 	}
 
-	//zera todos os campos de Animal
+	// zera todos os campos de Animal	
 	public void novo() {
-		agendamento = new Agendamento();
+		try {
+			agendamento = new Agendamento();
+
+			AnimalDAO animalDAO = new AnimalDAO();
+			animais = animalDAO.listar();
+			
+			ServicoDAO servicoDAO = new ServicoDAO();
+			servicos = servicoDAO.listar();
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um agendamento!");
+			erro.printStackTrace();
+		}
 	}
-	
+
 	public void index() {
 		try {
 			Faces.redirect("./pages/agendamentos.xhtml");
-		}
-		catch (IOException erro) {
+		} catch (IOException erro) {
 			erro.printStackTrace();
 		}
-		
+
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
@@ -70,7 +106,7 @@ public class AgendamentoBean implements Serializable{
 		try {
 			AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
 			agendamentos = agendamentoDAO.listar();
-			
+
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu um erro ao listar os agendamentos!");
 			erro.printStackTrace();
@@ -79,6 +115,12 @@ public class AgendamentoBean implements Serializable{
 
 	public void salvar() {
 		try {
+			
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			Usuario usuario = usuarioDAO.buscar(1L);
+			agendamento.setCodUsuarioInclusao(usuario);
+			
+			
 			AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
 			agendamentoDAO.merge(agendamento);
 
@@ -95,31 +137,45 @@ public class AgendamentoBean implements Serializable{
 
 	public void onRowSelect(SelectEvent event) {
 		agendamentoSelecionado = (Agendamento) event.getObject();
-		
+
 		// Messages.addGlobalInfo("Isso foi selecionado: " + test.getNome());
 	}
 
 	public void excluir(ActionEvent evento) {
 		agendamento = (Agendamento) evento.getComponent().getAttributes().get("agendamentoSelecionado");
 
-		try{
+		try {
 			AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
 			agendamentoDAO.excluir(agendamento);
-			Messages.addGlobalInfo("Agendamento horário " + agendamento.getHorario() + " e dia "+ agendamento.getDataAtendimento() + " Excluído");
-			
+			Messages.addGlobalInfo("Agendamento horário " + agendamento.getHorario() + " e dia "
+					+ agendamento.getDataAtendimento() + " Excluído");
+
 			agendamentos = agendamentoDAO.listar();
-		}catch (RuntimeException e) {
+		} catch (RuntimeException e) {
 			Messages.addGlobalError("Não foi possivel excluir!");
 			e.printStackTrace();
 		}
 
 	}
-	
+
 	public void alterar(ActionEvent evento) {
-		agendamento = (Agendamento) evento.getComponent().getAttributes().get("agendamentoSelecionado");
-		if(agendamento == null) {
-			Messages.addGlobalError("Não foi possivel alterar!");
+		try {
+			agendamento = (Agendamento) evento.getComponent().getAttributes().get("agendamentoSelecionado");
+			if (agendamento == null) {
+				Messages.addGlobalError("Não foi possivel alterar!(Valor(es) Nulo(s))");
+			} else {
+				// populando lista de clientes
+				AnimalDAO animalDAO = new AnimalDAO();
+				animais = animalDAO.listar();
+				
+				ServicoDAO servicoDAO = new ServicoDAO();
+				servicos = servicoDAO.listar();
+			}
+
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao adicionar um agendamento!");
+			erro.printStackTrace();
 		}
 	}
-	
+
 }

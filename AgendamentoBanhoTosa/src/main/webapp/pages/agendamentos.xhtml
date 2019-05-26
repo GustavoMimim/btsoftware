@@ -32,7 +32,7 @@
 					value="#{agendamentoBean.agendamentos}" var="agendamento"
 					paginator="true" rows="10" paginatorPosition="bottom"
 					selectionMode="single" selection="#{agendamentoBean.agendamento}"
-					rowKey="#{agendamento.codigo}" sortBy="#{agendamento.horario}">
+					rowKey="#{agendamento.codigo}" sortBy="#{agendamento.dataAtendimento},#{agendamento.horario}">
 
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{agendamentoBean.onRowSelect}" />
@@ -40,12 +40,11 @@
 					<p:column headerText="Horário" sortBy="#{agendamento.horario}">
 						<h:outputText value="#{agendamento.horario}" />
 					</p:column>
-
-					<p:column headerText="Nome do Cliente"
-						sortBy="#{agendamento.codAnimal.codCliente.nome}">
-						<h:outputText value="#{agendamento.codAnimal.codCliente.nome}" />
+					
+					<p:column headerText="Data" sortBy="#{agendamento.dataAtendimento}">
+						<h:outputText value="#{agendamento.dataAtendimento}" />
 					</p:column>
-
+					
 					<p:column headerText="Nome do Animal"
 						sortBy="#{agendamento.codAnimal.nome}">
 						<h:outputText value="#{agendamento.codAnimal.nome}" />
@@ -55,14 +54,8 @@
 						<h:outputText value="#{agendamento.codServico.tipoServico}" />
 					</p:column>
 
-					<!-- Agendamento não tem valor, então... -->
-					<!-- 
 					<p:column headerText="Valor">
-						<h:outputText value="#{agendamento.valor}" />
-					</p:column>
-					 -->
-					<p:column headerText="Telefone">
-						<h:outputText value="#{agendamento.codAnimal.codCliente.telefone}" />
+						<h:outputText value="R$ #{agendamento.codServico.preco}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
@@ -84,6 +77,10 @@
 					<h:outputLabel value="Nome do Animal: " />
 					<h:outputText
 						value="#{agendamentoBean.agendamentoSelecionado.codAnimal.nome}" />
+					
+					<h:outputLabel value="Data do agendamento:" />
+						<h:outputText 
+								value="#{agendamentoBean.agendamentoSelecionado.dataAtendimento}" />
 
 					<h:outputLabel value="Telefone: " />
 					<h:outputText
@@ -136,18 +133,19 @@
 					<p:fieldset legend="Dados do Agendamento"
 						style="margin-bottom:20px">
 
-						<h:panelGrid columns="2">
-							<h:outputLabel value="Nome do Animal-Cliente:" />
-							<p:selectOneMenu id="animalCombo" style="width:350px"
-								value="#{agendamentoBean.agendamento.codAnimal}"
-								converter="omnifaces.SelectItemsConverter">
-								<f:selectItem itemLabel="Selecione um Animal-Cliente"
-									noSelectionOption="true" />
-								<f:selectItems value="#{agendamentoBean.agendamento.codAnimal}"
-									var="animal" itemValue="#{animal}"
-									itemLabel="#{animal.nome} - #{animal.codCliente.nome}" />
-							</p:selectOneMenu>
-						</h:panelGrid>
+						<h:panelGrid columns="1">
+								<p:outputLabel value="Cliente/ Animal:" />
+								<p:selectOneMenu id="animal" style="width:600px"
+									value="#{agendamentoBean.agendamento.codAnimal}"
+									converter="omnifaces.SelectItemsConverter" required="true"
+									requiredMessage="O campo Cliente/Animal é obrigatório!">
+									<f:selectItem itemLabel="Selecione um animal"
+										noSelectionOption="true" />
+									<f:selectItems value="#{agendamentoBean.animais}"
+										var="animal" itemValue="#{animal}"
+										itemLabel="#{animal.nome} - #{animal.codCliente.nome}(#{animal.codCliente.cpf})" />
+								</p:selectOneMenu>
+							</h:panelGrid>
 
 						<div style="height: 10px;"></div>
 
@@ -158,25 +156,19 @@
 								converter="omnifaces.SelectItemsConverter">
 								<f:selectItem itemLabel="Selecione um serviço"
 									noSelectionOption="true" />
-								<f:selectItems value="#{agendamentoBean.agendamento.codServico}"
+								<f:selectItems value="#{agendamentoBean.servicos}"
 									var="servico" itemValue="#{servico}"
 									itemLabel="#{servico.tipoServico}" />
 							</p:selectOneMenu>
 
 							<h:outputLabel value="Horário do agendamento" />
-							<p:inputNumber size="5" maxlength="5"
+							<p:inputText size="5" maxlength="5"
 								value="#{agendamentoBean.agendamento.horario}" />
 
 							<h:outputLabel value="Data do agendamento:" />
 							<p:calendar size="25"
 								value="#{agendamentoBean.agendamento.dataAtendimento}" />
-							<!-- Parte de chaves do usuario
-							<h:outputLabel value="Usuário: " />
-							<p:inputText size="5" maxlength="2"
-								value="#{agendamentoBean.agendamento.codUsuarioInclusao}"
-								disabled="true" placeholder="#{loginBean.usuario.nome}" />
- -->
-
+								
 							<!-- Pula linha -->
 							<p:outputLabel value="" />
 							<p:outputLabel value="Buscar animal?" />
@@ -203,11 +195,6 @@
 								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
 							
-							<!-- Como ainda não valida usuario, então... -->
-							<!-- 
-							<p:outputLabel value="Usuário: "/>
-							<p:inputText value="#{agendamentoBean.agendamento.codUsuarioInclusao}"/>
-							 -->
 						</h:panelGrid>
 
 						<div style="height: 10px;"></div>
