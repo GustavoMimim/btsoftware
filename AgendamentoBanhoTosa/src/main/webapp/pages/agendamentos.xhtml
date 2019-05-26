@@ -41,7 +41,7 @@
 						<h:outputText value="#{agendamento.horario}" />
 					</p:column>
 					
-					<p:column headerText="Data" sortBy="#{agendamento.dataAtendimento}">
+					<p:column headerText="Data" sortBy="#{agendamento.dataAtendimento}" filterBy="#{agendamento.dataAtendimento}">
 						<h:outputText value="#{agendamento.dataAtendimento}" />
 					</p:column>
 					

@@ -31,7 +31,7 @@ public class LoginBean {
 
 	public void autenticar() {
 		try {
-			Faces.redirect("./pages/usuarios.xhtml");
+			Faces.redirect("./pages/agendamentos.xhtml");
 		} catch (IOException erro) {
 			erro.printStackTrace();
 			Messages.addGlobalError(erro.getMessage());
