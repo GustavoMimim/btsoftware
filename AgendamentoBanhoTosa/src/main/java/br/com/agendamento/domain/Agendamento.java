@@ -20,7 +20,7 @@ public class Agendamento extends GenericDomain {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Usuario codUsuarioInclusao;
-	
+
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Servico codServico;
@@ -56,6 +56,9 @@ public class Agendamento extends GenericDomain {
 
 	@Column(length = 3, nullable = false)
 	private String pacote;
+
+	@Column(nullable = true)
+	private String status;
 
 	public Usuario getCodUsuarioInclusao() {
 		return codUsuarioInclusao;
@@ -103,6 +106,14 @@ public class Agendamento extends GenericDomain {
 
 	public void setPacote(String pacote) {
 		this.pacote = pacote;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

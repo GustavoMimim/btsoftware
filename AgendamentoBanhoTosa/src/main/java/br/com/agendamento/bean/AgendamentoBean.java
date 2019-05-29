@@ -120,14 +120,22 @@ public class AgendamentoBean implements Serializable {
 			Usuario usuario = usuarioDAO.buscar(1L);
 			agendamento.setCodUsuarioInclusao(usuario);
 			
-			
 			AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-			agendamentoDAO.merge(agendamento);
+			
+			if (!agendamentoDAO.verificaAnimal(agendamento.getCodAnimal().getCodigo(),agendamento.getDataAtendimento()).isEmpty()) {
+				Messages.addGlobalError("Animal ja agendado para o dia " + agendamento.getDataAtendimento());
+			} else {//Cadastra um novo agendamento
 
-			novo();
-			agendamentos = agendamentoDAO.listar();
+				agendamentoDAO.merge(agendamento);
 
-			Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+				novo();
+				agendamentos = agendamentoDAO.listar();
+
+				Messages.addGlobalInfo("Operação Realizada com Sucesso!");
+			}
+			
+
+			//Messages.addGlobalInfo("Operação Realizada com Sucesso!");
 		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro ao salvar o agendamento!");
 			erro.printStackTrace();
