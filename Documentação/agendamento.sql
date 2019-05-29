@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `agendamento` (
   `codAnimal_codigo` bigint(20) NOT NULL,
   `codServico_codigo` bigint(20) NOT NULL,
   `codUsuarioInclusao_codigo` bigint(20) NOT NULL,
+  `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`codigo`),
   KEY `FK_bjk48gd9xlrcdsfpq2yvlgoo3` (`codAnimal_codigo`),
   KEY `FK_3hjfeddh668ckg7196cyij6u9` (`codServico_codigo`),
@@ -34,12 +35,25 @@ CREATE TABLE IF NOT EXISTS `agendamento` (
   CONSTRAINT `FK_3hjfeddh668ckg7196cyij6u9` FOREIGN KEY (`codServico_codigo`) REFERENCES `servico` (`codigo`),
   CONSTRAINT `FK_73vo9ofjpi1ekfqhjr2r1uf4m` FOREIGN KEY (`codUsuarioInclusao_codigo`) REFERENCES `usuario` (`codigo`),
   CONSTRAINT `FK_bjk48gd9xlrcdsfpq2yvlgoo3` FOREIGN KEY (`codAnimal_codigo`) REFERENCES `animal` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela agendamento.agendamento: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela agendamento.agendamento: ~12 rows (aproximadamente)
 /*!40000 ALTER TABLE `agendamento` DISABLE KEYS */;
-INSERT INTO `agendamento` (`codigo`, `buscarAnimal`, `dataAtendimento`, `entregarAnimal`, `horario`, `pacote`, `codAnimal_codigo`, `codServico_codigo`, `codUsuarioInclusao_codigo`) VALUES
-	(3, 'Sim', '2019-05-31', 'Sim', '13h30', 'Sim', 1, 1, 1);
+INSERT INTO `agendamento` (`codigo`, `buscarAnimal`, `dataAtendimento`, `entregarAnimal`, `horario`, `pacote`, `codAnimal_codigo`, `codServico_codigo`, `codUsuarioInclusao_codigo`, `status`) VALUES
+	(5, 'Sim', '2019-05-29', 'Sim', '1h30', 'Sim', 3, 2, 1, 'Em andamento'),
+	(6, 'Sim', '2019-05-31', 'Sim', '1h30', 'Sim', 3, 1, 1, 'Em andamento'),
+	(7, 'Sim', '2019-05-31', 'Sim', '3h30', 'Sim', 3, 2, 1, NULL),
+	(8, 'Sim', '2019-05-30', 'Sim', '1h30', 'Sim', 3, 2, 1, 'A fazer'),
+	(9, 'Sim', '2019-05-30', 'Sim', '3h30', 'Sim', 2, 2, 1, 'Finalizado'),
+	(10, 'Sim', '2019-05-30', 'Nao', '10h00', 'Nao', 2, 2, 1, 'Em andamento'),
+	(11, 'Sim', '2019-05-30', 'Sim', '9h00', 'Sim', 3, 2, 1, 'Em andamento'),
+	(12, 'Sim', '2019-05-30', 'Sim', '8h00', 'Sim', 3, 1, 1, 'Em andamento'),
+	(13, 'Sim', '2019-05-31', 'Sim', '10h30', 'Sim', 2, 3, 1, 'Finalizado'),
+	(14, 'Sim', '2019-05-31', 'Sim', '3h30', 'Sim', 2, 2, 1, NULL),
+	(15, 'Sim', '2019-05-31', 'Sim', '10h00', 'Sim', 1, 1, 1, 'A fazer'),
+	(16, 'Sim', '2019-05-31', 'Nao', '15h30', 'Nao', 1, 1, 1, 'Finalizado'),
+	(17, 'Sim', '2019-05-31', 'Sim', '14h30', 'Sim', 1, 1, 1, 'A fazer'),
+	(18, 'Nao', '2019-05-29', 'Nao', '9h00', 'Nao', 1, 1, 1, 'Em andamento');
 /*!40000 ALTER TABLE `agendamento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela agendamento.agendamentoservico
@@ -76,12 +90,14 @@ CREATE TABLE IF NOT EXISTS `animal` (
   KEY `FK_rwjq1wcv40egff0vqd1kc78us` (`codUsuarioInclusao_codigo`),
   CONSTRAINT `FK_27p6huldcphov8a290s1m704n` FOREIGN KEY (`codCliente_codigo`) REFERENCES `cliente` (`codigo`),
   CONSTRAINT `FK_rwjq1wcv40egff0vqd1kc78us` FOREIGN KEY (`codUsuarioInclusao_codigo`) REFERENCES `usuario` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela agendamento.animal: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela agendamento.animal: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `animal` DISABLE KEYS */;
 INSERT INTO `animal` (`codigo`, `cor`, `nome`, `observacoes`, `pelagem`, `porte`, `raca`, `sexo`, `codCliente_codigo`, `codUsuarioInclusao_codigo`) VALUES
-	(1, 'preto', 'bob', 'Animal tem alergia', 'media', 'Grande', 'teste', 'M', 1, 1);
+	(1, 'preto', 'bob', 'Animal tem alergia', 'media', 'Grande', 'teste', 'M', 1, 1),
+	(2, '', 'Max', '', 'media', 'Grande', 'vira lata', 'M', 2, 1),
+	(3, '', 'Belinha', 'Alergia a alguma coisa', 'media', 'Médio', 'poddle', 'F', 2, 1);
 /*!40000 ALTER TABLE `animal` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela agendamento.cliente
@@ -109,12 +125,13 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   KEY `FK_4vckri5yedmw6lm77oc8ekija` (`codUsuarioInclusao_codigo`),
   CONSTRAINT `FK_2l3ic39ogmd5kjadcncbsm103` FOREIGN KEY (`codUsuarioAlteracao_codigo`) REFERENCES `usuario` (`codigo`),
   CONSTRAINT `FK_4vckri5yedmw6lm77oc8ekija` FOREIGN KEY (`codUsuarioInclusao_codigo`) REFERENCES `usuario` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela agendamento.cliente: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela agendamento.cliente: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
 INSERT INTO `cliente` (`codigo`, `bairro`, `cep`, `cidade`, `complemento`, `cpf`, `dataAlteracao`, `dataInclusao`, `dataNascimento`, `estado`, `logradouro`, `nome`, `numero`, `rg`, `status`, `telefone`, `codUsuarioAlteracao_codigo`, `codUsuarioInclusao_codigo`) VALUES
-	(1, 'bairro', '18860000', 'Timburi', NULL, '48179506843', NULL, '2019-05-20 22:03:09', NULL, 'Paraná', 'teste', 'Teste', 10, '', 'Ativo', '14987727727', NULL, NULL);
+	(1, 'bairro', '18860000', 'Timburi', NULL, '48179506943', NULL, '2019-05-26 16:42:13', NULL, 'Paraná', 'teste', 'Lucas Oliveira da Cruz', 10, '', 'Ativo', '14997573382', NULL, NULL),
+	(2, 'Centro', '19960000', 'Ourinhos', NULL, '82882882888', NULL, '2019-05-26 16:43:22', NULL, 'Paraná', 'Rua Teste ', 'Joao Marcos', 120, '', 'Ativo', '1433832212', NULL, NULL);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela agendamento.pagamento
@@ -168,15 +185,14 @@ CREATE TABLE IF NOT EXISTS `planoagendamento` (
   KEY `FK_7fb3i341dfg1gh708rb9japss` (`codUsuarioInclusao_codigo`),
   CONSTRAINT `FK_7fb3i341dfg1gh708rb9japss` FOREIGN KEY (`codUsuarioInclusao_codigo`) REFERENCES `usuario` (`codigo`),
   CONSTRAINT `FK_mnb0qwxyoj74qs8wu74bcyljo` FOREIGN KEY (`codAnimal_codigo`) REFERENCES `animal` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela agendamento.planoagendamento: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela agendamento.planoagendamento: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `planoagendamento` DISABLE KEYS */;
 INSERT INTO `planoagendamento` (`codigo`, `dataCadastro`, `dataCancelamento`, `frequenciaAtendimento`, `frequenciaPagamento`, `horario`, `precoPlano`, `codAnimal_codigo`, `codUsuarioInclusao_codigo`) VALUES
 	(1, '21:46:34', '21:46:36', 1, 1, '21:26:28', 0, 1, 1),
-	(3, '00:00:00', NULL, 10, 10, '10h00', 10, 1, 1),
-	(4, '00:00:00', NULL, 20, 30, '11h30', 150, 1, 1),
-	(5, '00:00:00', NULL, 12, 18, '12h00', 120, 1, 1);
+	(7, '00:00:00', NULL, 15, 30, '15h00', 10, 2, 1),
+	(8, NULL, NULL, 15, 15, '10h00', 100, 1, 1);
 /*!40000 ALTER TABLE `planoagendamento` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela agendamento.planoservico
@@ -205,12 +221,14 @@ CREATE TABLE IF NOT EXISTS `servico` (
   PRIMARY KEY (`codigo`),
   KEY `FK_diduwvxi114f9gmyu661dhh07` (`codUsuarioInclusao_codigo`),
   CONSTRAINT `FK_diduwvxi114f9gmyu661dhh07` FOREIGN KEY (`codUsuarioInclusao_codigo`) REFERENCES `usuario` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela agendamento.servico: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela agendamento.servico: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `servico` DISABLE KEYS */;
 INSERT INTO `servico` (`codigo`, `descricao`, `preco`, `tipoServico`, `codUsuarioInclusao_codigo`) VALUES
-	(1, 'teste', 10, 'teste', 1);
+	(1, 'Teste', 30, 'Banho e Tosa', 1),
+	(2, '', 70, 'Banho Medicinal', 1),
+	(3, 'Tosa de acordo com a raça', 50, 'Tosa da Raça', 1);
 /*!40000 ALTER TABLE `servico` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela agendamento.usuario
