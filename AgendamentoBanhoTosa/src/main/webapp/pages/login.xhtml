@@ -21,19 +21,21 @@
 
 	<p:growl id="growl" showDetail="false" sticky="false" life="3000" />
 	<div class="ui-g cointeiner">
-		<div class="ui-g-12 topo">
-			<h1>Sistema de Banho e Tosa</h1>
-		</div>
-		<div class="ui-g-3 login-lateral-esquerda">
+		
+		<div class="ui-g-4 login-lateral-direita"></div>
+		<div class="ui-g-4 login-lateral-esquerda">
+
 			<h:form id="formLogin">
 				<div class="login-area">
+					<h1 align="center">Sistema de Banho e Tosa</h1>
 					<div class="login-area-usuario">
 						<h:panelGrid columns="1">
 							<h:outputLabel for="usuario" value="Usuario"
 								styleClass="login-area-txtusuario" />
 							<p:inputText id="usuario" required="true"
 								styleClass="login-area-usuario-campo"
-								value="#{loginBean.usuario.usuario}" requiredMessage="Digite o usuário!" />
+								value="#{loginBean.usuario.usuario}"
+								requiredMessage="Digite o usuário!" />
 						</h:panelGrid>
 					</div>
 					<div class="login-area-senha">
@@ -41,22 +43,24 @@
 							<h:outputLabel for="senha" value="Senha"
 								styleClass="login-area-txtsenha" />
 							<p:password id="senha" styleClass="login-area-senha-campo"
-								required="true" value="#{loginBean.usuario.senha}" requiredMessage="Digite a senha!" />
+								required="true" value="#{loginBean.usuario.senha}"
+								requiredMessage="Digite a senha!" />
 						</h:panelGrid>
 					</div>
 					<center>
-					<div class="botao">
-						<p:commandButton value="Entrar"
-							actionListener="#{loginBean.logar}" update=":growl :formLogin">
-							<f:attribute name="usuarioSelecionado"
-								value="#{loginBean.usuario}" />
-						</p:commandButton>
-					</div>
+						<div class="botao">
+							<p:commandButton value="Entrar"
+								actionListener="#{loginBean.logar}" update=":growl :formLogin">
+								<f:attribute name="usuarioSelecionado"
+									value="#{loginBean.usuario}" />
+							</p:commandButton>
+						</div>
 					</center>
 				</div>
 			</h:form>
 		</div>
-		<div class="ui-g-9 login-lateral-direita"></div>
+		<div class="ui-g-4 login-lateral-direita"></div>
+
 	</div>
 </h:body>
 </html>

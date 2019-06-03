@@ -95,12 +95,6 @@
 				</p:confirmDialog>
 			</p:panel>
 
-			<p:panel id="painelFiltro" styleClass="painel">
-				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Filtros" styleClass="tituloPainel" />
-				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
-				</h:panelGrid>
-			</p:panel>
 		</div>
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
@@ -115,7 +109,7 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Cliente/ Animal:" />
+								<p:outputLabel value="Cliente/ Animal: *" />
 								<p:selectOneMenu id="animal" style="width:600px"
 									value="#{planoAgendamentoBean.plano.codAnimal}"
 									converter="omnifaces.SelectItemsConverter" required="true"
@@ -128,7 +122,7 @@
 								</p:selectOneMenu>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Dt. Cadastro" />
+								<h:outputLabel value="Dt. Cadastro *" />
 								<p:calendar size="38"
 									value="#{planoAgendamentoBean.plano.dataCadastro}" />
 							</h:panelGrid>
@@ -137,13 +131,13 @@
 						<h:panelGrid columns="6">
 
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Freq. Atendimento" />
+								<h:outputLabel value="Freq. Atendimento *" />
 								<p:inputText size="38"
 									value="#{planoAgendamentoBean.plano.frequenciaAtendimento}" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Freq. Pagamento" />
+								<h:outputLabel value="Freq. Pagamento*" />
 								<p:inputText size="38"
 									value="#{planoAgendamentoBean.plano.frequenciaPagamento}" />
 							</h:panelGrid>
@@ -156,13 +150,13 @@
 
 
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Horario" />
+								<h:outputLabel value="Horario *" />
 								<p:inputText size="38" maxlength="30"
 									value="#{planoAgendamentoBean.plano.horario}" />
 							</h:panelGrid>
 
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Preco Plano" />
+								<h:outputLabel value="Preco Plano*" />
 								<p:inputText size="38"
 									value="#{planoAgendamentoBean.plano.precoPlano}" />
 							</h:panelGrid>

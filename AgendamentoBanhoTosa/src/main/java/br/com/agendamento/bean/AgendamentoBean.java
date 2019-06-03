@@ -218,7 +218,8 @@ public class AgendamentoBean implements Serializable {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			Usuario usuario = usuarioDAO.buscar(1L);
 			pagamento.setCodUsuarioInclusao(usuario);
-
+			pagamento.setCliente(agendamento.getCodAnimal().getCodCliente().getNome());
+			
 			pagamento.setDataPagamento(new Date());
 			pagamento.setValor(agendamentoSelecionado.getCodServico().getPreco());
 

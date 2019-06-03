@@ -122,14 +122,7 @@
 
 			</p:panel>
 
-			<p:panel id="painelFiltro" styleClass="painel">
-				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Filtros" styleClass="tituloPainel" />
-				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
 
-				</h:panelGrid>
-
-			</p:panel>
 		</div>
 
 
@@ -148,7 +141,7 @@
 						style="margin-bottom:20px">
 
 						<h:panelGrid columns="1">
-							<p:outputLabel value="Cliente/ Animal:" />
+							<p:outputLabel value="Cliente/ Animal: *" />
 							<p:selectOneMenu id="animal" style="width:600px"
 								value="#{agendamentoBean.agendamento.codAnimal}"
 								converter="omnifaces.SelectItemsConverter" required="true"
@@ -164,10 +157,11 @@
 						<div style="height: 10px;"></div>
 
 						<h:panelGrid columns="2" cellpadding="5">
-							<p:outputLabel value="Tipo de Serviço" />
+							<p:outputLabel value="Tipo de Serviço *" />
 							<p:selectOneMenu id="servicoCombo" style="width:350px"
 								value="#{agendamentoBean.agendamento.codServico}"
-								converter="omnifaces.SelectItemsConverter">
+								converter="omnifaces.SelectItemsConverter"  required="true"
+								requiredMessage="O campo Serviço é obrigatório!">
 								<f:selectItem itemLabel="Selecione um serviço"
 									noSelectionOption="true" />
 								<f:selectItems value="#{agendamentoBean.servicos}" var="servico"
@@ -175,7 +169,7 @@
 							</p:selectOneMenu>
 
 
-							<p:outputLabel value="Horario:" />
+							<p:outputLabel value="Horario: *" />
 							<p:selectOneMenu id="horario" style="width:150px"
 								value="#{agendamentoBean.agendamento.horario}" required="true"
 								requiredMessage="O campo horario é obrigatório!">
@@ -200,16 +194,18 @@
 								<f:selectItem itemLabel="17h30" itemValue="17h30" />
 							</p:selectOneMenu>
 
-							<h:outputLabel value="Data do agendamento:" />
+							<h:outputLabel value="Data do agendamento: *" />
 							<p:calendar size="25"
-								value="#{agendamentoBean.agendamento.dataAtendimento}" />
+								value="#{agendamentoBean.agendamento.dataAtendimento}"  required="true"
+								requiredMessage="O campo Data é obrigatório!"/>
 
 							<!-- Pula linha -->
 							<p:outputLabel value="" />
 							<p:outputLabel value="Buscar animal?" />
 							<p:selectOneRadio id="buscarAnimal"
 								value="#{agendamentoBean.agendamento.buscarAnimal}"
-								unselectable="false">
+								unselectable="false"  required="true"
+								requiredMessage="O campo Buscar é obrigatório!">
 								<f:selectItem itemLabel="Sim" itemValue="Sim" />
 								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
@@ -217,7 +213,8 @@
 							<p:outputLabel value="Entregar animal?" />
 							<p:selectOneRadio id="entregarAnimal"
 								value="#{agendamentoBean.agendamento.entregarAnimal}"
-								unselectable="false">
+								unselectable="false"  required="true"
+								requiredMessage="O campo Entregar é obrigatório!">
 								<f:selectItem itemLabel="Sim" itemValue="Sim" />
 								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
@@ -225,13 +222,15 @@
 							<p:outputLabel value="Pacote?" />
 							<p:selectOneRadio id="pacote"
 								value="#{agendamentoBean.agendamento.pacote}"
-								unselectable="false">
+								unselectable="false"  required="true"
+								requiredMessage="O campo Pacote é obrigatório!">
 								<f:selectItem itemLabel="Sim" itemValue="Sim" />
 								<f:selectItem itemLabel="Não" itemValue="Nao" />
 							</p:selectOneRadio>
 
-							<h:outputText value="Status:" />
-							<p:selectOneButton value="#{agendamentoBean.agendamento.status}">
+							<h:outputText value="Status: *" />
+							<p:selectOneButton value="#{agendamentoBean.agendamento.status}"  required="true"
+								requiredMessage="O campo Status é obrigatório!">
 								<f:selectItem default="true" itemLabel="A fazer"
 									itemValue="A fazer" />
 								<f:selectItem itemLabel="Em andamento" itemValue="Em andamento" />

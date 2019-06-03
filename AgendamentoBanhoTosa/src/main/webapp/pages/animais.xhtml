@@ -95,12 +95,6 @@
 				</p:confirmDialog>
 			</p:panel>
 
-			<p:panel id="painelFiltro" styleClass="painel">
-				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Filtros" styleClass="tituloPainel" />
-				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
-				</h:panelGrid>
-			</p:panel>
 		</div>
 
 		<!-- MODAIS para cadastro, detalhes, exclusão -->
@@ -115,13 +109,13 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Nome:" />
+								<h:outputLabel value="Nome: *" />
 								<p:inputText size="45" maxlength="20"
 									value="#{animalBean.animal.nome}" required="true"
 									requiredMessage="O campo nome é obrigatório!" />
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<h:outputLabel value="Raça:" />
+								<h:outputLabel value="Raça: *" />
 								<p:inputText size="38" maxlength="30"
 									value="#{animalBean.animal.raca}" required="true"
 									requiredMessage="O campo raça é obrigatório!" />
@@ -131,7 +125,7 @@
 
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Cor:" id="cor" />
+								<p:outputLabel value="Cor: *" id="cor" />
 								<p:inputText size="86" maxlength="30"
 									value="#{animalBean.animal.cor}" />
 							</h:panelGrid>
@@ -143,7 +137,7 @@
 						<h:panelGrid columns="6">
 
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Pelagem:" />
+								<p:outputLabel value="Pelagem: *" />
 								<p:selectOneMenu id="pelagem" style="width:150px"
 									value="#{animalBean.animal.pelagem}" required="true"
 									requiredMessage="O campo pelagem é obrigatório!">
@@ -155,7 +149,7 @@
 								</p:selectOneMenu>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Porte:" />
+								<p:outputLabel value="Porte: *" />
 								<p:selectOneMenu id="porte" style="width:150px"
 									value="#{animalBean.animal.porte}" required="true"
 									requiredMessage="O campo porte é obrigatório!">
@@ -167,7 +161,7 @@
 								</p:selectOneMenu>
 							</h:panelGrid>
 							<h:panelGrid columns="1">
-								<p:outputLabel value="Sexo:" />
+								<p:outputLabel value="Sexo: *" />
 								<p:selectOneRadio id="sexo" value="#{animalBean.animal.sexo}"
 									unselectable="true">
 									<f:selectItem itemLabel="Macho" itemValue="M" />
@@ -192,7 +186,7 @@
 					<p:fieldset legend="Dados Cliente" style="margin-bottom:20px">
 						<h:panelGrid columns="1" cellpadding="5">
 
-							<p:outputLabel value="Cliente:" />
+							<p:outputLabel value="Cliente: *" />
 							<p:selectOneMenu id="cliente" style="width:350px"
 								value="#{animalBean.animal.codCliente}"
 								converter="omnifaces.SelectItemsConverter" required="true"

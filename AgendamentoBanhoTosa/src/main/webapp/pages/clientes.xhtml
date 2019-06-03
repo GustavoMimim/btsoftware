@@ -91,14 +91,7 @@
 
 			</p:panel>
 
-			<p:panel id="painelFiltro" styleClass="painel">
-				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Filtros" styleClass="tituloPainel" />
-				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
 
-				</h:panelGrid>
-
-			</p:panel>
 		</div>
 
 
@@ -121,7 +114,7 @@
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<p:outputLabel value="CPF: *" />
-								<p:inputText size="15" maxlength="14"
+								<p:inputText size="15" maxlength="11"
 									value="#{clienteBean.cliente.cpf}" required="true"
 									requiredMessage="O campo CPF é obrigatório!"/>
 							</h:panelGrid>

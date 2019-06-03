@@ -15,6 +15,9 @@ public class Pagamento extends GenericDomain {
 	// Atributos
 	@Column(length = 45, nullable = true)
 	private String tipoPagamento;
+	
+	@Column(nullable = true)
+	private String cliente;
 
 	@Column(nullable = false)
 	private double valor;
@@ -27,7 +30,7 @@ public class Pagamento extends GenericDomain {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Usuario codUsuarioInclusao;
-
+	
 	public String getTipoPagamento() {
 		return tipoPagamento;
 	}
@@ -59,4 +62,16 @@ public class Pagamento extends GenericDomain {
 	public void setCodUsuarioInclusao(Usuario codUsuarioInclusao) {
 		this.codUsuarioInclusao = codUsuarioInclusao;
 	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+	
+	
+
+	
 }

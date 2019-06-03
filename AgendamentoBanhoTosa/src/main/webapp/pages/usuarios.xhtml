@@ -105,14 +105,6 @@
 
 			</p:panel>
 
-			<p:panel id="painelFiltro" styleClass="painel">
-				<i class="far fa-file-alt iconePadding iconePainel"></i>
-				<h:outputText value="Filtros" styleClass="tituloPainel" />
-				<h:panelGrid style="margin-bottom:10px" cellpadding="5">
-
-				</h:panelGrid>
-
-			</p:panel>
 		</div>
 
 
@@ -142,7 +134,7 @@
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<h:outputLabel for="rg" value="RG:" />
-								<p:inputText id="rg" size="15" maxlength="9"
+								<p:inputText id="rg" size="15" maxlength="8"
 									value="#{usuarioBean.usuario.rg}" />
 							</h:panelGrid>
 						</h:panelGrid>
