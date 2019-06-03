@@ -20,7 +20,7 @@ public class Pagamento extends GenericDomain {
 	private double valor;
 
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataPagamento;
 
 	// Chave Estrangeira

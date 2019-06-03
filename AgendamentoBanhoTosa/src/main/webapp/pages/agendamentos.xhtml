@@ -35,7 +35,8 @@
 					rowKey="#{agendamento.codigo}"
 					sortBy="#{agendamento.dataAtendimento},#{agendamento.horario}">
 
-					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
+					<p:ajax event="rowSelect"
+						update=":painelInfo :dialogDetalhes :dialogPagamento"
 						listener="#{agendamentoBean.onRowSelect}" />
 
 					<p:column headerText="Horário" sortBy="#{agendamento.horario}">
@@ -43,7 +44,7 @@
 					</p:column>
 
 					<p:column headerText="Data" sortBy="#{agendamento.dataAtendimento}"
-						filterBy="#{agendamento.dataAtendimento}" >
+						filterBy="#{agendamento.dataAtendimento}">
 						<h:outputText value="#{agendamento.dataAtendimento}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
@@ -59,12 +60,6 @@
 					</p:column>
 
 					<p:column headerText="Status" sortBy="#{agendamento.status}">
-						<p:commandButton actionListener="#{agendamentoBean.alterar}"
-							value="" oncomplete="PF('dlg4').show();"
-							onclick="PF('dlg3').hide();" style="border-radius:10px;">
-							<f:attribute name="agendamentoSelecionado"
-								value="#{agendamentoBean.agendamento}" />
-						</p:commandButton>
 						<h:outputText value="#{agendamento.status}" />
 
 					</p:column>
@@ -100,14 +95,22 @@
 
 				<p:commandButton value="Ver mais" type="button"
 					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
-					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
+					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;width:49%;" />
 
 				<p:commandButton value="Excluir"
 					actionListener="#{agendamentoBean.excluir}"
-					update=":growl :tabelaAgendamentos:tabAgendamentos">
+					update=":growl :tabelaAgendamentos:tabAgendamentos"
+					style="width:49%;">
 					<p:confirm header="Excluir" message="Deseja excluir o agendamento?"></p:confirm>
 					<f:attribute name="agendamentoSelecionado"
 						value="#{agendamentoBean.agendamentoSelecionado}" />
+				</p:commandButton>
+
+				<p:commandButton value="Pagar" title="Novo Agendamento"
+					onclick="PF('dlg5').show();"
+					actionListener="#{agendamentoBean.novoPagamento()}"
+					update=" :formCadPagamento:painelForm :growl"
+					style="background:green;border:1px;border-style:solid;color:white;border-color:green;width:98%;margin-top:5px">
 				</p:commandButton>
 
 				<p:confirmDialog global="true">
@@ -196,7 +199,7 @@
 								<f:selectItem itemLabel="17h00" itemValue="17h00" />
 								<f:selectItem itemLabel="17h30" itemValue="17h30" />
 							</p:selectOneMenu>
-							
+
 							<h:outputLabel value="Data do agendamento:" />
 							<p:calendar size="25"
 								value="#{agendamentoBean.agendamento.dataAtendimento}" />
@@ -323,6 +326,8 @@
 
 
 
+
+
 		<p:dialog header="Cadastro de Agendamento" widgetVar="dlg4"
 			modal="true" draggable="false" resizable="false" height="auto">
 
@@ -358,5 +363,73 @@
 			</h:form>
 
 		</p:dialog>
+
+		<p:dialog header="Cadastro de Pagamento" widgetVar="dlg5" modal="true"
+			draggable="false" resizable="false" height="auto"
+			id="dialogPagamento">
+
+
+
+			<h:form id="formCadPagamento">
+				<h:panelGrid columns="1" id="painelForm">
+
+					<p:fieldset legend="Dados Cliente" style="margin-bottom:20px">
+						<h:panelGrid columns="4">
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Nome do Cliente: "
+									style="font-weight:bold;" />
+								<h:outputText
+									value="#{agendamentoBean.agendamentoSelecionado.codAnimal.codCliente.nome}" />
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:outputLabel value="CPF: " style="font-weight:bold;" />
+								<h:outputText
+									value="#{agendamentoBean.agendamentoSelecionado.codAnimal.codCliente.cpf}" />
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Nome do Animal: "
+									style="font-weight:bold;" />
+								<h:outputText
+									value="#{agendamentoBean.agendamentoSelecionado.codAnimal.nome}" />
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Valor: " style="font-weight:bold;" />
+								<h:outputText
+									value="#{agendamentoBean.agendamentoSelecionado.codServico.preco}" />
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:fieldset>
+
+					<p:fieldset legend="Dados Pagamento" style="margin-bottom:20px">
+						<h:panelGrid columns="6" cellpadding="5">
+							<p:outputLabel value="Tipo de Pagamento:" />
+							<p:selectOneMenu style="width:150px"
+								value="#{agendamentoBean.pagamento.tipoPagamento}">
+								<f:selectItem itemLabel="Selecione um Tipo" itemValue="" />
+								<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+								<f:selectItem itemLabel="Cartão" itemValue="Cartao" />
+								<f:selectItem itemLabel="Cheque" itemValue="Cheque" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" type="submit"
+						actionListener="#{agendamentoBean.pagar}"
+						update=":growl :formCadPagamento:painelForm"
+						onclick="PF('dlg5').hide();">
+						<f:attribute name="agendamentoSelecionado"
+							value="#{agendamentoBean.agendamentoSelecionado}" />
+					</p:commandButton>
+
+					<p:commandButton value="Cancelar" onclick="PF('dlg5').hide();" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>

@@ -14,7 +14,9 @@ import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
 import br.com.agendamento.dao.PagamentoDAO;
+import br.com.agendamento.dao.UsuarioDAO;
 import br.com.agendamento.domain.Pagamento;
+import br.com.agendamento.domain.Usuario;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -62,11 +64,10 @@ public class PagamentoBean implements Serializable {
 	public void index() {
 		try {
 			Faces.redirect("./pages/pagamento.xhtml");
-		}
-		catch (IOException erro) {
+		} catch (IOException erro) {
 			erro.printStackTrace();
 		}
-		
+
 	}
 
 	@PostConstruct // é chamado logo apos o construtor da classe
@@ -82,13 +83,14 @@ public class PagamentoBean implements Serializable {
 
 	public void salvar() {
 		try {
-			//Teste
-			/*UsuarioDAO usuarioDao = new UsuarioDAO();
+			
+			UsuarioDAO usuarioDao = new UsuarioDAO();
 			Usuario usuario = new Usuario();
 			usuario = usuarioDao.buscar(1L);
-			*/
+			
 			PagamentoDAO pagamentoDAO = new PagamentoDAO();
-			//pagamento.setCodUsuarioInclusao(usuario);
+			pagamento.setCodUsuarioInclusao(usuario);
+			//pagamento.setValor();
 			pagamentoDAO.merge(pagamento);
 
 			novo();

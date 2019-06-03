@@ -39,15 +39,19 @@
 					</p:column>
 
 					<p:column headerText="Tipo de Pagamento">
-						<h:outputText value="#{pagamento.tipo}" />
+						<h:outputText value="#{pagamento.tipoPagamento}" />
 					</p:column>
 
 					<p:column headerText="Valor" sortBy="#{pagamento.valor}">
-						<h:outputText value="#{pagamento.valor}" />
+						<h:outputText value="R$ #{pagamento.valor}" >
+						<f:convertNumber pattern="00.00"/>
+						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Data" sortBy="#{pagamento.data}">
-						<h:outputText value="#{pagamento.data}" />
+					<p:column headerText="Data" sortBy="#{pagamento.dataPagamento}">
+						<h:outputText value="#{pagamento.dataPagamento}" >
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 					</p:column>
 				</p:dataTable>
 			</h:form>

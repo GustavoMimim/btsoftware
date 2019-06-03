@@ -31,5 +31,22 @@ public class AgendamentoDAO extends GenericDAO<Agendamento> {
 			sessao.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Agendamento> listarAgenda() {
+		Session sessao = HibernateUtil.getFabricaSessoes().openSession();
+		try {
+			String teste = "nao";
+			Criteria consulta = sessao.createCriteria(Agendamento.class);
+			consulta.add(Restrictions.eq("statusPagamento", teste));
+			List<Agendamento> resultado = consulta.list();
+			return resultado;
+
+		} catch (RuntimeException erro) {
+			throw erro;
+		} finally {
+			sessao.close();
+		}
+	}
 
 }

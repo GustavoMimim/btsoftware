@@ -24,6 +24,7 @@ public class Agendamento extends GenericDomain {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Servico codServico;
+	
 
 	public Animal getCodAnimal() {
 		return codAnimal;
@@ -43,6 +44,9 @@ public class Agendamento extends GenericDomain {
 
 	@Column(nullable = false)
 	private String horario;
+	
+	@Column(nullable = true)
+	private String statusPagamento;
 
 	@Column(length = 3, nullable = false)
 	private String entregarAnimal;
@@ -115,5 +119,15 @@ public class Agendamento extends GenericDomain {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getStatusPagamento() {
+		return statusPagamento;
+	}
+
+	public void setStatusPagamento(String statusPagamento) {
+		this.statusPagamento = statusPagamento;
+	}
+	
+	
 
 }
