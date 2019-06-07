@@ -31,11 +31,11 @@ public class PlanoAgendamento extends GenericDomain {
 	private int frequenciaPagamento;
 
 	@Column(nullable = true)
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 
 	@Column(nullable = true)
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCancelamento;
 
 	@Column(nullable = false)

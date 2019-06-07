@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.br.CPF;
+
 @SuppressWarnings("serial")
 @Entity
 public class Usuario extends GenericDomain {
@@ -27,6 +30,7 @@ public class Usuario extends GenericDomain {
 	private String rg;
 
 	@Column(length = 14, nullable = false)
+	@CPF(message = "Informe um CPF valido")
 	private String cpf;
 
 	@Column(nullable=true)
@@ -58,6 +62,7 @@ public class Usuario extends GenericDomain {
 	private String nivelUsuario;
 	
 	@Column(length = 50, nullable = false)
+	@Email(message = "Informe um email válido")
 	private String email;
 
 	public String getUsuario() {

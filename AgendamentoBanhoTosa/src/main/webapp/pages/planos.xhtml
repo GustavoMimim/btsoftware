@@ -110,7 +110,7 @@
 						<h:panelGrid columns="6">
 							<h:panelGrid columns="1">
 								<p:outputLabel value="Cliente/ Animal: *" />
-								<p:selectOneMenu id="animal" style="width:600px"
+								<p:selectOneMenu id="animal" style="width:620px"
 									value="#{planoAgendamentoBean.plano.codAnimal}"
 									converter="omnifaces.SelectItemsConverter" required="true"
 									requiredMessage="O campo Cliente/Animal é obrigatório!">
@@ -120,11 +120,6 @@
 										var="animal" itemValue="#{animal}"
 										itemLabel="#{animal.nome} - #{animal.codCliente.nome}(#{animal.codCliente.cpf})" />
 								</p:selectOneMenu>
-							</h:panelGrid>
-							<h:panelGrid columns="1">
-								<h:outputLabel value="Dt. Cadastro *" />
-								<p:calendar size="38"
-									value="#{planoAgendamentoBean.plano.dataCadastro}" />
 							</h:panelGrid>
 						</h:panelGrid>
 
@@ -151,7 +146,7 @@
 
 							<h:panelGrid columns="1">
 								<h:outputLabel value="Horario *" />
-								<p:inputText size="38" maxlength="30"
+								<p:inputMask mask="99h99" size="38" maxlength="5"
 									value="#{planoAgendamentoBean.plano.horario}" />
 							</h:panelGrid>
 

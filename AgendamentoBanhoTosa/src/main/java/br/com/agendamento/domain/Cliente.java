@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 @SuppressWarnings("serial")
 @Entity
 public class Cliente extends GenericDomain {
@@ -27,6 +29,7 @@ public class Cliente extends GenericDomain {
 	private String nome;
 
 	@Column(length = 14, nullable = false)
+	@CPF(message = "Informe um CPF valido")
 	private String cpf;
 
 	@Column(length = 12, nullable = false)

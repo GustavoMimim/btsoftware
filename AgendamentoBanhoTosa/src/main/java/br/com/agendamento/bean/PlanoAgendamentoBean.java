@@ -2,6 +2,7 @@ package br.com.agendamento.bean;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -68,6 +69,8 @@ public class PlanoAgendamentoBean implements Serializable {
 	public void novo() {
 		try {
 			plano = new PlanoAgendamento();
+			
+			plano.setDataCadastro(new Date());
 
 			AnimalDAO animalDAO = new AnimalDAO();
 			animais = animalDAO.listar();

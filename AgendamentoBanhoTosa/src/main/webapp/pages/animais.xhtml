@@ -35,12 +35,12 @@
 					<p:ajax event="rowSelect" update=":painelInfo :dialogDetalhes"
 						listener="#{animalBean.onRowSelect}" />
 
-					<p:column headerText="Nome do animal">
+					<p:column headerText="Nome do animal" sortBy="#{animal.nome}" filterBy="#{animal.nome}">
 						<h:outputText value="#{animal.nome}" />
 					</p:column>
 
 					<p:column headerText="Cliente(Dono)"
-						sortBy="#{animal.codCliente.nome}">
+						sortBy="#{animal.codCliente.nome}" filterBy="#{animal.codCliente.nome}">
 						<h:outputText value="#{animal.codCliente.nome}" />
 					</p:column>
 

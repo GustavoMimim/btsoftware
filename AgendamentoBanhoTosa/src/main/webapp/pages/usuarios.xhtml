@@ -127,7 +127,7 @@
 							</h:panelGrid>
 							<h:panelGrid columns="1">
 								<p:outputLabel for="cpf" value="CPF:" />
-								<p:inputText id="cpf" size="15" maxlength="11"
+								<p:inputMask mask="999.999.999-99" id="cpf" size="15" maxlength="14"
 									value="#{usuarioBean.usuario.cpf}" required="true"
 									requiredMessage="O campo CPF é obrigatório!" />
 
