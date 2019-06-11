@@ -354,7 +354,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" type="submit"
 						actionListener="#{agendamentoBean.salvar}"
-						update=":growl :formCadAgendamento:painelForm :tabelaAgendamentos:tabAgendamentos" />
+						update=":growl :formCadAgendamento:painelForm :tabelaAgendamentos:tabAgendamentos" onclick="PF('dlg4').hide();"/>
 					<p:commandButton value="Cancelar" onclick="PF('dlg4').hide();"
 						actionListener="#{agendamentoBean.index}" />
 				</h:panelGrid>

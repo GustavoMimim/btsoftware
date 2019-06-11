@@ -82,13 +82,7 @@
 					onclick="PF('dlg3').show();" styleClass="botaoVerMais"
 					style="background:transparent;border:1px;border-style:solid;color:#F2994A;border-color:#F2994A;" />
 
-				<p:commandButton value="Excluir"
-					actionListener="#{pagamentoBean.excluir}"
-					update=":growl :tabelaPagamentos:tabPagamentos">
-					<p:confirm header="Excluir" message="Deseja excluir o pagamento?"></p:confirm>
-					<f:attribute name="pagamentoSelecionado"
-						value="#{pagamentoBean.pagamentoSelecionado}" />
-				</p:commandButton>
+
 
 				<p:confirmDialog global="true">
 					<p:commandButton value="Sim" type="button"

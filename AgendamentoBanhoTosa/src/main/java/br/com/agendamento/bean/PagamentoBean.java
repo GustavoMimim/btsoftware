@@ -113,21 +113,6 @@ public class PagamentoBean implements Serializable {
 		// Messages.addGlobalInfo("Isso foi selecionado: " + test.getNome());
 	}
 
-	public void excluir(ActionEvent evento) {
-		pagamento = (Pagamento) evento.getComponent().getAttributes().get("pagamentoSelecionado");
-
-		try{
-			PagamentoDAO pagamentoDAO = new PagamentoDAO();
-			pagamentoDAO.excluir(pagamento);
-			Messages.addGlobalInfo("Pagamento " + pagamento.getCodigo() + "do tipo " + pagamento.getTipoPagamento() + " excluído");
-			
-			pagamentos = pagamentoDAO.listar();
-		}catch (RuntimeException e) {
-			Messages.addGlobalError("Não foi possivel excluir!");
-			e.printStackTrace();
-		}
-
-	}
 	
 	public void alterar(ActionEvent evento) {
 		pagamento = (Pagamento) evento.getComponent().getAttributes().get("pagamentoSelecionado");
